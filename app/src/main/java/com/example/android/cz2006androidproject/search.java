@@ -1,5 +1,8 @@
 package com.example.android.cz2006androidproject;
 
+/**
+ * Created by dbakti7 on 10/11/2015.
+ */
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -11,18 +14,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.android.cz2006androidproject.R;
 
-
-
-public class MainActivity extends Activity {//ActionBarActivity {
+public class search extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
+        setContentView(R.layout.search);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -43,10 +42,6 @@ public class MainActivity extends Activity {//ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    public void searchPage(View view) {
-        Intent intent = new Intent(MainActivity.this, search.class);
-        startActivity(intent);
     }
 
 }

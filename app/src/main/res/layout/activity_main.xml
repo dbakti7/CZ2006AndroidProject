@@ -45,21 +45,22 @@
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-        <Button
-            android:text="Home"
+        android:layout_weight="1.25">
+        <ImageButton
+            android:src="@drawable/home_black"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent" />
-        <Button
-            android:text="Search"
+        <ImageButton
+            android:src = "@drawable/magnify"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent" />
-        <Button
-            android:text="Calendar"
+            android:layout_height="match_parent"
+            android:onClick="searchPage"/>
+        <ImageButton
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:src="@drawable/calendar_black"
             android:layout_height="match_parent" />
     </LinearLayout>
 
