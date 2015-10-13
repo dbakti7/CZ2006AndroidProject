@@ -1,33 +1,22 @@
 package com.example.android.cz2006androidproject;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.support.annotation.MainThread;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
+public class calendar extends AppCompatActivity {
 
-
-
-public class MainActivity extends Activity {//ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
+        setContentView(R.layout.activity_calendar);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_calendar, menu);
         return true;
     }
 
@@ -45,15 +34,4 @@ public class MainActivity extends Activity {//ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    //Move to SearchPage
-    public void searchPage(View view) {
-        Intent intent = new Intent(MainActivity.this, search.class);
-        startActivity(intent);
-    }
-
-    //Move to Calendar Page
-    public void calendarPageClicked(View v){
-        startActivity(new Intent(MainActivity.this, calendar.class));
-    }
-
 }

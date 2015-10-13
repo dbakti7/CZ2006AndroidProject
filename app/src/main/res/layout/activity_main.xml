@@ -61,7 +61,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:src="@drawable/calendar_black"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:onClick="calendarPageClicked"/>
     </LinearLayout>
 
 
