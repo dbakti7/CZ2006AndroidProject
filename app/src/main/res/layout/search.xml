@@ -5,7 +5,8 @@
     <EditText
         android:id="@+id/searchQuery"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
         android:hint="Enter a Location"
         android:gravity="center"
         >
@@ -13,9 +14,40 @@
     <Button
         android:id="@+id/searchButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
         android:text="Search"
         android:gravity="center">
-
     </Button>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8.5"></LinearLayout>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:src="@drawable/home_black"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <ImageButton
+                android:src = "@drawable/magnify"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:onClick="searchPage"/>
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/calendar_black"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
