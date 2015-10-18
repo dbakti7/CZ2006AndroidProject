@@ -36,7 +36,8 @@
                 android:src="@drawable/home_black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:onClick="homePageClicked" />
             <ImageButton
                 android:src = "@drawable/magnify"
                 android:layout_width="0dp"
@@ -47,7 +48,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:src="@drawable/calendar_black"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:onClick="searchPageClicked" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

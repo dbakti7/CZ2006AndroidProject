@@ -1,9 +1,11 @@
 package com.example.android.cz2006androidproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.Toast;
@@ -48,5 +50,17 @@ public class calendar extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //Move to HomePage
+    public void homePageClicked(View view) {
+        Intent intent = new Intent(calendar.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    //Move to SearchPage
+    public void searchPageClicked(View view) {
+        Intent intent = new Intent(calendar.this, search.class);
+        startActivity(intent);
     }
 }

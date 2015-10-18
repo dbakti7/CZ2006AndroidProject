@@ -44,4 +44,15 @@ public class search extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Move to CalendarPage
+    public void searchPageClicked(View view) {
+        Intent intent = new Intent(search.this, calendar.class);
+        startActivity(intent);
+    }
+
+    //Move to HomePage
+    public void homePageClicked(View view) {
+        Intent intent = new Intent(search.this, MainActivity.class);
+        startActivity(intent);
+    }
 }
