@@ -28,7 +28,7 @@ public class calendar extends AppCompatActivity {
         });
     }
 
-
+/*
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,7 +50,7 @@ public class calendar extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     //Move to HomePage
     public void homePageClicked(View view) {
