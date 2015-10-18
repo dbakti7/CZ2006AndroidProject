@@ -30,7 +30,7 @@ public class calendar extends AppCompatActivity {
 
 
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_calendar, menu);
@@ -50,7 +50,7 @@ public class calendar extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     //Move to HomePage
     public void homePageClicked(View view) {
