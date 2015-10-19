@@ -5,15 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-<<<<<<< HEAD
- * Created by dbakti7 on 10/19/2015.*/
-
- public class Weather {
-=======
  * Created by dbakti7 on 10/19/2015.
  */
 public class Weather {
->>>>>>> 99a5050e40ea32c69905e99700bac3bba68f56c2
     private String condition;
     private double windSpeed;
     private double precipitation;
