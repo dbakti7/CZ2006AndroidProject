@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by dbakti7 on 1
+ * Created by dbakti7 on 10/19/2015.
+ */
 public class Weather {
-    private String condition;0/19/2015.
-            */
+    private String condition;
     private double windSpeed;
     private double precipitation;
     private double humidity;

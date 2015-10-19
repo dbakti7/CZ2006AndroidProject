@@ -10,21 +10,29 @@ import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.cz2006androidproject.R;
 import com.example.android.cz2006androidproject.calendar;
 import com.example.android.cz2006androidproject.search;
 
 
-public class MainActivity extends Activity {//ActionBarActivity {
+public class MainActivity extends AppCompatActivity{//ActionBarActivity {
+
+    ListView listview;
+    ArrayAdapter<String> listAdapter;
+    String fragmentArray[] = {"FRAGMENT 1", "FRAGMENT 2"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        listview = (ListView)findViewById(R.id.listview);
+        listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, fragmentArray);
+        listview.setAdapter(listAdapter);
     }
 
     @Override
