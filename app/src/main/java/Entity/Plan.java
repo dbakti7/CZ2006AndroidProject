@@ -1,0 +1,48 @@
+package Entity;
+import java.util.*;
+/**
+ * Created by dbakti7 on 10/19/2015.
+ */
+public class Plan {
+    private int[] ETA = new int[10];
+    private boolean finalized;
+    private String date;
+    private Place listPlace[] = new Place[10];
+    private int[] travelTime = new int[10];
+    private double[] travelCost = new double[10];
+    Plan() {
+        finalized = false;
+        date = null;
+    }
+    public boolean getState() {
+        return finalized;
+    }
+    public void setState(boolean finalized) {
+        this.finalized = finalized;
+    }
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
+    }
+    public Place[] getPlaces() {
+        return listPlace;
+    }
+    public void setPlaces(Place[] listPlace) {
+        this.listPlace = listPlace;
+    }
+    public int[] getTravelTime() {
+        return travelTime;
+    }
+    public double[] getTravelCost() {
+        return travelCost;
+    }
+    public void setETA(){
+        // get from API gothere.sg
+    }
+    public int[] getETA() {
+        return ETA;
+    }
+
+}

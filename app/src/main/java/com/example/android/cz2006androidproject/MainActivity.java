@@ -1,7 +1,9 @@
 package com.example.android.cz2006androidproject;
 
+
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.MainThread;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,7 +13,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
+import com.example.android.cz2006androidproject.R;
+import com.example.android.cz2006androidproject.calendar;
+import com.example.android.cz2006androidproject.search;
 
 
 public class MainActivity extends Activity {//ActionBarActivity {
@@ -44,9 +48,15 @@ public class MainActivity extends Activity {//ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    //Move to SearchPage
     public void searchPage(View view) {
         Intent intent = new Intent(MainActivity.this, search.class);
         startActivity(intent);
+    }
+
+    //Move to Calendar Page
+    public void calendarPageClicked(View v){
+        startActivity(new Intent(MainActivity.this, calendar.class));
     }
 
 }
