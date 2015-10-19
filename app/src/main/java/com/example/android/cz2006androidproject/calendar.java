@@ -1,6 +1,7 @@
 package com.example.android.cz2006androidproject;
 
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -55,6 +56,7 @@ public class calendar extends AppCompatActivity {
     //Move to HomePage
     public void homePageClicked(View view) {
         Intent intent = new Intent(calendar.this, MainActivity.class);
+        ActivityCompat.finishAffinity(this);
         startActivity(intent);
     }
 

@@ -36,7 +36,7 @@
         android:layout_weight="1"/>
     <ImageView
         android:id="@+id/ivMAINrecommendedPlanImage"
-        android:src="@drawable/landscape_540115_1920"
+        android:src="@mipmap/landscape_540115_1920"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"/>
@@ -50,7 +50,7 @@
         android:layout_weight="1"/>
     <ImageView
         android:id="@+id/ivMAINstaffPicksImage"
-        android:src="@drawable/landscape_540115_1920"
+        android:src="@mipmap/landscape_540115_1920"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"/>
@@ -82,11 +82,11 @@
 </LinearLayout>
 
     <ListView
-        android:layout_width="250dp"
+        android:layout_width="275dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
         android:id="@+id/listview"
-        android:background="@color/material_grey_100"
+        android:background="#5e5555"
     ></ListView>
 
 

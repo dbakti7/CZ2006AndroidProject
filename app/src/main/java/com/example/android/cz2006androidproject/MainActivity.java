@@ -25,13 +25,14 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
 
     ListView listview;
     ArrayAdapter<String> listAdapter;
-    String fragmentArray[] = {"FRAGMENT 1", "FRAGMENT 2"};
+    String[] fragmentArray = {"LALALA", "LELELE"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listview = (ListView)findViewById(R.id.listview);
-        listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, fragmentArray);
+        listAdapter = new ArrayAdapter<String>(this, R.layout.myplan_layout, R.id.textView1, fragmentArray);
         listview.setAdapter(listAdapter);
     }
 
