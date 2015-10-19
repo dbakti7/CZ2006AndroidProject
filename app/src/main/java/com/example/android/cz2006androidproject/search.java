@@ -45,7 +45,7 @@ public class search extends Activity {
     }
 
     //Move to CalendarPage
-    public void searchPageClicked(View view) {
+    public void calendarPageClicked(View view) {
         Intent intent = new Intent(search.this, calendar.class);
         startActivity(intent);
     }
