@@ -1,5 +1,19 @@
 <android.support.v4.widget.DrawerLayout
     android:layout_width="match_parent"
+<<<<<<< HEAD
+=======
+    android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+>>>>>>> 99a5050e40ea32c69905e99700bac3bba68f56c2
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
     android:layout_alignParentTop="true"
@@ -80,6 +94,10 @@
 
         </LinearLayout>
     </LinearLayout>
+<<<<<<< HEAD
+=======
+</LinearLayout>
+>>>>>>> 99a5050e40ea32c69905e99700bac3bba68f56c2
 
     <ListView
         android:layout_width="250dp"
@@ -87,7 +105,14 @@
         android:layout_gravity="left"
         android:id="@+id/listview"
         android:background="@color/material_grey_100"
+<<<<<<< HEAD
         ></ListView>
 
 
 </android.support.v4.widget.DrawerLayout>
+=======
+    ></ListView>
+
+
+</android.support.v4.widget.DrawerLayout>
+>>>>>>> 99a5050e40ea32c69905e99700bac3bba68f56c2
