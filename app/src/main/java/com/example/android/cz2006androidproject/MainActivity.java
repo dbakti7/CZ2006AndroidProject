@@ -1,5 +1,6 @@
 package com.example.android.cz2006androidproject;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.MainThread;
@@ -12,7 +13,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
+import com.example.android.cz2006androidproject.R;
+import com.example.android.cz2006androidproject.calendar;
+import com.example.android.cz2006androidproject.search;
 
 
 public class MainActivity extends Activity {//ActionBarActivity {
