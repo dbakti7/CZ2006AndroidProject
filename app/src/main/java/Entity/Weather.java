@@ -15,9 +15,9 @@ public class Weather {
     private double humidity;
     Weather() {
         condition = null;
-        windSpeed = 0;
-        precipitation = 0;
-        humidity = 0;
+        windSpeed = 0.0;
+        precipitation = 0.0;
+        humidity = 0.0;
     }
     public void setWeather() {
         // from API

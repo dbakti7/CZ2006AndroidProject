@@ -4,6 +4,7 @@ import java.util.*;
  * Created by dbakti7 on 10/19/2015.
  */
 public class Place {
+    // entity class
     private String category;
     private Weather weather;
     private String description;
