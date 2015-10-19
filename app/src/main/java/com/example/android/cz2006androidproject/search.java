@@ -5,6 +5,7 @@ package com.example.android.cz2006androidproject;
  */
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -53,6 +54,7 @@ public class search extends Activity {
     //Move to HomePage
     public void homePageClicked(View view) {
         Intent intent = new Intent(search.this, MainActivity.class);
+        ActivityCompat.finishAffinity(this);
         startActivity(intent);
     }
 }
