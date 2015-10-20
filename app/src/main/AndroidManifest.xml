@@ -42,9 +42,16 @@
             android:name=".ScheduleListView"
             android:label="@string/title_activity_schedule_list_view" >
         </activity>
+<<<<<<< HEAD
 =======
 
 >>>>>>> f592c5517f6fbfbfa69d543959daceb40941e2fc
+=======
+        <activity
+            android:name=".SearchResult"
+            android:label="@string/title_activity_search_result" >
+        </activity>
+>>>>>>> 59c9af314fb527d9296208a87d46afc0226456d1
     </application>
 
 </manifest>

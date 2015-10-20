@@ -7,4 +7,5 @@
     <string name="title_activity_view_schedule">ViewSchedule</string>
     <string name="title_activity_view_details">ViewDetails</string>
     <string name="title_activity_schedule_list_view">ScheduleListView</string>
+    <string name="title_activity_search_result">SearchResult</string>
 </resources>
