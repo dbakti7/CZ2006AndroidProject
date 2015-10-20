@@ -14,6 +14,7 @@ import com.example.android.cz2006androidproject.R;
 public class calendar extends AppCompatActivity {
 
     CalendarView cal;
+    String dateWithPlan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
