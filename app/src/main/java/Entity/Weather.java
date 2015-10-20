@@ -3,32 +3,37 @@ package Entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import control.accessGovAPI;
 
 /**
  * Created by dbakti7 on 10/19/2015.
  */
 public class Weather {
     private String condition;
-    private double windSpeed;
-    private double precipitation;
-    private double humidity;
+    private String temperature;
+    private String humidity;
     public Weather() {
         condition = null;
-        windSpeed = 0;
-        precipitation = 0;
-        humidity = 0;
+        temperature = null;
+        humidity = null;
     }
-    public void setWeather() {
+
+    public void setWeather() throws Exception{
         // from API
+        List container = accessGovAPI.get12HourForecast();
+        condition = container.get(0).toString();
+        temperature = container.get(1).toString();
+        humidity = container.get(2).toString();
     }
+
     public List getWeatherDetails(){
         List weatherDetails = new ArrayList();
         weatherDetails.add(condition);
-        weatherDetails.add(windSpeed);
-        weatherDetails.add(precipitation);
+        weatherDetails.add(temperature);
         weatherDetails.add(humidity);
         return weatherDetails;
     }
+
     public String toString() {
         return this.condition;
     }

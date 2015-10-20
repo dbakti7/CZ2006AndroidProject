@@ -17,23 +17,23 @@ public class Place {
         description = null;
         image = null;
     }
-    public Place(String name, String category, Weather weather, String description, String image) {
+    public Place(String name, String category, Weather weather, String description, String image) throws Exception{
         this.name = name;
         this.category = category;
-        this.weather = weather;
-        this.description = description;
-        this.image = image;
+        this.weather.setWeather();
+        //this.description = description;
+        //this.image = image;
     }
-    public void setDetails() {
-        // from API
+    public void setDetails() throws Exception{
+        this.weather.setWeather();
     }
     public List getDetails() {
         List details = new ArrayList();
         details.add(name);
         details.add(category);
         details.add(weather);
-        details.add(description);
-        details.add(image);
+        //details.add(description);
+        //details.add(image);
         return details;
     }
 }
