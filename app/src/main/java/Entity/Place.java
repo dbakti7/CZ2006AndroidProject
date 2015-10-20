@@ -5,11 +5,13 @@ import java.util.*;
  */
 public class Place {
     // entity class
+    private String name;
     private String category;
     private Weather weather;
     private String description;
     private String image;
     Place() {
+        name = null;
         category = null;
         weather = null;
         description = null;
@@ -20,6 +22,7 @@ public class Place {
     }
     public List getDetails() {
         List details = new ArrayList();
+        details.add(name);
         details.add(category);
         details.add(weather);
         details.add(description);
