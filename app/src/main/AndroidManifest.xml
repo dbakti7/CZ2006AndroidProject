@@ -33,6 +33,10 @@
             android:name=".ViewDetails"
             android:label="@string/title_activity_view_details" >
         </activity>
+        <activity
+            android:name=".ScheduleListView"
+            android:label="@string/title_activity_schedule_list_view" >
+        </activity>
     </application>
 
 </manifest>
