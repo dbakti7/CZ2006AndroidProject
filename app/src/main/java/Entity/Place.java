@@ -17,12 +17,12 @@ public class Place {
         description = null;
         image = null;
     }
-    public Place(String name, String category, Weather weather, String description, String image) throws Exception{
+    public Place(String name, String category, String description, String image) throws Exception{
         this.name = name;
         this.category = category;
-        this.weather.setWeather();
-        //this.description = description;
-        //this.image = image;
+        this.setDetails();
+        this.description = description;
+        this.image = image;
     }
     public void setDetails() throws Exception{
         this.weather.setWeather();
@@ -32,8 +32,8 @@ public class Place {
         details.add(name);
         details.add(category);
         details.add(weather);
-        //details.add(description);
-        //details.add(image);
+        details.add(description);
+        details.add(image);
         return details;
     }
 }
