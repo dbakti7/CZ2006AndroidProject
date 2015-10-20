@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.cz2006androidproject.R;
 import com.example.android.cz2006androidproject.ScheduleListView;
+import com.example.android.cz2006androidproject.SearchResult;
 import com.example.android.cz2006androidproject.ViewDetails;
 
 import Entity.Place;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listview = (ListView)findViewById(R.id.listview);
-        listAdapter = new ArrayAdapter<String>(this, R.layout.myplan_layout, R.id.textView1, fragmentArray);
+        listAdapter = new ArrayAdapter<String>(this, R.layout.myplan_layout, R.id.textView2, fragmentArray);
         listview.setAdapter(listAdapter);
     }
 
@@ -74,6 +75,11 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
         }
         i.putExtra("parse this", pSampleArray);
         startActivity(i);
+    }
+
+    public void travelPlannerPage(View view) {
+        Intent intent = new Intent(MainActivity.this, TravelPlanner.class);
+        startActivity(intent);
     }
 
 }
