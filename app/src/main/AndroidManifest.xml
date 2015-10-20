@@ -33,7 +33,6 @@
             android:name=".ViewSchedule"
             android:label="@string/title_activity_view_schedule" >
         </activity>
-<<<<<<< HEAD
         <activity
             android:name=".ViewDetails"
             android:label="@string/title_activity_view_details" >
@@ -42,16 +41,18 @@
             android:name=".ScheduleListView"
             android:label="@string/title_activity_schedule_list_view" >
         </activity>
-<<<<<<< HEAD
-=======
-
->>>>>>> f592c5517f6fbfbfa69d543959daceb40941e2fc
-=======
         <activity
-            android:name=".SearchResult"
-            android:label="@string/title_activity_search_result" >
+            android:name=".MapView"
+            android:label="@string/title_activity_map_view" >
         </activity>
->>>>>>> 59c9af314fb527d9296208a87d46afc0226456d1
+        <activity
+            android:name=".PlanChoicesByTaxi"
+            android:label="@string/title_activity_plan_choices_by_taxi" >
+        </activity>
+        <activity
+            android:name=".PlanChoicesByPublicTransport"
+            android:label="@string/title_activity_plan_choices_by_public_transport" >
+        </activity>
     </application>
 
 </manifest>

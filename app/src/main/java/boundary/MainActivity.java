@@ -11,8 +11,6 @@ import android.widget.ListView;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.cz2006androidproject.R;
-import com.example.android.cz2006androidproject.ScheduleListView;
-import com.example.android.cz2006androidproject.SearchResult;
 import com.example.android.cz2006androidproject.ViewDetails;
 
 import Entity.Place;

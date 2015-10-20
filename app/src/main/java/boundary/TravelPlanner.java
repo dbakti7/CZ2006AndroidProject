@@ -13,8 +13,7 @@ import android.widget.Toast;
 
 import com.example.android.cz2006androidproject.R;
 
-import java.util.Calendar;
-import java.util.Date;
+import Control.TravelPlannerAdapter;
 
 /**
  * Created by stvalxndr on 20-Oct-15.

@@ -8,4 +8,8 @@
     <string name="title_activity_view_details">ViewDetails</string>
     <string name="title_activity_schedule_list_view">ScheduleListView</string>
     <string name="title_activity_search_result">SearchResult</string>
+    <string name="title_activity_map_view">MapView</string>
+    <string name="title_activity_plan_choices_by_taxi">PlanChoicesByTaxi</string>
+    <string name="title_activity_plan_choices_by_public_transport">PlanChoicesByPublicTransport
+    </string>
 </resources>

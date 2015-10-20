@@ -3,10 +3,11 @@ package Entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import control.accessGovAPI;
+
 
 /**
  * Created by dbakti7 on 10/19/2015.
+ * This class implements Weather entity.
  */
 public class Weather {
     private String condition;
@@ -18,12 +19,13 @@ public class Weather {
         humidity = null;
     }
 
-    public void setWeather() throws Exception{
+    public void setWeather() {
         // from API
+        /* This part is still under development
         List container = accessGovAPI.get12HourForecast();
         condition = container.get(0).toString();
         temperature = container.get(1).toString();
-        humidity = container.get(2).toString();
+        humidity = container.get(2).toString();*/
     }
 
     public List getWeatherDetails(){
