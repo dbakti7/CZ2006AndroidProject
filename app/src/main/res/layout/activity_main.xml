@@ -39,11 +39,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
-<<<<<<< HEAD
-        android:onClick="placeDetail"/>
-=======
+
         android:onClick="travelPlannerPage" />
->>>>>>> f592c5517f6fbfbfa69d543959daceb40941e2fc
+
     <TextView
         android:id="@+id/tvMAINstaffPicks"
         android:text="Staff Picks"
