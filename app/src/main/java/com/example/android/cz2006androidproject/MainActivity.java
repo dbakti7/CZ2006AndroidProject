@@ -2,6 +2,7 @@ package com.example.android.cz2006androidproject;
 
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Intent;
 import android.support.annotation.MainThread;
 import android.support.v7.app.ActionBarActivity;
@@ -20,12 +21,15 @@ import com.example.android.cz2006androidproject.R;
 import com.example.android.cz2006androidproject.calendar;
 import com.example.android.cz2006androidproject.search;
 
+import java.util.ArrayList;
+import java.util.TreeSet;
+
 
 public class MainActivity extends AppCompatActivity{//ActionBarActivity {
 
     ListView listview;
     ArrayAdapter<String> listAdapter;
-    String[] fragmentArray = {"LALALA", "LELELE"};
+    String[] fragmentArray = {"A", "B", "C", "D", "E"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
