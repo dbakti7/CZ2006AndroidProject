@@ -1,9 +1,15 @@
 package com.example.android.cz2006androidproject;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.lang.*;
+import java.util.List;
 
 
 public class ViewDetails extends ActionBarActivity {
@@ -12,6 +18,20 @@ public class ViewDetails extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_details);
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            String[] value = extras.getStringArray("parse this");
+            ImageView iv = (ImageView)findViewById(R.id.ivVIEWDETAILSimage);
+            iv.setImageResource(getResources().getIdentifier(
+                    value[4], "mipmap", this.getPackageName()));
+            TextView placeName=(TextView)findViewById(R.id.tvVIEWDETAILSname);
+            placeName.setText(value[0]);
+            TextView detail=(TextView)findViewById(R.id.tvVIEWDETAILSdetail);
+            detail.setText(value[3]);
+        }
+
+
+
     }
 
     @Override
@@ -35,4 +55,6 @@ public class ViewDetails extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

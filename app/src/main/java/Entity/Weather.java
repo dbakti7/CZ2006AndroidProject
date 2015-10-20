@@ -12,7 +12,7 @@ public class Weather {
     private double windSpeed;
     private double precipitation;
     private double humidity;
-    Weather() {
+    public Weather() {
         condition = null;
         windSpeed = 0;
         precipitation = 0;
@@ -28,5 +28,8 @@ public class Weather {
         weatherDetails.add(precipitation);
         weatherDetails.add(humidity);
         return weatherDetails;
+    }
+    public String toString() {
+        return this.condition;
     }
 }
