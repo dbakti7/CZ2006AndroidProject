@@ -1,4 +1,4 @@
-<android.support.v4.widget.DrawerLayout
+<android.support.v4.widget.DrawerLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
@@ -38,7 +38,8 @@
         android:src="@mipmap/landscape_540115_1920"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"/>
+        android:layout_weight="4"
+        android:onClick="travelPlannerPage" />
     <TextView
         android:id="@+id/tvMAINstaffPicks"
         android:text="Staff Picks"
@@ -52,7 +53,8 @@
         android:src="@mipmap/landscape_540115_1920"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"/>
+        android:layout_weight="4"
+        android:onClick="travelPlannerPage" />
 
 
 
@@ -83,14 +85,16 @@
     </LinearLayout>
 </LinearLayout>
 
-
-
     <ListView
         android:layout_width="275dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
         android:id="@+id/listview"
         android:background="#5e5555"
+        tools:listheader="@layout/abc_action_bar_title_item"
+        android:headerDividersEnabled="false"
+        android:paddingStart="30dp"
+        android:paddingLeft="30dp"
     ></ListView>
 
 

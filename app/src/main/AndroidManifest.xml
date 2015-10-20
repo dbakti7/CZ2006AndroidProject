@@ -26,9 +26,14 @@
             android:label="@string/title_activity_calendar" >
         </activity>
         <activity
+            android:name="boundary.TravelPlanner"
+            android:label="@string/title_activity_view_schedule" >
+        </activity>
+        <activity
             android:name=".ViewSchedule"
             android:label="@string/title_activity_view_schedule" >
         </activity>
+
     </application>
 
 </manifest>

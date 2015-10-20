@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listview = (ListView)findViewById(R.id.listview);
-        listAdapter = new ArrayAdapter<String>(this, R.layout.myplan_layout, R.id.textView1, fragmentArray);
+        listAdapter = new ArrayAdapter<String>(this, R.layout.myplan_layout, R.id.textView2, fragmentArray);
         listview.setAdapter(listAdapter);
     }
 
@@ -58,6 +58,11 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
     //Move to Calendar Page
     public void calendarPageClicked(View v){
         startActivity(new Intent(MainActivity.this, calendar.class));
+    }
+
+    public void travelPlannerPage(View view) {
+        Intent intent = new Intent(MainActivity.this, TravelPlanner.class);
+        startActivity(intent);
     }
 
 }
