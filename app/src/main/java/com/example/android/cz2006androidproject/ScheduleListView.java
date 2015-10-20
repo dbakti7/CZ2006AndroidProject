@@ -1,48 +1,31 @@
-package boundary;
+package com.example.android.cz2006androidproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.android.cz2006androidproject.R;
-
-public class displayListView extends AppCompatActivity {
+public class ScheduleListView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_schedule);
+        setContentView(R.layout.activity_schedule_list_view);
         String[] places={"Jurong East Mall","IKEA","Hendersen Waves",
                 "Marina Bay","Changi Airport"};
 
         int logo[]={R.mipmap.sunny,R.mipmap.rainy,R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
-
-
-        ListAdapter theAdapter = new ScheduleAdapter(this, places,logo);
-        ListView theListView = (ListView) findViewById(R.id.listview);
+        ListAdapter theAdapter = new CustomListAdapter(this, places,logo);
+        ListView theListView = (ListView) findViewById(R.id.theListView);
         theListView.setAdapter(theAdapter);
-        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                String Placekicked ="Detail" +
-                        String.valueOf(adapterView.getItemAtPosition(position));
-
-                Toast.makeText(displayListView.this, Placekicked, Toast.LENGTH_SHORT).show();
-
-            }
-        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_schedule_list_view, menu);
         return true;
     }
 

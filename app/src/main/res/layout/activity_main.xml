@@ -33,12 +33,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-    <ImageView
-        android:id="@+id/ivMAINrecommendedPlanImage"
+    <ImageButton
+        android:id="@+id/ibMAINrecommendedPlanImage"
         android:src="@mipmap/landscape_540115_1920"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"/>
+        android:layout_weight="4"
+        android:onClick="placeDetail"/>
     <TextView
         android:id="@+id/tvMAINstaffPicks"
         android:text="Staff Picks"
@@ -47,8 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-    <ImageView
-        android:id="@+id/ivMAINstaffPicksImage"
+    <ImageButton
+        android:id="@+id/ibMAINstaffPicksImage"
         android:src="@mipmap/landscape_540115_1920"
         android:layout_width="match_parent"
         android:layout_height="0dp"

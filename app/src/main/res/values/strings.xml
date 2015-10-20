@@ -5,4 +5,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_calendar">calendar</string>
     <string name="title_activity_view_schedule">ViewSchedule</string>
+    <string name="title_activity_view_details">ViewDetails</string>
+    <string name="title_activity_schedule_list_view">ScheduleListView</string>
 </resources>

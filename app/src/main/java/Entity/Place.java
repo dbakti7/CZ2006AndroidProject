@@ -17,6 +17,13 @@ public class Place {
         description = null;
         image = null;
     }
+    public Place(String name, String category, Weather weather, String description, String image) {
+        this.name = name;
+        this.category = category;
+        this.weather = weather;
+        this.description = description;
+        this.image = image;
+    }
     public void setDetails() {
         // from API
     }
