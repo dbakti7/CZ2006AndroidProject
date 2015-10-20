@@ -22,6 +22,7 @@ public class Place {
         description = null;
         image = null;
     }
+<<<<<<< HEAD
 
     /**
      * class contructor
@@ -31,6 +32,12 @@ public class Place {
         this.name = name;
         this.category = category;
         this.weather.setWeather();
+=======
+    public Place(String name, String category, String description, String image) throws Exception{
+        this.name = name;
+        this.category = category;
+        this.setDetails();
+>>>>>>> f28fc74caa9f56b3c08c63dd7d6f764a0fa917f7
         this.description = description;
         this.image = image;
     }
