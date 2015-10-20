@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.cz2006androidproject.R;
+import com.example.android.cz2006androidproject.ScheduleListView;
 
 
 public class MainActivity extends AppCompatActivity{//ActionBarActivity {
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
     }
     //Move to SearchPage
     public void searchPage(View view) {
-        Intent intent = new Intent(MainActivity.this, search.class);
+        Intent intent = new Intent(MainActivity.this, ScheduleListView.class);
         startActivity(intent);
     }
 
