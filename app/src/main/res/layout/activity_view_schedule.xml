@@ -3,17 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context="com.example.windows7.schedule.MainActivity">
+    tools:context="com.example.android.cz2006androidproject.displayListView">
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="25dp"
-        android:id ="@+id/imageView1"/>
+        android:id ="@+id/weatherlogo"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id ="@+id/textView1"
+        android:id ="@+id/Placename"
         android:textSize ="30sp"
         android:textStyle="bold"
         android:padding="15dp"/>

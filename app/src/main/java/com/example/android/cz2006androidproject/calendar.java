@@ -20,11 +20,19 @@ public class calendar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         cal = (CalendarView) findViewById(R.id.calendar);
+        cal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 Toast.makeText(getApplicationContext(), dayOfMonth + "/" + (month+1) + "/" + year, Toast.LENGTH_LONG).show();
+
             }
         });
     }
@@ -62,7 +70,7 @@ public class calendar extends AppCompatActivity {
 
     //Move to SearchPage
     public void searchPageClicked(View view) {
-        Intent intent = new Intent(calendar.this, search.class);
+        Intent intent = new Intent(calendar.this, TabHostSchedule.class);
         startActivity(intent);
     }
 }

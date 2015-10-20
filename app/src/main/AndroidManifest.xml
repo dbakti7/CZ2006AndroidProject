@@ -29,6 +29,10 @@
             android:name=".ViewSchedule"
             android:label="@string/title_activity_view_schedule" >
         </activity>
+        <activity
+            android:name=".TabHostSchedule"
+            android:label="@string/title_activity_tab_host_schedule" >
+        </activity>
     </application>
 
 </manifest>

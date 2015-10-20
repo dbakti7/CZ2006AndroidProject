@@ -29,10 +29,10 @@ public class displayListView extends AppCompatActivity {
         theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                String Placekicked ="Detail" +
+                String Placepicked ="Detail" +
                         String.valueOf(adapterView.getItemAtPosition(position));
 
-                Toast.makeText(displayListView.this, Placekicked, Toast.LENGTH_SHORT).show();
+                Toast.makeText(displayListView.this, Placepicked, Toast.LENGTH_SHORT).show();
 
             }
         });

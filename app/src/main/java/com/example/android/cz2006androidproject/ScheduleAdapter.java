@@ -25,11 +25,11 @@ class ScheduleAdapter extends ArrayAdapter<String> {
         View theView = theInflater.inflate(R.layout.activity_view_schedule, parent, false);
         String places = getItem(position);
 
-        TextView theTextView = (TextView) theView.findViewById(R.id.textView1);
+        TextView theTextView = (TextView) theView.findViewById(R.id.Placename);
 
         theTextView.setText(places);
 
-        ImageView theImageView =(ImageView) theView.findViewById(R.id.imageView1);
+        ImageView theImageView =(ImageView) theView.findViewById(R.id.weatherlogo);
         theImageView.setImageResource(logos[position]);
         return theView;
     }
