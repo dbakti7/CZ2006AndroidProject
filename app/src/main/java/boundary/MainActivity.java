@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
 
     ListView listview;
     ArrayAdapter<String> listAdapter;
-    String[] fragmentArray = {"LALALA", "LELELE"};
+    String[] fragmentArray = {"A","B","C","D","E"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
