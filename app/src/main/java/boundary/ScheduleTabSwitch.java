@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
 
+import com.example.android.cz2006androidproject.MapsViewer;
 import com.example.android.cz2006androidproject.R;
 
 
@@ -25,7 +26,7 @@ public class ScheduleTabSwitch extends TabActivity {
         spec = tabHost.newTabSpec("page1").setIndicator("list").setContent(ListIntent);
         tabHost.addTab(spec);
 
-        Intent MapIntent = new Intent(this, Calendar.class);
+        Intent MapIntent = new Intent(this, MapsViewer.class);
         spec = tabHost.newTabSpec("page2").setIndicator("map").setContent(MapIntent);
         tabHost.addTab(spec);
 

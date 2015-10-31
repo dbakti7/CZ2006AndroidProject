@@ -32,9 +32,15 @@ public class Calendar extends AppCompatActivity {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 //Toast.makeText(getApplicationContext(), dayOfMonth + "/" + (month+1) + "/" + year, Toast.LENGTH_LONG).show();
                 int[] date = {year, month, dayOfMonth};
-                Intent intent = new Intent(Calendar.this, TravelPlanner.class);
-                intent.putExtra("parse this", date);
-                startActivity(intent);
+                if(date[2] == 30) {
+                    Intent intent = new Intent(Calendar.this, ScheduleTabSwitch.class);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(Calendar.this, TravelPlanner.class);
+                    intent.putExtra("parse this", date);
+                    startActivity(intent);
+                }
             }
 
             /*

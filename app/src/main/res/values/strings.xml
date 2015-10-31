@@ -13,4 +13,5 @@
     <string name="title_activity_plan_choices_by_public_transport">PlanChoicesByPublicTransport
     </string>
     <string name="title_activity_schedule_tab_switch">ScheduleTabSwitch</string>
+    <string name="title_activity_maps_viewer">Map</string>
 </resources>
