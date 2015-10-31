@@ -30,10 +30,6 @@
             android:label="@string/title_activity_view_schedule" >
         </activity>
         <activity
-            android:name=".ViewSchedule"
-            android:label="@string/title_activity_view_schedule" >
-        </activity>
-        <activity
             android:name="Boundary.ViewDetails"
             android:label="@string/title_activity_view_details" >
         </activity>
