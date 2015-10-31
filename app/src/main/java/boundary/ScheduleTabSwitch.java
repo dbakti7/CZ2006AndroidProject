@@ -7,8 +7,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
 
+<<<<<<< HEAD:app/src/main/java/boundary/ScheduleTabSwitch.java
 import com.example.android.cz2006androidproject.R;
 
+=======
+import boundary.MapView;
+import boundary.ScheduleListView;
+import boundary.MainActivity;
+import boundary.Calendar;
+>>>>>>> 9b3a1016d46f499f7ab2cdba93590a66806aaae5:app/src/main/java/com/example/android/cz2006androidproject/ScheduleTabSwitch.java
 
 
 public class ScheduleTabSwitch extends TabActivity {
@@ -25,7 +32,7 @@ public class ScheduleTabSwitch extends TabActivity {
         spec = tabHost.newTabSpec("page1").setIndicator("list").setContent(ListIntent);
         tabHost.addTab(spec);
 
-        Intent MapIntent = new Intent(this, Calendar.class);
+        Intent MapIntent = new Intent(this, MapsActivityView.class);
         spec = tabHost.newTabSpec("page2").setIndicator("map").setContent(MapIntent);
         tabHost.addTab(spec);
 
