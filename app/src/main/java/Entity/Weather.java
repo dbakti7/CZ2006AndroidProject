@@ -4,7 +4,7 @@ package Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import Boundary.accessGovAPI;
+import boundary.accessGovAPI;
 
 
 /**
@@ -15,11 +15,13 @@ public class Weather {
     private String condition;
     private String temperature;
     private String humidity;
+
     public Weather() {
         condition = null;
         temperature = null;
         humidity = null;
     }
+
     public Weather(String condition, String temperature, String humidity) {
         this.condition = condition;
         this.temperature = temperature;
