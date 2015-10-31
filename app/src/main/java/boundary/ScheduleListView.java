@@ -1,4 +1,4 @@
-package Boundary;
+package boundary;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.widget.ListView;
 
 import com.example.android.cz2006androidproject.R;
 
-import Control.CustomListAdapter;
-import Entity.Plan;
+import control.CustomListAdapter;
+import entity.Plan;
 
 /**
  * This class is used to show the plan in the form of list

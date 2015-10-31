@@ -1,10 +1,10 @@
-package Entity;
+package entity;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Boundary.accessGovAPI;
+import boundary.accessGovAPI;
 
 
 /**

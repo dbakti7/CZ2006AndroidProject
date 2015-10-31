@@ -1,4 +1,4 @@
-package Boundary;
+package boundary;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import com.example.android.cz2006androidproject.R;
 
-import Entity.Place;
+import entity.Place;
 
 /**
  * This class is used to show the search result of an query. User will be able to select places

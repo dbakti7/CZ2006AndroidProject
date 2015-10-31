@@ -1,4 +1,4 @@
-package Control;
+package control;
 
 import android.util.Xml;
 

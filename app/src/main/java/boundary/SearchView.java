@@ -1,4 +1,4 @@
-package Boundary;
+package boundary;
 
 /**
  * Created by dbakti7 on 10/11/2015.

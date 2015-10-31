@@ -1,7 +1,7 @@
-package Control;
+package control;
 
-import Entity.Place;
-import Entity.Plan;
+import entity.Place;
+import entity.Plan;
 
 /**
  * Created by dbakti7 on 10/20/2015.

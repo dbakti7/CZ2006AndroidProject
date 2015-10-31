@@ -1,4 +1,4 @@
-package Boundary;
+package boundary;
 
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
@@ -6,9 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.cz2006androidproject.R;
+
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 /**
  * This class is used to show calendar view.
@@ -26,8 +30,25 @@ public class Calendar extends AppCompatActivity {
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(), dayOfMonth + "/" + (month+1) + "/" + year, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), dayOfMonth + "/" + (month+1) + "/" + year, Toast.LENGTH_LONG).show();
+                int[] date = {year, month, dayOfMonth};
+                Intent intent = new Intent(Calendar.this, TravelPlanner.class);
+                intent.putExtra("parse this", date);
+                startActivity(intent);
             }
+
+            /*
+            Intent i = new Intent(MainActivity.this, ViewDetails.class);
+        Place pSample = new Place("Scenery", "Tourist Attractions", new Weather(), "Beautiful Scenery", "landscape_540115_1920");
+        String[] pSampleArray = new String[10];
+        for(int j=0;j<5;++j) {
+            pSampleArray[j] = new String();
+            pSampleArray[j] = (String)pSample.getDetails().get(j).toString();
+        }
+        i.putExtra("parse this", pSampleArray);
+        startActivity(i);
+             */
+
         });
     }
 
@@ -43,6 +64,8 @@ public class Calendar extends AppCompatActivity {
         Intent intent = new Intent(Calendar.this, SearchView.class);
         startActivity(intent);
     }
+
+
 
     /**
      * update the status of the date to indicate whether there is an existing plan or not on that

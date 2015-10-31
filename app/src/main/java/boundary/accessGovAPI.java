@@ -1,4 +1,4 @@
-package Boundary;
+package boundary;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -24,7 +24,7 @@ public class accessGovAPI {
 
         int responseCode = con.getResponseCode();
         if(responseCode == 200) {
-            Control.xmlParser temp = new Control.xmlParser();
+            control.xmlParser temp = new control.xmlParser();
             result = temp.parseWeatherXml(con.getInputStream(), dataset);
         } else {
             System.out.println("Error in accessing API");
@@ -39,7 +39,7 @@ public class accessGovAPI {
         HttpURLConnection con = (HttpURLConnection)obj.openConnection();
         con.setRequestMethod("GET");
         con.connect();
-        Control.jsonParser temp = new Control.jsonParser();
+        control.jsonParser temp = new control.jsonParser();
         myToken = temp.parseToken(con.getInputStream());
 
         return myToken;

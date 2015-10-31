@@ -1,4 +1,4 @@
-package Boundary;
+package boundary;
 
 
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.cz2006androidproject.R;
 
-import Entity.Place;
-import Entity.Weather;
+import entity.Place;
+import entity.Weather;
 
 
 public class MainActivity extends AppCompatActivity{//ActionBarActivity {

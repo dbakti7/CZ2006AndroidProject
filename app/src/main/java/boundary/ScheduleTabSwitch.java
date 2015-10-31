@@ -1,16 +1,14 @@
-package com.example.android.cz2006androidproject;
+package boundary;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
 
-import Boundary.ScheduleListView;
-import Boundary.MainActivity;
-import Boundary.Calendar;
+import com.example.android.cz2006androidproject.R;
+
 
 
 public class ScheduleTabSwitch extends TabActivity {

@@ -1,6 +1,6 @@
-package Control;
+package control;
 
-import Entity.Place;
+import entity.Place;
 
 /**
  * Created by dbakti7 on 10/20/2015.

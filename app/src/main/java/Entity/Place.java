@@ -1,4 +1,4 @@
-package Entity;
+package entity;
 import java.util.*;
 /**
  * Created by dbakti7 on 10/19/2015.

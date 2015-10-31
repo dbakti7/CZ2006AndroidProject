@@ -1,5 +1,5 @@
-package Entity;
-import java.util.*;
+package entity;
+
 /**
  * Created by dbakti7 on 10/19/2015.
  * This class implements the Plan entity with the attributes finalized, date, listPlace, ETA,
