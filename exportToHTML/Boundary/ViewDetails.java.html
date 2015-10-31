@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>ViewDetails.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+.s5 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+ViewDetails.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">Boundary</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.support.v7.app.ActionBarActivity</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.Menu</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.MenuItem</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">com.example.android.cz2006androidproject.R</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">java.lang.*</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s3">/** 
+ * This class is used to view details of a place. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">ViewDetails </span><span class="s0">extends </span><span class="s1">ActionBarActivity { 
+ 
+    @Override 
+    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s2">;</span><span class="s1"> 
+        setContentView(R.layout.activity_view_details)</span><span class="s2">;</span><span class="s1"> 
+        Bundle extras = getIntent().getExtras()</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">if</span><span class="s1">(extras != </span><span class="s0">null</span><span class="s1">) { 
+            String[] value = extras.getStringArray(</span><span class="s4">&quot;parse this&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+            ImageView iv = (ImageView)findViewById(R.id.ivVIEWDETAILSimage)</span><span class="s2">;</span><span class="s1"> 
+            iv.setImageResource(getResources().getIdentifier( 
+                    value[</span><span class="s5">4</span><span class="s1">]</span><span class="s2">, </span><span class="s4">&quot;mipmap&quot;</span><span class="s2">, </span><span class="s0">this</span><span class="s1">.getPackageName()))</span><span class="s2">;</span><span class="s1"> 
+            TextView placeName=(TextView)findViewById(R.id.tvVIEWDETAILSname)</span><span class="s2">;</span><span class="s1"> 
+            placeName.setText(value[</span><span class="s5">0</span><span class="s1">])</span><span class="s2">;</span><span class="s1"> 
+            TextView detail=(TextView)findViewById(R.id.tvVIEWDETAILSdetail)</span><span class="s2">;</span><span class="s1"> 
+            detail.setText(value[</span><span class="s5">3</span><span class="s1">])</span><span class="s2">;</span><span class="s1"> 
+        } 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onCreateOptionsMenu(Menu menu) { 
+        </span><span class="s3">// Inflate the menu; this adds items to the action bar if it is present.</span><span class="s1"> 
+        getMenuInflater().inflate(R.menu.menu_view_details</span><span class="s2">, </span><span class="s1">menu)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return true</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onOptionsItemSelected(MenuItem item) { 
+        </span><span class="s3">// Handle action bar item clicks here. The action bar will</span><span class="s1"> 
+        </span><span class="s3">// automatically handle clicks on the Home/Up button, so long</span><span class="s1"> 
+        </span><span class="s3">// as you specify a parent activity in AndroidManifest.xml.</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">id = item.getItemId()</span><span class="s2">;</span><span class="s1"> 
+ 
+        </span><span class="s3">//noinspection SimplifiableIfStatement</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(id == R.id.action_settings) { 
+            </span><span class="s0">return true</span><span class="s2">;</span><span class="s1"> 
+        } 
+ 
+        </span><span class="s0">return super</span><span class="s1">.onOptionsItemSelected(item)</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+ 
+} 
+</span></pre>
+</body>
+</html>

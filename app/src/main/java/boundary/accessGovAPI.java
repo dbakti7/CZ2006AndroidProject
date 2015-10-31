@@ -1,4 +1,4 @@
-package control;
+package Boundary;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by Stefan on 10/18/2015.
+ * This class is used to communicate with various government APIs.
  */
 public class accessGovAPI {
     private static List result = new ArrayList();
@@ -23,7 +24,7 @@ public class accessGovAPI {
 
         int responseCode = con.getResponseCode();
         if(responseCode == 200) {
-            xmlParser temp = new xmlParser();
+            Control.xmlParser temp = new Control.xmlParser();
             result = temp.parseWeatherXml(con.getInputStream(), dataset);
         } else {
             System.out.println("Error in accessing API");
@@ -38,15 +39,15 @@ public class accessGovAPI {
         HttpURLConnection con = (HttpURLConnection)obj.openConnection();
         con.setRequestMethod("GET");
         con.connect();
-        jsonParser temp = new jsonParser();
+        Control.jsonParser temp = new Control.jsonParser();
         myToken = temp.parseToken(con.getInputStream());
 
-        return myToken
+        return myToken;
     }
 
     public static List searchAPIHandler(String entry) throws Exception {
         String result = null;
-        String
+        return null;
     }
 
     public static List get12HourForecast() throws Exception{

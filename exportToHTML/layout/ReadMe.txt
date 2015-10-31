@@ -1,0 +1,1 @@
+This folder contains all the XML files to configure the layout or display in the Android Application.

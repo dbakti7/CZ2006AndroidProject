@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>Calendar.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+.s5 { color: rgb(0,0,255); }
+.s6 { color: rgb(128,128,128); font-weight: bold; font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Calendar.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">Boundary</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.v4.app.ActivityCompat</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.v7.app.AppCompatActivity</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.View</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.CalendarView</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">com.example.android.cz2006androidproject.R</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s3">/** 
+ * This class is used to show calendar view. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">Calendar </span><span class="s0">extends </span><span class="s1">AppCompatActivity { 
+ 
+    CalendarView cal</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String[] dateWithPlan</span><span class="s2">;</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s2">;</span><span class="s1"> 
+        setContentView(R.layout.activity_calendar)</span><span class="s2">;</span><span class="s1"> 
+        cal = (CalendarView) findViewById(R.id.calendar)</span><span class="s2">;</span><span class="s1"> 
+        cal.setOnDateChangeListener(</span><span class="s0">new </span><span class="s1">CalendarView.OnDateChangeListener() { 
+ 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onSelectedDayChange(CalendarView view</span><span class="s2">, </span><span class="s0">int </span><span class="s1">year</span><span class="s2">, </span><span class="s0">int </span><span class="s1">month</span><span class="s2">, </span><span class="s0">int </span><span class="s1">dayOfMonth) { 
+                Toast.makeText(getApplicationContext()</span><span class="s2">, </span><span class="s1">dayOfMonth + </span><span class="s4">&quot;/&quot; </span><span class="s1">+ (month+</span><span class="s5">1</span><span class="s1">) + </span><span class="s4">&quot;/&quot; </span><span class="s1">+ year</span><span class="s2">, </span><span class="s1">Toast.LENGTH_LONG).show()</span><span class="s2">;</span><span class="s1"> 
+            } 
+        })</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">//Move to HomePage</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">homePageClicked(View view) { 
+        Intent intent = </span><span class="s0">new </span><span class="s1">Intent(Calendar.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">MainActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        ActivityCompat.finishAffinity(</span><span class="s0">this</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        startActivity(intent)</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">//Move to SearchPage</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">searchPageClicked(View view) { 
+        Intent intent = </span><span class="s0">new </span><span class="s1">Intent(Calendar.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">SearchView.</span><span class="s0">class</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        startActivity(intent)</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * update the status of the date to indicate whether there is an existing plan or not on that 
+     * date. 
+     * </span><span class="s6">@param </span><span class="s3">date 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">updateCalendar(String date) { 
+ 
+    } 
+} 
+</span></pre>
+</body>
+</html>

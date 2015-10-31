@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>jsonParser.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+jsonParser.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">Control</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">org.json.JSONException</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">org.json.JSONObject</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">java.io.BufferedReader</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.io.IOException</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.io.InputStream</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.io.InputStreamReader</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s3">/** 
+ * Created by pc lenovo on 10/20/2015. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">jsonParser { 
+ 
+    </span><span class="s0">public </span><span class="s1">String parseToken(InputStream in) </span><span class="s0">throws </span><span class="s1">NullPointerException</span><span class="s2">,</span><span class="s1">IOException</span><span class="s2">,</span><span class="s1">JSONException { 
+        BufferedReader br = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        StringBuilder sb = </span><span class="s0">new </span><span class="s1">StringBuilder()</span><span class="s2">;</span><span class="s1"> 
+        String line</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">try </span><span class="s1">{ 
+            br = </span><span class="s0">new </span><span class="s1">BufferedReader(</span><span class="s0">new </span><span class="s1">InputStreamReader(in))</span><span class="s2">;</span><span class="s1"> 
+            </span><span class="s0">while </span><span class="s1">((line = br.readLine()) != </span><span class="s0">null</span><span class="s1">) {sb.append(line)</span><span class="s2">;</span><span class="s1">} 
+        } </span><span class="s0">finally </span><span class="s1">{ 
+            </span><span class="s0">if</span><span class="s1">(br==</span><span class="s0">null</span><span class="s1">) {br.close()</span><span class="s2">;</span><span class="s1">} 
+        } 
+        String token = sb.toString()</span><span class="s2">;</span><span class="s1"> 
+ 
+        JSONObject obj = </span><span class="s0">new </span><span class="s1">JSONObject(token)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return </span><span class="s1">obj.getJSONObject(</span><span class="s4">&quot;GetToken&quot;</span><span class="s1">).getString(</span><span class="s4">&quot;NewToken&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+    } 
+} 
+</span></pre>
+</body>
+</html>

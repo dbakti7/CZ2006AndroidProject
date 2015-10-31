@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Weather.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Weather.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">Entity</span><span class="s2">;</span><span class="s1"> 
+ 
+ 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.List</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">boundary.accessGovAPI</span><span class="s2">;</span><span class="s1"> 
+ 
+ 
+</span><span class="s3">/** 
+ * Created by dbakti7 on 10/19/2015. 
+ * This class implements Weather entity. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">Weather { 
+    </span><span class="s0">private </span><span class="s1">String condition</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String temperature</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String humidity</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Weather() { 
+        condition = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        temperature = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        humidity = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s0">public </span><span class="s1">Weather(String condition</span><span class="s2">, </span><span class="s1">String temperature</span><span class="s2">, </span><span class="s1">String humidity) { 
+        </span><span class="s0">this</span><span class="s1">.condition = condition</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.temperature = temperature</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.humidity = humidity</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">setWeather() </span><span class="s0">throws </span><span class="s1">Exception{ 
+        </span><span class="s3">// from API</span><span class="s1"> 
+ 
+        List container = accessGovAPI.get12HourForecast()</span><span class="s2">;</span><span class="s1"> 
+        condition = container.get(</span><span class="s4">0</span><span class="s1">).toString()</span><span class="s2">;</span><span class="s1"> 
+        temperature = container.get(</span><span class="s4">1</span><span class="s1">).toString()</span><span class="s2">;</span><span class="s1"> 
+        humidity = container.get(</span><span class="s4">2</span><span class="s1">).toString()</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">public </span><span class="s1">List getWeatherDetails(){ 
+        List weatherDetails = </span><span class="s0">new </span><span class="s1">ArrayList()</span><span class="s2">;</span><span class="s1"> 
+        weatherDetails.add(condition)</span><span class="s2">;</span><span class="s1"> 
+        weatherDetails.add(temperature)</span><span class="s2">;</span><span class="s1"> 
+        weatherDetails.add(humidity)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return </span><span class="s1">weatherDetails</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">public </span><span class="s1">String toString() { 
+        </span><span class="s0">return this</span><span class="s1">.condition</span><span class="s2">;</span><span class="s1"> 
+    } 
+} 
+</span></pre>
+</body>
+</html>

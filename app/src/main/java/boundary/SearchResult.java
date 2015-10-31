@@ -1,23 +1,31 @@
-package com.example.android.cz2006androidproject;
+package Boundary;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.android.cz2006androidproject.R;
 
-public class PlanChoicesByPublicTransport extends ActionBarActivity {
+import Entity.Place;
 
+/**
+ * This class is used to show the search result of an query. User will be able to select places
+ * from here.
+ */
+public class SearchResult extends ActionBarActivity {
+    Place[] result = new Place[10];
+    String searchEntry = new String();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plan_choices_by_public_transport);
+        setContentView(R.layout.activity_search_result);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_plan_choices_by_public_transport, menu);
+        getMenuInflater().inflate(R.menu.menu_search_result, menu);
         return true;
     }
 
@@ -34,5 +42,11 @@ public class PlanChoicesByPublicTransport extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public String getUserInput() {
+        return null;
+    }
+    public void searchEntry(String entry) {
+
     }
 }

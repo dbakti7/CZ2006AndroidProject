@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>Place.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(128,128,128); font-weight: bold; font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Place.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">Entity</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.*</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s3">/** 
+ * Created by dbakti7 on 10/19/2015. 
+ * This class implements the Place entity with the attributes name, category, weather, description, 
+ * and image. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">Place { 
+    </span><span class="s0">private </span><span class="s1">String name</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String category</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Weather weather</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String description</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String image</span><span class="s2">;</span><span class="s1"> 
+ 
+    </span><span class="s3">/** 
+     * default class constructor 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Place() { 
+        name = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        category = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        weather = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        description = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        image = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * class contructor 
+     */</span><span class="s1"> 
+ 
+    </span><span class="s0">public </span><span class="s1">Place(String name</span><span class="s2">, </span><span class="s1">String category</span><span class="s2">, </span><span class="s1">Weather weather</span><span class="s2">, </span><span class="s1">String description</span><span class="s2">, </span><span class="s1">String image) </span><span class="s0">throws </span><span class="s1">Exception{ 
+        </span><span class="s0">this</span><span class="s1">.name = name</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.category = category</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.weather.setWeather()</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.description = description</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.image = image</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * set the weather 
+     * </span><span class="s4">@throws </span><span class="s3">Exception 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">setDetails() </span><span class="s0">throws </span><span class="s1">Exception{ 
+        </span><span class="s0">this</span><span class="s1">.weather.setWeather()</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * get the details of the place 
+     * </span><span class="s4">@return </span><span class="s3">details of the place in a List 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">List getDetails() { 
+        </span><span class="s3">// return details of a place</span><span class="s1"> 
+        List details = </span><span class="s0">new </span><span class="s1">ArrayList()</span><span class="s2">;</span><span class="s1"> 
+        details.add(name)</span><span class="s2">;</span><span class="s1"> 
+        details.add(category)</span><span class="s2">;</span><span class="s1"> 
+        details.add(weather)</span><span class="s2">;</span><span class="s1"> 
+        details.add(description)</span><span class="s2">;</span><span class="s1"> 
+        details.add(image)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return </span><span class="s1">details</span><span class="s2">;</span><span class="s1"> 
+    } 
+} 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>Plan.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,0,255); }
+.s5 { color: rgb(128,128,128); font-weight: bold; font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Plan.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">Entity</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.*</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s3">/** 
+ * Created by dbakti7 on 10/19/2015. 
+ * This class implements the Plan entity with the attributes finalized, date, listPlace, ETA, 
+ * travelTime, transport, and travelCost. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">Plan { 
+    </span><span class="s0">private boolean </span><span class="s1">finalized</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String date</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Place listPlace[] = </span><span class="s0">new </span><span class="s1">Place[</span><span class="s4">10</span><span class="s1">]</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private int</span><span class="s1">[] ETA = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">10</span><span class="s1">]</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private int</span><span class="s1">[] travelTime = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">10</span><span class="s1">]</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String[] transport = </span><span class="s0">new </span><span class="s1">String[</span><span class="s4">10</span><span class="s1">]</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private double</span><span class="s1">[] travelCost = </span><span class="s0">new double</span><span class="s1">[</span><span class="s4">10</span><span class="s1">]</span><span class="s2">;</span><span class="s1"> 
+ 
+    </span><span class="s3">/** 
+     * class constructor 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Plan() { 
+        finalized = </span><span class="s0">false</span><span class="s2">;</span><span class="s1"> 
+        date = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; </span><span class="s4">10</span><span class="s2">; </span><span class="s1">++i) 
+            listPlace[i] = </span><span class="s0">new </span><span class="s1">Place()</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * getter functions 
+     * </span><span class="s5">@return </span><span class="s3">various attributes 
+     */</span><span class="s1"> 
+    </span><span class="s0">public boolean </span><span class="s1">getState() { 
+        </span><span class="s0">return </span><span class="s1">finalized</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s0">public </span><span class="s1">String getDate() { 
+        </span><span class="s0">return </span><span class="s1">date</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s0">public </span><span class="s1">Place[] getPlaces() { 
+        </span><span class="s0">return </span><span class="s1">listPlace</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s0">public int</span><span class="s1">[] getETA() { 
+        </span><span class="s0">return </span><span class="s1">ETA</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s0">public int</span><span class="s1">[] getTravelTime() { 
+        </span><span class="s0">return </span><span class="s1">travelTime</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s0">public </span><span class="s1">String[] getTransport() { 
+        </span><span class="s0">return </span><span class="s1">transport</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s0">public double</span><span class="s1">[] getTravelCost() { 
+        </span><span class="s0">return </span><span class="s1">travelCost</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * setter functions 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">setState(</span><span class="s0">boolean </span><span class="s1">finalized) { 
+        </span><span class="s0">this</span><span class="s1">.finalized = finalized</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s0">public void </span><span class="s1">setDate(String date) { 
+        </span><span class="s0">this</span><span class="s1">.date = date</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s0">public void </span><span class="s1">setPlaces(Place[] listPlace) { 
+        </span><span class="s0">this</span><span class="s1">.listPlace = listPlace</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s0">public void </span><span class="s1">setETA(){ 
+        </span><span class="s3">// get from API gothere.sg</span><span class="s1"> 
+    } 
+    </span><span class="s0">public void </span><span class="s1">setTravelTime() { 
+        </span><span class="s3">// get from API</span><span class="s1"> 
+    } 
+    </span><span class="s0">public void </span><span class="s1">setTransport() { 
+        </span><span class="s3">// get from API</span><span class="s1"> 
+    } 
+    </span><span class="s0">public void </span><span class="s1">setTravelCost() { 
+        </span><span class="s3">// get from API</span><span class="s1"> 
+    } 
+ 
+ 
+ 
+}</span></pre>
+</body>
+</html>

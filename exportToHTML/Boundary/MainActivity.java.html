@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>MainActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+.s5 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+MainActivity.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">Boundary</span><span class="s2">;</span><span class="s1"> 
+ 
+ 
+</span><span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.Menu</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.MenuItem</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.View</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.ArrayAdapter</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.ListView</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.v7.app.AppCompatActivity</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">com.example.android.cz2006androidproject.R</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">Entity.Place</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">Entity.Weather</span><span class="s2">;</span><span class="s1"> 
+ 
+ 
+</span><span class="s0">public class </span><span class="s1">MainActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity{</span><span class="s3">//ActionBarActivity {</span><span class="s1"> 
+ 
+    ListView listview</span><span class="s2">;</span><span class="s1"> 
+    ArrayAdapter&lt;String&gt; listAdapter</span><span class="s2">;</span><span class="s1"> 
+    String[] fragmentArray = {</span><span class="s4">&quot;A&quot;</span><span class="s2">,</span><span class="s4">&quot;B&quot;</span><span class="s2">,</span><span class="s4">&quot;C&quot;</span><span class="s2">,</span><span class="s4">&quot;D&quot;</span><span class="s2">,</span><span class="s4">&quot;E&quot;</span><span class="s1">}</span><span class="s2">;</span><span class="s1"> 
+ 
+    @Override 
+    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s2">;</span><span class="s1"> 
+        setContentView(R.layout.activity_main)</span><span class="s2">;</span><span class="s1"> 
+        listview = (ListView)findViewById(R.id.listview)</span><span class="s2">;</span><span class="s1"> 
+        listAdapter = </span><span class="s0">new </span><span class="s1">ArrayAdapter&lt;String&gt;(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">R.layout.myplan_layout</span><span class="s2">, </span><span class="s1">R.id.textView2</span><span class="s2">, </span><span class="s1">fragmentArray)</span><span class="s2">;</span><span class="s1"> 
+        listview.setAdapter(listAdapter)</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onCreateOptionsMenu(Menu menu) { 
+        </span><span class="s3">// Inflate the menu; this adds items to the action bar if it is present.</span><span class="s1"> 
+        getMenuInflater().inflate(R.menu.menu_main</span><span class="s2">, </span><span class="s1">menu)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return true</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onOptionsItemSelected(MenuItem item) { 
+        </span><span class="s3">// Handle action bar item clicks here. The action bar will</span><span class="s1"> 
+        </span><span class="s3">// automatically handle clicks on the Home/Up button, so long</span><span class="s1"> 
+        </span><span class="s3">// as you specify a parent activity in AndroidManifest.xml.</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">id = item.getItemId()</span><span class="s2">;</span><span class="s1"> 
+ 
+        </span><span class="s3">//noinspection SimplifiableIfStatement</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(id == R.id.action_settings) { 
+            </span><span class="s0">return true</span><span class="s2">;</span><span class="s1"> 
+        } 
+ 
+        </span><span class="s0">return super</span><span class="s1">.onOptionsItemSelected(item)</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s3">//Move to SearchPage</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">searchPage(View view) { 
+        Intent intent = </span><span class="s0">new </span><span class="s1">Intent(MainActivity.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">SearchView.</span><span class="s0">class</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        startActivity(intent)</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">//Move to Calendar Page</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">calendarPageClicked(View v){ 
+        startActivity(</span><span class="s0">new </span><span class="s1">Intent(MainActivity.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">Calendar.</span><span class="s0">class</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+    } 
+    </span><span class="s0">public void </span><span class="s1">placeDetail(View v) </span><span class="s0">throws </span><span class="s1">Exception { 
+        Intent i = </span><span class="s0">new </span><span class="s1">Intent(MainActivity.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">ViewDetails.</span><span class="s0">class</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        Place pSample = </span><span class="s0">new </span><span class="s1">Place(</span><span class="s4">&quot;Scenery&quot;</span><span class="s2">, </span><span class="s4">&quot;Tourist Attractions&quot;</span><span class="s2">, </span><span class="s0">new </span><span class="s1">Weather()</span><span class="s2">, </span><span class="s4">&quot;Beautiful Scenery&quot;</span><span class="s2">, </span><span class="s4">&quot;landscape_540115_1920&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        String[] pSampleArray = </span><span class="s0">new </span><span class="s1">String[</span><span class="s5">10</span><span class="s1">]</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">j=</span><span class="s5">0</span><span class="s2">;</span><span class="s1">j&lt;</span><span class="s5">5</span><span class="s2">;</span><span class="s1">++j) { 
+            pSampleArray[j] = </span><span class="s0">new </span><span class="s1">String()</span><span class="s2">;</span><span class="s1"> 
+            pSampleArray[j] = (String)pSample.getDetails().get(j).toString()</span><span class="s2">;</span><span class="s1"> 
+        } 
+        i.putExtra(</span><span class="s4">&quot;parse this&quot;</span><span class="s2">, </span><span class="s1">pSampleArray)</span><span class="s2">;</span><span class="s1"> 
+        startActivity(i)</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">travelPlannerPage(View view) { 
+        Intent intent = </span><span class="s0">new </span><span class="s1">Intent(MainActivity.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">TravelPlanner.</span><span class="s0">class</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        startActivity(intent)</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+} 
+</span></pre>
+</body>
+</html>

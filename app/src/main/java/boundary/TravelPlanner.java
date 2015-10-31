@@ -1,4 +1,4 @@
-package boundary;
+package Boundary;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,17 +14,20 @@ import android.widget.Toast;
 import com.example.android.cz2006androidproject.R;
 
 import Control.TravelPlannerAdapter;
+import Entity.Place;
 
 /**
  * Created by stvalxndr on 20-Oct-15.
+ * This class is used to arrange places selected by user.
  */
 
 public class TravelPlanner extends Activity {
     String date;
+    Place[] listPlace = new Place[10];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.travelplanner_layout);
+        setContentView(R.layout.activity_travel_planner);
         DatePicker dp = (DatePicker)findViewById(R.id.datePicker);
         dp.setCalendarViewShown(false);
         date = dp.toString();

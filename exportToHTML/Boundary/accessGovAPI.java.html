@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>accessGovAPI.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+.s5 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+accessGovAPI.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">Boundary</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">java.net.HttpURLConnection</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.net.URL</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.List</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s3">/** 
+ * Created by Stefan on 10/18/2015. 
+ * This class is used to communicate with various government APIs. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">accessGovAPI { 
+    </span><span class="s0">private static </span><span class="s1">List result = </span><span class="s0">new </span><span class="s1">ArrayList()</span><span class="s2">;</span><span class="s1"> 
+ 
+    </span><span class="s0">private static void </span><span class="s1">weatherAPIHandler(String dataset) </span><span class="s0">throws </span><span class="s1">Exception{ 
+        String keyref = </span><span class="s4">&quot;781CF461BB6606ADBC7C75BF9D4F60DBD179D04B183282AD&quot;</span><span class="s2">;</span><span class="s1"> 
+        String url = </span><span class="s4">&quot;http://www.nea.gov.sg/api/WebAPI?dataset=&quot; </span><span class="s1">+ dataset + </span><span class="s4">&quot;&amp;keyref=&quot; </span><span class="s1">+ keyref</span><span class="s2">;</span><span class="s1"> 
+ 
+        URL obj = </span><span class="s0">new </span><span class="s1">URL(url)</span><span class="s2">;</span><span class="s1"> 
+        HttpURLConnection con = (HttpURLConnection)obj.openConnection()</span><span class="s2">;</span><span class="s1"> 
+        con.setRequestMethod(</span><span class="s4">&quot;GET&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        con.setConnectTimeout(</span><span class="s5">15000</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        con.connect()</span><span class="s2">;</span><span class="s1"> 
+ 
+        </span><span class="s0">int </span><span class="s1">responseCode = con.getResponseCode()</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">if</span><span class="s1">(responseCode == </span><span class="s5">200</span><span class="s1">) { 
+            Control.xmlParser temp = </span><span class="s0">new </span><span class="s1">Control.xmlParser()</span><span class="s2">;</span><span class="s1"> 
+            result = temp.parseWeatherXml(con.getInputStream()</span><span class="s2">, </span><span class="s1">dataset)</span><span class="s2">;</span><span class="s1"> 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            System.out.println(</span><span class="s4">&quot;Error in accessing API&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        } 
+    } 
+ 
+    </span><span class="s0">private static </span><span class="s1">String getToken() </span><span class="s0">throws </span><span class="s1">Exception { 
+        String key = </span><span class="s4">&quot;N+FyIMvpuzYtw0L28rr3MdH/ND1JgyUZpgzIGLGc/ViD1ze78hEfPykspkzC7ffnVHbpoW9VQFkfAwWYw1T/OGquGThn0eCEmFqUBq98F7zohefJh4A4awNXpyNuQfR4GZcC8hTlDl+MnTf9WAErH9/1S8xx00/PoEdELI94sbo=|mv73ZvjFcSo=&quot;</span><span class="s2">;</span><span class="s1"> 
+        String myToken = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+ 
+        URL obj = </span><span class="s0">new </span><span class="s1">URL(</span><span class="s4">&quot;http://www.onemap.sg/API/services.svc/getToken?accessKEY=&quot; </span><span class="s1">+ key)</span><span class="s2">;</span><span class="s1"> 
+        HttpURLConnection con = (HttpURLConnection)obj.openConnection()</span><span class="s2">;</span><span class="s1"> 
+        con.setRequestMethod(</span><span class="s4">&quot;GET&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        con.connect()</span><span class="s2">;</span><span class="s1"> 
+        Control.jsonParser temp = </span><span class="s0">new </span><span class="s1">Control.jsonParser()</span><span class="s2">;</span><span class="s1"> 
+        myToken = temp.parseToken(con.getInputStream())</span><span class="s2">;</span><span class="s1"> 
+ 
+        </span><span class="s0">return </span><span class="s1">myToken</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">public static </span><span class="s1">List searchAPIHandler(String entry) </span><span class="s0">throws </span><span class="s1">Exception { 
+        String result = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return null</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">public static </span><span class="s1">List get12HourForecast() </span><span class="s0">throws </span><span class="s1">Exception{ 
+        weatherAPIHandler(</span><span class="s4">&quot;12hrs_forecast&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return </span><span class="s1">result</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">public static </span><span class="s1">List get3DaysForecast() </span><span class="s0">throws </span><span class="s1">Exception{ 
+        weatherAPIHandler(</span><span class="s4">&quot;3days_outlook&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return </span><span class="s1">result</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+}</span></pre>
+</body>
+</html>

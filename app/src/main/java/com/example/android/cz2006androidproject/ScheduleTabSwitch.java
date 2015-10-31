@@ -1,28 +1,44 @@
-package boundary;
+package com.example.android.cz2006androidproject;
 
-/**
- * Created by dbakti7 on 10/11/2015.
- */
-import android.app.Activity;
+import android.app.TabActivity;
 import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.TabHost;
 
-import com.example.android.cz2006androidproject.R;
+import Boundary.ScheduleListView;
+import Boundary.MainActivity;
+import Boundary.Calendar;
 
-public class search extends Activity {
+
+public class ScheduleTabSwitch extends TabActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search);
+        setContentView(R.layout.activity_schedule_tab_switch);
+
+        TabHost tabHost = getTabHost();
+
+        Intent ListIntent = new Intent(this, ScheduleListView.class);
+        TabHost.TabSpec spec;
+        spec = tabHost.newTabSpec("page1").setIndicator("list").setContent(ListIntent);
+        tabHost.addTab(spec);
+
+        Intent MapIntent = new Intent(this, Calendar.class);
+        spec = tabHost.newTabSpec("page2").setIndicator("map").setContent(MapIntent);
+        tabHost.addTab(spec);
+
+
+
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_schedule_tab_switch, menu);
         return true;
     }
 
@@ -39,18 +55,5 @@ public class search extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    //Move to CalendarPage
-    public void calendarPageClicked(View view) {
-        Intent intent = new Intent(search.this, calendar.class);
-        startActivity(intent);
-    }
-
-    //Move to HomePage
-    public void homePageClicked(View view) {
-        Intent intent = new Intent(search.this, MainActivity.class);
-        ActivityCompat.finishAffinity(this);
-        startActivity(intent);
     }
 }

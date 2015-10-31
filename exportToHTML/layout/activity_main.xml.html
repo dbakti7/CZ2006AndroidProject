@@ -1,0 +1,133 @@
+<html>
+<head>
+<title>activity_main.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { }
+.s1 { color: rgb(0,0,128); font-weight: bold; }
+.s2 { color: rgb(0,0,255); font-weight: bold; }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+.s4 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+activity_main.xml</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">&lt;</span><span class="s1">android.support.v4.widget.DrawerLayout </span><span class="s2">xmlns:tools=</span><span class="s3">&quot;http://schemas.android.com/tools&quot;</span><span class="s0"> 
+    </span><span class="s2">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+    </span><span class="s2">android:layout_height=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+    </span><span class="s2">android:id=</span><span class="s3">&quot;@+id/drawerLayout&quot;</span><span class="s0"> 
+    </span><span class="s2">android:layout_alignParentTop=</span><span class="s3">&quot;true&quot;</span><span class="s0"> 
+    </span><span class="s2">android:layout_centerHorizontal=</span><span class="s3">&quot;true&quot;</span><span class="s0"> 
+    </span><span class="s2">xmlns:android=</span><span class="s3">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="s0">&gt; 
+ 
+&lt;</span><span class="s1">LinearLayout </span><span class="s2">xmlns:android=</span><span class="s3">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="s0"> 
+    </span><span class="s2">xmlns:tools=</span><span class="s3">&quot;http://schemas.android.com/tools&quot;</span><span class="s0"> 
+    </span><span class="s2">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+ 
+    </span><span class="s2">android:layout_height=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+    </span><span class="s2">android:orientation=</span><span class="s3">&quot;vertical&quot; </span><span class="s2">tools:context=</span><span class="s3">&quot;.MainActivity&quot;</span><span class="s0">&gt; 
+    </span><span class="s4">&lt;!--android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot; 
+    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot; 
+    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot; 
+    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;--&gt;</span><span class="s0"> 
+ 
+    &lt;</span><span class="s1">TextView</span><span class="s0"> 
+        </span><span class="s2">android:id=</span><span class="s3">&quot;@+id/tvMAINhome&quot;</span><span class="s0"> 
+        </span><span class="s2">android:text=</span><span class="s3">&quot;Home&quot;</span><span class="s0"> 
+        </span><span class="s2">android:textSize=</span><span class="s3">&quot;40dp&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_height=</span><span class="s3">&quot;0dp&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_weight=</span><span class="s3">&quot;1&quot;</span><span class="s0">/&gt; 
+ 
+    &lt;</span><span class="s1">TextView</span><span class="s0"> 
+        </span><span class="s2">android:id=</span><span class="s3">&quot;@+id/tvMAINrecommendedPlan&quot;</span><span class="s0"> 
+        </span><span class="s2">android:text=</span><span class="s3">&quot;Recommended Plan&quot;</span><span class="s0"> 
+        </span><span class="s2">android:gravity=</span><span class="s3">&quot;center&quot;</span><span class="s0"> 
+        </span><span class="s2">android:textSize=</span><span class="s3">&quot;25dp&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_height=</span><span class="s3">&quot;0dp&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_weight=</span><span class="s3">&quot;1&quot;</span><span class="s0">/&gt; 
+    &lt;</span><span class="s1">ImageButton</span><span class="s0"> 
+        </span><span class="s2">android:id=</span><span class="s3">&quot;@+id/ibMAINrecommendedPlanImage&quot;</span><span class="s0"> 
+        </span><span class="s2">android:src=</span><span class="s3">&quot;@mipmap/landscape_540115_1920&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_height=</span><span class="s3">&quot;0dp&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_weight=</span><span class="s3">&quot;4&quot;</span><span class="s0"> 
+ 
+        </span><span class="s2">android:onClick=</span><span class="s3">&quot;travelPlannerPage&quot; </span><span class="s0">/&gt; 
+ 
+    &lt;</span><span class="s1">TextView</span><span class="s0"> 
+        </span><span class="s2">android:id=</span><span class="s3">&quot;@+id/tvMAINstaffPicks&quot;</span><span class="s0"> 
+        </span><span class="s2">android:text=</span><span class="s3">&quot;Staff Picks&quot;</span><span class="s0"> 
+        </span><span class="s2">android:gravity=</span><span class="s3">&quot;center&quot;</span><span class="s0"> 
+        </span><span class="s2">android:textSize=</span><span class="s3">&quot;25dp&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_height=</span><span class="s3">&quot;0dp&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_weight=</span><span class="s3">&quot;1&quot;</span><span class="s0">/&gt; 
+    &lt;</span><span class="s1">ImageButton</span><span class="s0"> 
+        </span><span class="s2">android:id=</span><span class="s3">&quot;@+id/ibMAINstaffPicksImage&quot;</span><span class="s0"> 
+        </span><span class="s2">android:src=</span><span class="s3">&quot;@mipmap/landscape_540115_1920&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_height=</span><span class="s3">&quot;0dp&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_weight=</span><span class="s3">&quot;4&quot;</span><span class="s0"> 
+        </span><span class="s2">android:onClick=</span><span class="s3">&quot;travelPlannerPage&quot; </span><span class="s0">/&gt; 
+ 
+ 
+ 
+    &lt;</span><span class="s1">LinearLayout</span><span class="s0"> 
+        </span><span class="s2">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_height=</span><span class="s3">&quot;0dp&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_weight=</span><span class="s3">&quot;1.25&quot;</span><span class="s0">&gt; 
+ 
+ 
+        &lt;</span><span class="s1">ImageButton</span><span class="s0"> 
+            </span><span class="s2">android:src=</span><span class="s3">&quot;@drawable/home_black&quot;</span><span class="s0"> 
+            </span><span class="s2">android:layout_width=</span><span class="s3">&quot;0dp&quot;</span><span class="s0"> 
+            </span><span class="s2">android:layout_weight=</span><span class="s3">&quot;1&quot;</span><span class="s0"> 
+            </span><span class="s2">android:layout_height=</span><span class="s3">&quot;match_parent&quot; </span><span class="s0">/&gt; 
+        &lt;</span><span class="s1">ImageButton</span><span class="s0"> 
+            </span><span class="s2">android:src = </span><span class="s3">&quot;@drawable/magnify&quot;</span><span class="s0"> 
+            </span><span class="s2">android:layout_width=</span><span class="s3">&quot;0dp&quot;</span><span class="s0"> 
+            </span><span class="s2">android:layout_weight=</span><span class="s3">&quot;1&quot;</span><span class="s0"> 
+            </span><span class="s2">android:layout_height=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+            </span><span class="s2">android:onClick=</span><span class="s3">&quot;searchPage&quot;</span><span class="s0">/&gt; 
+        &lt;</span><span class="s1">ImageButton</span><span class="s0"> 
+            </span><span class="s2">android:layout_width=</span><span class="s3">&quot;0dp&quot;</span><span class="s0"> 
+            </span><span class="s2">android:layout_weight=</span><span class="s3">&quot;1&quot;</span><span class="s0"> 
+            </span><span class="s2">android:src=</span><span class="s3">&quot;@drawable/calendar_black&quot;</span><span class="s0"> 
+            </span><span class="s2">android:layout_height=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+            </span><span class="s2">android:onClick=</span><span class="s3">&quot;calendarPageClicked&quot;</span><span class="s0">/&gt; 
+ 
+    &lt;/</span><span class="s1">LinearLayout</span><span class="s0">&gt; 
+&lt;/</span><span class="s1">LinearLayout</span><span class="s0">&gt; 
+ 
+    &lt;</span><span class="s1">ListView</span><span class="s0"> 
+        </span><span class="s2">android:layout_width=</span><span class="s3">&quot;275dp&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_height=</span><span class="s3">&quot;match_parent&quot;</span><span class="s0"> 
+        </span><span class="s2">android:layout_gravity=</span><span class="s3">&quot;left&quot;</span><span class="s0"> 
+        </span><span class="s2">android:id=</span><span class="s3">&quot;@+id/listview&quot;</span><span class="s0"> 
+        </span><span class="s2">android:background=</span><span class="s3">&quot;#5e5555&quot;</span><span class="s0"> 
+        </span><span class="s2">tools:listheader=</span><span class="s3">&quot;@layout/abc_action_bar_title_item&quot;</span><span class="s0"> 
+        </span><span class="s2">android:headerDividersEnabled=</span><span class="s3">&quot;false&quot;</span><span class="s0"> 
+        </span><span class="s2">android:paddingStart=</span><span class="s3">&quot;30dp&quot;</span><span class="s0"> 
+        </span><span class="s2">android:paddingLeft=</span><span class="s3">&quot;30dp&quot;</span><span class="s0"> 
+    &gt;&lt;/</span><span class="s1">ListView</span><span class="s0">&gt; 
+ 
+ 
+ 
+&lt;/</span><span class="s1">android.support.v4.widget.DrawerLayout</span><span class="s0">&gt; 
+ 
+ 
+ 
+ 
+ 
+</span></pre>
+</body>
+</html>

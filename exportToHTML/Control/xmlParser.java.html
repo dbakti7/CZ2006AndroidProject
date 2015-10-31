@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>xmlParser.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+.s5 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+xmlParser.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">Control</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.util.Xml</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">org.xmlpull.v1.XmlPullParser</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">org.xmlpull.v1.XmlPullParserException</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">java.io.IOException</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.io.InputStream</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.List</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s3">/** 
+ * Created by stefan on 10/18/2015. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">xmlParser{ 
+    </span><span class="s0">private static final </span><span class="s1">String ns = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+ 
+    </span><span class="s0">public </span><span class="s1">List parseWeatherXml(InputStream in</span><span class="s2">,</span><span class="s1">String data) </span><span class="s0">throws </span><span class="s1">Exception{ 
+        List res = </span><span class="s0">new </span><span class="s1">ArrayList()</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">try</span><span class="s1">{ 
+            XmlPullParser parser = Xml.newPullParser()</span><span class="s2">;</span><span class="s1"> 
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES</span><span class="s2">, </span><span class="s0">false</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+            parser.setInput(in</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+            parser.nextTag()</span><span class="s2">;</span><span class="s1"> 
+            </span><span class="s0">if</span><span class="s1">(data.equalsIgnoreCase(</span><span class="s4">&quot;12hrs_forecast&quot;</span><span class="s1">)) { 
+                res=read12HourForecast(parser)</span><span class="s2">;</span><span class="s1"> 
+            } 
+            </span><span class="s3">//else if(data.equalsIgnoreCase(&quot;3days_outlook&quot;)) {</span><span class="s1"> 
+            </span><span class="s3">//    res=read3DaysForecast(parser);</span><span class="s1"> 
+            </span><span class="s3">//}</span><span class="s1"> 
+        } </span><span class="s0">finally </span><span class="s1">{in.close()</span><span class="s2">;</span><span class="s1">} 
+        </span><span class="s0">return </span><span class="s1">res</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">private </span><span class="s1">List read12HourForecast(XmlPullParser parser) </span><span class="s0">throws </span><span class="s1">Exception { 
+        List&lt;String&gt; forecast = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s2">;</span><span class="s1"> 
+ 
+        parser.require(XmlPullParser.START_TAG</span><span class="s2">, </span><span class="s1">ns</span><span class="s2">, </span><span class="s4">&quot;item&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">while</span><span class="s1">(parser.next() != XmlPullParser.END_TAG) { 
+            </span><span class="s0">if</span><span class="s1">(parser.getEventType() != XmlPullParser.START_TAG) {</span><span class="s0">continue</span><span class="s2">;</span><span class="s1">} 
+ 
+            String name = parser.getName()</span><span class="s2">;</span><span class="s1"> 
+            </span><span class="s0">switch</span><span class="s1">(name){ 
+                </span><span class="s0">case</span><span class="s4">&quot;forecast&quot;</span><span class="s1">: 
+                    forecast.add(parser.getText())</span><span class="s2">;</span><span class="s1"> 
+                    </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+                </span><span class="s0">case</span><span class="s4">&quot;temperature&quot;</span><span class="s1">:</span><span class="s0">case</span><span class="s4">&quot;relativeHumidity&quot;</span><span class="s1">: 
+                    String temp = parser.getAttributeValue(</span><span class="s0">null</span><span class="s2">,</span><span class="s4">&quot;low&quot;</span><span class="s1">)+</span><span class="s4">&quot; - &quot;</span><span class="s1">+ 
+                                parser.getAttributeValue(</span><span class="s0">null</span><span class="s2">,</span><span class="s4">&quot;high&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+                    forecast.add(temp)</span><span class="s2">;</span><span class="s1"> 
+                </span><span class="s0">default</span><span class="s1">: 
+                    skip(parser)</span><span class="s2">;</span><span class="s1"> 
+                    </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+            } 
+        } 
+        </span><span class="s0">return </span><span class="s1">forecast</span><span class="s2">;</span><span class="s1"> 
+ 
+    } 
+ 
+    </span><span class="s0">private </span><span class="s1">List read3DaysForecast(XmlPullParser parser) </span><span class="s0">throws </span><span class="s1">Exception { 
+        List forecast = </span><span class="s0">new </span><span class="s1">ArrayList()</span><span class="s2">;</span><span class="s1"> 
+        parser.require(XmlPullParser.START_TAG</span><span class="s2">, </span><span class="s1">ns</span><span class="s2">, </span><span class="s4">&quot;item&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return </span><span class="s1">forecast</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">private void </span><span class="s1">skip(XmlPullParser parser) </span><span class="s0">throws </span><span class="s1">XmlPullParserException</span><span class="s2">, </span><span class="s1">IOException { 
+        </span><span class="s0">if </span><span class="s1">(parser.getEventType() != XmlPullParser.START_TAG) { 
+            </span><span class="s0">throw new </span><span class="s1">IllegalStateException()</span><span class="s2">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">int </span><span class="s1">depth = </span><span class="s5">1</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">while </span><span class="s1">(depth != </span><span class="s5">0</span><span class="s1">) { 
+            </span><span class="s0">switch </span><span class="s1">(parser.next()) { 
+                </span><span class="s0">case </span><span class="s1">XmlPullParser.END_TAG: 
+                    depth--</span><span class="s2">;</span><span class="s1"> 
+                    </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+                </span><span class="s0">case </span><span class="s1">XmlPullParser.START_TAG: 
+                    depth++</span><span class="s2">;</span><span class="s1"> 
+                    </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+            } 
+        } 
+    } 
+} 
+</span></pre>
+</body>
+</html>

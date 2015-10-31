@@ -1,6 +1,5 @@
-package com.example.android.cz2006androidproject;
+package Boundary;
 
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,10 +7,13 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.cz2006androidproject.R;
+
 import java.lang.*;
-import java.util.List;
 
-
+/**
+ * This class is used to view details of a place.
+ */
 public class ViewDetails extends ActionBarActivity {
 
     @Override
@@ -29,9 +31,6 @@ public class ViewDetails extends ActionBarActivity {
             TextView detail=(TextView)findViewById(R.id.tvVIEWDETAILSdetail);
             detail.setText(value[3]);
         }
-
-
-
     }
 
     @Override

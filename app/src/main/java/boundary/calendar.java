@@ -1,4 +1,4 @@
-package boundary;
+package Boundary;
 
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
@@ -10,11 +10,13 @@ import android.widget.Toast;
 
 import com.example.android.cz2006androidproject.R;
 
-
-public class calendar extends AppCompatActivity {
+/**
+ * This class is used to show calendar view.
+ */
+public class Calendar extends AppCompatActivity {
 
     CalendarView cal;
-    String dateWithPlan;
+    private String[] dateWithPlan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,40 +31,25 @@ public class calendar extends AppCompatActivity {
         });
     }
 
-/*
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_calendar, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
-
     //Move to HomePage
     public void homePageClicked(View view) {
-        Intent intent = new Intent(calendar.this, MainActivity.class);
+        Intent intent = new Intent(Calendar.this, MainActivity.class);
         ActivityCompat.finishAffinity(this);
         startActivity(intent);
     }
 
     //Move to SearchPage
     public void searchPageClicked(View view) {
-        Intent intent = new Intent(calendar.this, search.class);
+        Intent intent = new Intent(Calendar.this, SearchView.class);
         startActivity(intent);
+    }
+
+    /**
+     * update the status of the date to indicate whether there is an existing plan or not on that
+     * date.
+     * @param date
+     */
+    public void updateCalendar(String date) {
+
     }
 }

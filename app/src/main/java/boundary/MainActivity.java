@@ -1,4 +1,4 @@
-package boundary;
+package Boundary;
 
 
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.cz2006androidproject.R;
-import com.example.android.cz2006androidproject.ViewDetails;
 
 import Entity.Place;
 import Entity.Weather;
@@ -55,15 +54,15 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
     }
     //Move to SearchPage
     public void searchPage(View view) {
-        Intent intent = new Intent(MainActivity.this, search.class);
+        Intent intent = new Intent(MainActivity.this, SearchView.class);
         startActivity(intent);
     }
 
     //Move to Calendar Page
     public void calendarPageClicked(View v){
-        startActivity(new Intent(MainActivity.this, calendar.class));
+        startActivity(new Intent(MainActivity.this, Calendar.class));
     }
-    public void placeDetail(View v) {
+    public void placeDetail(View v) throws Exception {
         Intent i = new Intent(MainActivity.this, ViewDetails.class);
         Place pSample = new Place("Scenery", "Tourist Attractions", new Weather(), "Beautiful Scenery", "landscape_540115_1920");
         String[] pSampleArray = new String[10];
