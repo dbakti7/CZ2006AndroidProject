@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.cz2006androidproject" >
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +16,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar" >
         //android:theme="@style/AppTheme"
         <activity
-            android:name="Boundary.MainActivity"
+            android:name="boundary.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,44 +25,60 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="Boundary.SearchView"
+            android:name="boundary.SearchView"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="Boundary.Calendar"
+            android:name="boundary.Calendar"
             android:label="@string/title_activity_calendar" >
         </activity>
         <activity
-            android:name="Boundary.TravelPlanner"
+            android:name="boundary.TravelPlanner"
             android:label="@string/title_activity_view_schedule" >
         </activity>
         <activity
-            android:name="Boundary.ViewDetails"
+            android:name="boundary.ViewDetails"
             android:label="@string/title_activity_view_details" >
         </activity>
         <activity
-            android:name="Boundary.ScheduleListView"
+            android:name="boundary.ScheduleListView"
             android:label="@string/title_activity_schedule_list_view" >
         </activity>
         <activity
-            android:name="Boundary.MapView"
+            android:name="boundary.MapView"
             android:label="@string/title_activity_map_view" >
         </activity>
         <activity
-            android:name="Boundary.PlanChoicesByTaxi"
+            android:name="boundary.PlanChoicesByTaxi"
             android:label="@string/title_activity_plan_choices_by_taxi" >
         </activity>
         <activity
-            android:name="Boundary.PlanChoicesByPublicTransport"
+            android:name="boundary.PlanChoicesByPublicTransport"
             android:label="@string/title_activity_plan_choices_by_public_transport" >
         </activity>
         <activity
-            android:name="Boundary.SearchResult"
+            android:name="boundary.SearchResult"
             android:label="@string/title_activity_search_result" >
         </activity>
         <activity
             android:name=".ScheduleTabSwitch"
             android:label="@string/title_activity_schedule_tab_switch" >
+        </activity>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsActivityView"
+            android:label="@string/title_activity_maps_activity_view" >
         </activity>
     </application>
 
