@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/searchQuery"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
+        android:hint="Enter a Location"
+        android:gravity="center"
+        >
+    </EditText>
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
+        android:text="Search"
+        android:gravity="center">
+    </Button>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.7"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@mipmap/tourist"
+
+            android:id="@+id/touristAttractionsBUTTON"
+            android:textSize="@dimen/abc_text_size_large_material"
+            android:text="Tourist Attractions"
+            android:textColor="#FFFF00"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            ></Button>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@mipmap/hotel"
+            android:id="@+id/hotelBUTTON"
+            android:textSize="@dimen/abc_text_size_large_material"
+            android:text="Hotels"
+            android:textColor="#FFFF00"
+            android:textStyle="bold"></Button>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.7"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@mipmap/restaurant"
+            android:id="@+id/foodCentreBUTTON"
+            android:textSize="@dimen/abc_text_size_large_material"
+            android:text="Food Centres"
+            android:textColor="#FFFF00"
+            android:textStyle="bold"
+            android:textAlignment="center"></Button>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@mipmap/park"
+            android:id="@+id/parkBUTTON"
+            android:textSize="@dimen/abc_text_size_large_material"
+            android:text="Parks"
+            android:textColor="#FFFF00"
+            android:textStyle="bold"
+            android:textAlignment="center"></Button>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.7"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@mipmap/museum"
+            android:backgroundTintMode="src_atop"
+            android:id="@+id/museumBUTTON"
+            android:textSize="@dimen/abc_text_size_large_material"
+            android:text="Museums"
+            android:textColor="#FFFF00"
+            android:textStyle="bold"
+            android:textAlignment="center"></Button>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@mipmap/library"
+            android:id="@+id/libraryBUTTON"
+            android:textSize="@dimen/abc_text_size_large_material"
+            android:text="Public Libraries"
+            android:textColor="#FFFF00"
+            android:textStyle="bold"
+            android:textAlignment="center"></Button>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:src="@drawable/home_black"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:onClick="homePageClicked" />
+            <ImageButton
+                android:src = "@drawable/magnify"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/calendar_black"
+                android:layout_height="match_parent"
+                android:onClick="calendarPageClicked" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
