@@ -80,6 +80,10 @@
             android:name=".MapsViewer"
             android:label="@string/title_activity_maps_viewer" >
         </activity>
+        <activity
+            android:name="boundary.PlacesListView"
+            android:label="@string/title_activity_places_list_view" >
+        </activity>
     </application>
 
 </manifest>

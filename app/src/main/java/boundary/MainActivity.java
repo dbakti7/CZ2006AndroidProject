@@ -2,6 +2,7 @@ package boundary;
 
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.android.cz2006androidproject.R;
 
 import entity.Place;
+import entity.PopularPlace;
+import entity.SQLiteHelper;
 import entity.Weather;
 
 
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
         listview = (ListView)findViewById(R.id.listview);
         listAdapter = new ArrayAdapter<String>(this, R.layout.myplan_layout, R.id.textView2, fragmentArray);
         listview.setAdapter(listAdapter);
+        SQLiteHelper db = new SQLiteHelper(this);
     }
 
     @Override

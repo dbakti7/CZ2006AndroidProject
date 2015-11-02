@@ -15,6 +15,8 @@ import android.view.View;
 
 import com.example.android.cz2006androidproject.R;
 
+import entity.Place;
+
 public class SearchView extends Activity {
     private String searchEntry = new String();
     private String[] category = new String[6];
@@ -22,6 +24,7 @@ public class SearchView extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_view);
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,6 +63,38 @@ public class SearchView extends Activity {
     String getUserInput(){
         return null;
     }
+
+    public void touristAttractionsClicked(View view) {
+        Intent intent = new Intent(SearchView.this, PlacesListView.class);
+        intent.putExtra("parse this", "Tourist Attractions");
+        startActivity(intent);
+    }
+    public void hotelsClicked(View view) {
+        Intent intent = new Intent(SearchView.this, PlacesListView.class);
+        intent.putExtra("parse this", "Hotels");
+        startActivity(intent);
+    }
+    public void foodCentresClicked(View view) {
+        Intent intent = new Intent(SearchView.this, PlacesListView.class);
+        intent.putExtra("parse this", "Food Centres");
+        startActivity(intent);
+    }
+    public void parksClicked(View view) {
+        Intent intent = new Intent(SearchView.this, PlacesListView.class);
+        intent.putExtra("parse this", "Parks");
+        startActivity(intent);
+    }
+    public void museumClicked(View view) {
+        Intent intent = new Intent(SearchView.this, PlacesListView.class);
+        intent.putExtra("parse this", "Museums");
+        startActivity(intent);
+    }
+    public void publicLibrariesClicked(View view) {
+        Intent intent = new Intent(SearchView.this, PlacesListView.class);
+        intent.putExtra("parse this", "Public Libraries");
+        startActivity(intent);
+    }
+
     public void searchEntry(String entry) {
 
     }

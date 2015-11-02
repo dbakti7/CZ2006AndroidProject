@@ -4,10 +4,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.android.cz2006androidproject.R;
 
+import java.util.List;
+
 import entity.Place;
+import entity.PopularPlace;
+import entity.SQLiteHelper;
 
 /**
  * This class is used to show the search result of an query. User will be able to select places
@@ -20,6 +25,11 @@ public class SearchResult extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
+        SQLiteHelper db = new SQLiteHelper(this);
+        db.getReadableDatabase();
+        List<PopularPlace> list = db.getPopularPlaces();
+        TextView tester=(TextView)findViewById(R.id.testerTextView);
+        tester.setText(String.valueOf(list.size()));
     }
 
     @Override

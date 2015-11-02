@@ -36,6 +36,7 @@
             android:textColor="#FFFF00"
             android:textStyle="bold"
             android:textAlignment="center"
+            android:onClick="touristAttractionsClicked"
             ></Button>
         <Button
             android:layout_width="0dp"
@@ -46,7 +47,8 @@
             android:textSize="@dimen/abc_text_size_large_material"
             android:text="Hotels"
             android:textColor="#FFFF00"
-            android:textStyle="bold"></Button>
+            android:textStyle="bold"
+            android:onClick="hotelsClicked"></Button>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,7 +65,8 @@
             android:text="Food Centres"
             android:textColor="#FFFF00"
             android:textStyle="bold"
-            android:textAlignment="center"></Button>
+            android:textAlignment="center"
+            android:onClick = "foodCentresClicked"></Button>
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -74,7 +77,8 @@
             android:text="Parks"
             android:textColor="#FFFF00"
             android:textStyle="bold"
-            android:textAlignment="center"></Button>
+            android:textAlignment="center"
+            android:onClick="parksClicked"></Button>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,7 +96,8 @@
             android:text="Museums"
             android:textColor="#FFFF00"
             android:textStyle="bold"
-            android:textAlignment="center"></Button>
+            android:textAlignment="center"
+            android:onClick="museumClicked"></Button>
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -103,7 +108,8 @@
             android:text="Public Libraries"
             android:textColor="#FFFF00"
             android:textStyle="bold"
-            android:textAlignment="center"></Button>
+            android:textAlignment="center"
+            android:onClick="publicLibrariesClicked"></Button>
     </LinearLayout>
 
     <LinearLayout

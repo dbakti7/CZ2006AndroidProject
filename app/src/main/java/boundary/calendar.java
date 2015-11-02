@@ -43,18 +43,6 @@ public class Calendar extends AppCompatActivity {
                 }
             }
 
-            /*
-            Intent i = new Intent(MainActivity.this, ViewDetails.class);
-        Place pSample = new Place("Scenery", "Tourist Attractions", new Weather(), "Beautiful Scenery", "landscape_540115_1920");
-        String[] pSampleArray = new String[10];
-        for(int j=0;j<5;++j) {
-            pSampleArray[j] = new String();
-            pSampleArray[j] = (String)pSample.getDetails().get(j).toString();
-        }
-        i.putExtra("parse this", pSampleArray);
-        startActivity(i);
-             */
-
         });
     }
 
