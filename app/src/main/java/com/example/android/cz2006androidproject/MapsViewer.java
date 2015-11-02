@@ -1,6 +1,7 @@
 package com.example.android.cz2006androidproject;
 
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdate;
