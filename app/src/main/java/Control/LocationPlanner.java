@@ -1,6 +1,6 @@
 package control;
 
-import entity.Place;
+import entity.Location;
 
 /**
  * Created by dbakti7 on 10/20/2015.
@@ -8,36 +8,36 @@ import entity.Place;
  */
 public class LocationPlanner {
     /**
-     * add a new place into existing plan
+     * add a new location into existing plan
      */
-    public void addPlace(Place place, Place[] listPlace) {
+    public void addPlace(Location location, Location[] listLocation) {
 
     }
 
     /**
-     * delete a place from existing plan
-     * @param place
-     * @param listPlace
+     * delete a location from existing plan
+     * @param location
+     * @param listLocation
      */
-    public void removePlace(Place place, Place[] listPlace) {
+    public void removePlace(Location location, Location[] listLocation) {
 
     }
 
     /**
-     * set place as starting point of the plan
-     * @param place
-     * @param listPlace
+     * set location as starting point of the plan
+     * @param location
+     * @param listLocation
      */
-    public void setStart(Place place, Place[] listPlace) {
+    public void setStart(Location location, Location[] listLocation) {
 
     }
 
     /**
-     * set the place as last point of the plan
-     * @param place
-     * @param listPlace
+     * set the location as last point of the plan
+     * @param location
+     * @param listLocation
      */
-    public void setFinish(Place place, Place[] listPlace) {
+    public void setFinish(Location location, Location[] listLocation) {
 
     }
 

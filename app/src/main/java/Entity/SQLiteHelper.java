@@ -22,6 +22,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     // Books table name
     private static final String TABLE_POPULARPLACE = "PopularPlace";
+    private static final String TABLE_CURRENTPLAN = "CurrentPlan";
 
     // Books Table Columns names
     private static final String KEY_ID = "id";
@@ -29,6 +30,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_NAME = "name";
     private static final String KEY_LATITUDE = "latitude";
     private static final String KEY_LONGITUDE = "longitude";
+    private static final String KEY_DESCRIPTION = "description";
+    private static final String KEY_IMAGE = "image";
 
     private static final String[] COLUMNS = {KEY_ID, KEY_CATEGORY, KEY_NAME, KEY_LATITUDE, KEY_LONGITUDE};
 
@@ -49,25 +52,44 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         String CREATE_CURRENTPLAN_TABLE = "CREATE TABLE CURRENTPLAN ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "category TEXT, " +
-                "name TEXT, "+
-                "latitude REAL, " +
-                "longitude REAL )";
+                "name TEXT, " +
+                "category TEXT, "+
+                "description TEXT, " +
+                "image TEXT )";
         // create books table
         db.execSQL(CREATE_POPULARPLACE_TABLE);
+        db.execSQL(CREATE_CURRENTPLAN_TABLE);
 
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(id, category, name, latitude, longitude)" + " values(1, 'Tourist Attractions','Merlion', 2.0, 2.0)");
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Tourist Attractions','Merlion2', 22.0, 2.0)");
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Hotels','Hotel 1', 3.0, 2.0)");
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Hotels','Hotel 2', 3.0, 2.0)");
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Food Centres','FC 1', 3.0, 2.0)");
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Food Centres','FC 2', 3.0, 2.0)");
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Parks','Park 1', 3.0, 2.0)");
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Parks','Park 2', 3.0, 2.0)");
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Museums','Museum 1', 3.0, 2.0)");
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Museums','Museum 2', 3.0, 2.0)");
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Public Libraries','Library 1', 3.0, 2.0)");
-        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Public Libraries','Library 2', 3.0, 2.0)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(id, category, name, latitude, longitude)" + " values(1, 'Tourist Attractions','Singapore Flyer', 1.289572, 103.863121)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Tourist Attractions','Jurong Bird Park', 1.318803, 103.706420)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Tourist Attractions','Singapore Zoo', 1.404627, 103.793023)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Tourist Attractions','Universal Studios Singapore', 1.254278, 103.823765)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Tourist Attractions','Night Safari', 1.402198, 103.788125)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Museums','ArtScience Museum', 1.286413, 103.859180)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Museums','National Museum of Singapore', 1.296857, 103.848527)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Museums','National Design Centre', 1.298873, 103.853569)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Museums','National Gallery Singapore', 1.290518, 103.851630)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Museums','Asian Civilisations Museum', 1.287760, 103.851433)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Food Centres','Jurong West Block 505 Food Centre', 1.350054, 103.718148)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Food Centres','People’s Park Complex Food Centre', 1.289898, 103.844314)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Food Centres','Ayer Rajah Food Centre', 1.312293, 103.760243)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Food Centres','Zion Riverside Food Centre', 1.292843, 103.831231)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Food Centres','Toa Payoh Lorong 8 Hawker Centre',1.342622, 103.854462)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Hotels','Shangri-La Hotel', 1.311685, 103.826138)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Hotels','Singapore Marriott Hotel', 1.305624, 103.832580)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Hotels','Furama Riverfront Singapore',1.288143, 103.836001)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Hotels','Concorde Hotel Singapore',1.300804, 103.842154)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Hotels','The Fullerton Singapore', 1.286557, 103.853046)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Parks','Chinese Garden', 1.338718, 103.730064)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Parks','East Coast Park', 1.300891, 103.912079)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Parks','HortPark', 1.279410, 103.797579)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Parks','FortCanning Park', 1.295693, 103.847447)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Parks','Gardens by the Bay', 1.281708, 103.863570)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Public Libraries','Bishan Public Library', 1.355557, 103.849018)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Public Libraries','Toa Payoh public library',1.333859, 103.850504)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Public Libraries','National Library, Singapore', 1.297910, 103.854287 )");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Public Libraries','Library @Esplanade',1.289775, 103.856103)");
+        db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Public Libraries','Queenstown Library', 1.298951, 103.805379)");
         //db.execSQL("insert into " + TABLE_POPULARPLACE + " values(value1,value2...);");
         //db.execSQL("insert into " + TABLE_POPULARPLACE + " values(value1,value2...);");
     }
@@ -76,7 +98,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older books table if existed
         db.execSQL("DROP TABLE IF EXISTS PopularPlace");
-
+        db.execSQL("DROP TABLE IF EXISTS CurrentPlan");
         // create fresh books table
         this.onCreate(db);
     }
@@ -212,5 +234,67 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         //log
         //Log.d("deleteBook", pplace.toString());
 
+    }
+
+    public void addLocationtoCurrentPlan(Location location) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, location.getName()); // get title
+        values.put(KEY_CATEGORY, location.getCategory());
+        values.put(KEY_DESCRIPTION, location.getDescription());
+        values.put(KEY_IMAGE, location.getImage());
+
+        // 3. insert
+        db.insert(TABLE_CURRENTPLAN, // table
+                null, //nullColumnHack
+                values); // key/value -> keys = column names/ values = column values
+
+        // 4. close
+        db.close();
+    }
+
+    public List<Location> getCurrentPlan() {
+        List<Location> currentPlan = new LinkedList<Location>();
+
+        // 1. build the query
+        String query = "SELECT  * FROM " + TABLE_CURRENTPLAN;
+
+        // 2. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        // 3. go over each row, build book and add it to list
+        Location location = null;
+        if (cursor.moveToFirst()) {
+            do {
+                location = new Location();
+                location.setName(cursor.getString(1));
+                location.setCategory(cursor.getString(2));
+                location.setDescription(cursor.getString(3));
+                location.setImage(cursor.getString(4));
+
+                // Add book to books
+                currentPlan.add(location);
+            } while (cursor.moveToNext());
+        }
+
+        //Log.d("getAllBooks()", books.toString());
+
+        return currentPlan;
+    }
+
+    public void deleteLocation(Location location) {
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. delete
+        db.delete(TABLE_CURRENTPLAN, //table name
+                KEY_NAME + " = ?",  // selections
+                new String[]{String.valueOf(location.getName())}); //selections args
+
+        // 3. close
+        db.close();
     }
 }

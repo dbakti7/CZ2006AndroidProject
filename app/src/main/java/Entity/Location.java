@@ -2,20 +2,22 @@ package entity;
 import java.util.*;
 /**
  * Created by dbakti7 on 10/19/2015.
- * This class implements the Place entity with the attributes name, category, weather, description,
+ * This class implements the Location entity with the attributes name, category, weather, description,
  * and image.
  */
-public class Place {
+public class Location {
     private String name;
     private String category;
     private Weather weather;
     private String description;
     private String image;
+    private Double x;
+    private Double y;
 
     /**
      * default class constructor
      */
-    public Place() {
+    public Location() {
         name = null;
         category = null;
         weather = null;
@@ -28,12 +30,19 @@ public class Place {
      * class contructor
      */
 
-    public Place(String name, String category, Weather weather, String description, String image) throws Exception{
+    public Location(String name, String category, Weather weather, String description, String image) throws Exception{
         this.name = name;
         this.category = category;
         this.weather.setWeather();
         this.description = description;
         this.image = image;
+    }
+
+    public Location(String name, Double x, Double y) throws Exception{
+        this.name = name;
+        this.setWeatherDetails();
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -48,7 +57,7 @@ public class Place {
         this.category = category;
     }
 
-    public void setWeather() throws Exception{
+    public void setWeatherDetails() throws Exception{
         this.weather.setWeather();
     }
 

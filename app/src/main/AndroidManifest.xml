@@ -19,6 +19,14 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
         //android:theme="@style/AppTheme"
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+        <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAW8kHfzZxHOvGWOWODBoa6AbKsNW8lb3k"/>
         <activity
             android:name="boundary.MainActivity"
             android:label="@string/app_name" >

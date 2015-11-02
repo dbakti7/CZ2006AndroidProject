@@ -15,4 +15,5 @@
     <string name="title_activity_schedule_tab_switch">ScheduleTabSwitch</string>
     <string name="title_activity_maps_viewer">Map</string>
     <string name="title_activity_places_list_view">PlacesListView</string>
+    <string name = "str_atv_places">Search Place</string>
 </resources>

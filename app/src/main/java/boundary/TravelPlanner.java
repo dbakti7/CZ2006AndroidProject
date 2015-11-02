@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.android.cz2006androidproject.R;
 
 import control.TravelPlannerAdapter;
-import entity.Place;
+import entity.Location;
 
 /**
  * Created by stvalxndr on 20-Oct-15.
@@ -22,7 +22,7 @@ import entity.Place;
  */
 
 public class TravelPlanner extends Activity {
-    Place[] listPlace = new Place[10];
+    Location[] listLocation = new Location[10];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

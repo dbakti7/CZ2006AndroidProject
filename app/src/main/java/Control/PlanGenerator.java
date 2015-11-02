@@ -1,6 +1,6 @@
 package control;
 
-import entity.Place;
+import entity.Location;
 import entity.Plan;
 
 /**
@@ -46,9 +46,9 @@ public class PlanGenerator {
 
     /**
      * generates the plan based on given places
-     * @param listPlace
+     * @param listLocation
      */
-    public void generatePlan(Place[] listPlace) {
+    public void generatePlan(Location[] listLocation) {
 
     }
 }

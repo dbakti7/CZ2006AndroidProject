@@ -1,6 +1,6 @@
 package boundary;
 
-import entity.Place;
+import entity.Location;
 import entity.Plan;
 
 /**
@@ -9,7 +9,7 @@ import entity.Plan;
  */
 public class MyPlan {
     private Plan myPlan = new Plan();
-    public void visited(Place place) {
+    public void visited(Location location) {
 
     }
 }

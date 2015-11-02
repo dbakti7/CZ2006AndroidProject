@@ -24,13 +24,33 @@ public class xmlParser{
             parser.setInput(in, null);
             parser.nextTag();
             if(data.equalsIgnoreCase("12hrs_forecast")) {
-                res=read12HourForecast(parser);
+                res = read12HourForecast(parser);
+            } else if(data.equalsIgnoreCase("nowcast")) {
+                res = readNowcast(parser);
             }
             //else if(data.equalsIgnoreCase("3days_outlook")) {
             //    res=read3DaysForecast(parser);
             //}
         } finally {in.close();}
         return res;
+    }
+
+    private List readNowcast(XmlPullParser parser) throws Exception {
+        List<List> forecast = new ArrayList<>();
+
+        parser.require(XmlPullParser.START_TAG,ns,"weatherForecast");
+        while(parser.next()!=XmlPullParser.END_TAG) {
+            if(parser.getEventType()!=XmlPullParser.START_TAG) {continue;}
+            String name = parser.getName();
+            if(name.equalsIgnoreCase("area")){
+                List area = new ArrayList();
+                area.add(parser.getAttributeValue(null,"forecast"));
+                area.add(parser.getAttributeValue(null,"lat"));
+                area.add(parser.getAttributeValue(null,"lon"));
+                forecast.add(area);
+            }
+        }
+        return forecast;
     }
 
     private List read12HourForecast(XmlPullParser parser) throws Exception {
@@ -47,7 +67,7 @@ public class xmlParser{
                     break;
                 case"temperature":case"relativeHumidity":
                     String temp = parser.getAttributeValue(null,"low")+" - "+
-                                parser.getAttributeValue(null,"high");
+                            parser.getAttributeValue(null,"high");
                     forecast.add(temp);
                 default:
                     skip(parser);

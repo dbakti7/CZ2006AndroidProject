@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import control.CustomListAdapter;
+import entity.Location;
 import entity.PopularPlace;
 import entity.SQLiteHelper;
 
@@ -43,7 +45,7 @@ public class PlacesListView extends AppCompatActivity {
                 placesList.add(list.get(i).getName());
         String[] places = new String[placesList.size()];
         places = placesList.toArray(places);
-        int logo[]={R.mipmap.sunny,R.mipmap.rainy};//R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
+        int logo[]={R.mipmap.sunny,R.mipmap.rainy, R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
         ListAdapter theAdapter = new CustomListAdapter(this, places,logo);
         final ListView theListView = (ListView) findViewById(R.id.placesListView);
         theListView.setAdapter(theAdapter);
@@ -76,14 +78,21 @@ public class PlacesListView extends AppCompatActivity {
     public void buttonClicked(View view)
     {
         Button btn = (Button) view.findViewById(R.id.button1);
+        ImageView IV = (ImageView) view.findViewById(R.id.imageView1);
         SQLiteHelper db = new SQLiteHelper(this);
-        db.getReadableDatabase();
+        db.getWritableDatabase();
         List<PopularPlace> list = db.getPopularPlaces();
 
         String placeName = (String)btn.getText();
         for(int i = 0;i<list.size();++i) {
-            if(placeName.equals(list.get(i).getName()))
+            if(placeName.equals(list.get(i).getName())) {
+                Location location = new Location();
+                location.setName(list.get(i).getName());
+                location.setCategory(list.get(i).getCategory());
+                location.setImage("test");
+                db.addLocationtoCurrentPlan(location);
                 btn.setText(String.valueOf(list.get(i).getLatitude()));
+            }
         }
 
     }

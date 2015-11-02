@@ -2,23 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <EditText
-        android:id="@+id/searchQuery"
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.25"
-        android:hint="Enter a Location"
-        android:gravity="center"
-        >
-    </EditText>
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.25"
-        android:text="Search"
-        android:gravity="center">
-    </Button>
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/str_atv_places">
+
+        <requestFocus />
+    </AutoCompleteTextView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -111,7 +104,15 @@
             android:textAlignment="center"
             android:onClick="publicLibrariesClicked"></Button>
     </LinearLayout>
-
+    <Button
+        android:id="@+id/planButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
+        android:text="Plan!"
+        android:gravity="center"
+        android:onClick="planButtonClicked">
+    </Button>
     <LinearLayout
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
