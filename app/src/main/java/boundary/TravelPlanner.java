@@ -13,8 +13,12 @@ import android.widget.Toast;
 
 import com.example.android.cz2006androidproject.R;
 
+import java.util.List;
+
 import control.TravelPlannerAdapter;
 import entity.Location;
+import entity.PopularPlace;
+import entity.SQLiteHelper;
 
 /**
  * Created by stvalxndr on 20-Oct-15.
@@ -36,6 +40,11 @@ public class TravelPlanner extends Activity {
         int imgplaces[]={R.mipmap.sunny,R.mipmap.rainy,R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
         String places[] = {"Jurong East Mall","IKEA","Hendersen Waves",
                 "Marina Bay","Changi Airport"};
+
+
+        SQLiteHelper db = new SQLiteHelper(this);
+        db.getWritableDatabase();
+        List<PopularPlace> list = db.getPopularPlaces();
 
         ListAdapter tpAdapter = new TravelPlannerAdapter(this, places, imgplaces);
         ListView lvtp = (ListView)findViewById(R.id.lvtp);

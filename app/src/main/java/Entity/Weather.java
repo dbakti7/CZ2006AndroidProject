@@ -1,6 +1,8 @@
 package entity;
 
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class Weather {
     private String humidity;
 
     public Weather() {
-        condition = null;
+        condition = "default";
         temperature = null;
         humidity = null;
     }
@@ -28,13 +30,29 @@ public class Weather {
         this.humidity = humidity;
     }
 
-    public void setWeather() throws Exception{
+    public void setWeather(double latitude, double longitude) throws Exception{
         // from API
 
-        List container = accessGovAPI.get12HourForecast();
-        condition = container.get(0).toString();
+        List<List> temp = accessGovAPI.getNowcast();
+        double curMin = 2000000000;
+        int ans = 0, counter = 0;
+        for(List l: temp) {
+            double x = latitude - Double.parseDouble(l.get(1).toString());
+            double y = longitude - Double.parseDouble(l.get(2).toString());
+            double min = Math.sqrt(x * x + y * y);
+            if(min < curMin) {
+                curMin = min;
+                ans = counter;
+            }
+            ++counter;
+        }
+
+        List<List> container = accessGovAPI.get12HourForecast();
+        condition = temp.get(ans).get(0).toString();
+        temperature = "skldjfljsdlfj";
         temperature = container.get(1).toString();
         humidity = container.get(2).toString();
+
     }
 
     public List getWeatherDetails(){
@@ -46,6 +64,9 @@ public class Weather {
     }
 
     public String toString() {
-        return this.condition;
+        return condition;
+    }
+    public String getTemperature() {
+        return temperature;
     }
 }

@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listview = (ListView)findViewById(R.id.listview);
-        listAdapter = new ArrayAdapter<String>(this, R.layout.myplan_layout, R.id.textView2, fragmentArray);
-        listview.setAdapter(listAdapter);
+        //listview = (ListView)findViewById(R.id.listview);
+        //listAdapter = new ArrayAdapter<String>(this, R.layout.myplan_layout, R.id.textView2, fragmentArray);
+        //listview.setAdapter(listAdapter);
         SQLiteHelper db = new SQLiteHelper(this);
     }
 
@@ -79,6 +79,13 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
     public void travelPlannerPage(View view) {
         Intent intent = new Intent(MainActivity.this, TravelPlanner.class);
         startActivity(intent);
+    }
+
+    public void recommendedPlanClicked(View view) {
+
+    }
+    public void staffPickedClicked(View view) {
+
     }
 
 }

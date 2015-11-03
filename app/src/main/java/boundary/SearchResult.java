@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.cz2006androidproject.R;
 
@@ -28,10 +29,29 @@ public class SearchResult extends ActionBarActivity {
         SQLiteHelper db = new SQLiteHelper(this);
         db.getReadableDatabase();
         List<Location> list = db.getCurrentPlan();
+
+
         TextView tester=(TextView)findViewById(R.id.testerTextView1);
-        tester.setText(list.get(0).getName());
+
+        /*try {
+            loc.setWeatherDetails();
+            tester.setText(loc.getWeather().toString());
+        }
+        catch(Exception e) {
+
+        }*/
+        Location location = list.get(0);
+        try {
+            location.setWeatherDetails();
+            tester.setText(location.getWeather().toString());
+        }
+        catch(Exception e) {
+            //Toast toast = Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT);
+            //toast.show();
+        }
+
         TextView tester1=(TextView)findViewById(R.id.testerTextView2);
-        tester1.setText(list.get(1).getName());
+        tester1.setText(location.getWeather().getTemperature());
         TextView tester2=(TextView)findViewById(R.id.testerTextView3);
         tester2.setText(list.get(2).getName());
         TextView tester3=(TextView)findViewById(R.id.testerTextView4);

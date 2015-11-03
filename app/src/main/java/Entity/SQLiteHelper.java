@@ -23,6 +23,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     // Books table name
     private static final String TABLE_POPULARPLACE = "PopularPlace";
     private static final String TABLE_CURRENTPLAN = "CurrentPlan";
+    private static final String TABLE_RECOMMENDEDPLAN = "RecommendedPlan";
+    private static final String TABLE_STAFFPICKED = "StaffPicked";
 
     // Books Table Columns names
     private static final String KEY_ID = "id";
@@ -52,13 +54,35 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         String CREATE_CURRENTPLAN_TABLE = "CREATE TABLE CURRENTPLAN ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "name TEXT, " +
-                "category TEXT, "+
+                "category TEXT, " +
+                "name TEXT, "+
+                "latitude REAL, " +
+                "longitude REAL, " +
+                "description TEXT, " +
+                "image TEXT )";
+
+        String CREATE_RECOMMENDEDPLAN_TABLE = "CREATE TABLE RECOMMENDEDPLAN ( " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "category TEXT, " +
+                "name TEXT, "+
+                "latitude REAL, " +
+                "longitude REAL, " +
+                "description TEXT, " +
+                "image TEXT )";
+
+        String CREATE_STAFFPICKED_TABLE = "CREATE TABLE STAFFPICKED ( " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "category TEXT, " +
+                "name TEXT, "+
+                "latitude REAL, " +
+                "longitude REAL, " +
                 "description TEXT, " +
                 "image TEXT )";
         // create books table
         db.execSQL(CREATE_POPULARPLACE_TABLE);
         db.execSQL(CREATE_CURRENTPLAN_TABLE);
+        db.execSQL(CREATE_RECOMMENDEDPLAN_TABLE);
+        db.execSQL(CREATE_STAFFPICKED_TABLE);
 
         db.execSQL("insert into " + TABLE_POPULARPLACE + "(id, category, name, latitude, longitude)" + " values(1, 'Tourist Attractions','Singapore Flyer', 1.289572, 103.863121)");
         db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Tourist Attractions','Jurong Bird Park', 1.318803, 103.706420)");
@@ -90,8 +114,16 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Public Libraries','National Library, Singapore', 1.297910, 103.854287 )");
         db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Public Libraries','Library @Esplanade',1.289775, 103.856103)");
         db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude)" + " values('Public Libraries','Queenstown Library', 1.298951, 103.805379)");
-        //db.execSQL("insert into " + TABLE_POPULARPLACE + " values(value1,value2...);");
-        //db.execSQL("insert into " + TABLE_POPULARPLACE + " values(value1,value2...);");
+        db.execSQL("insert into " + TABLE_RECOMMENDEDPLAN + "(id, category, name, latitude, longitude, description, image)" + " values(1, 'Museums','National Gallery Singapore', 1.290518, 103.851630, 'National Gallery Singapore', 'img')");
+        db.execSQL("insert into " + TABLE_RECOMMENDEDPLAN + "(category, name, latitude, longitude, description, image)" + " values('Museums','National Design Centre', 1.298873, 103.853569, 'National Design Centre', 'img')");
+        db.execSQL("insert into " + TABLE_RECOMMENDEDPLAN + "(category, name, latitude, longitude, description, image)" + " values('Public Libraries','National Library, Singapore', 1.297910, 103.854287, 'National Library, Singapore', 'img')");
+        db.execSQL("insert into " + TABLE_RECOMMENDEDPLAN + "(category, name, latitude, longitude, description, image)" + " values('Food Centres','People’s Park Complex Food Centre', 1.289898, 103.844314, 'People’s Park Complex Food Centre', 'img')");
+        db.execSQL("insert into " + TABLE_RECOMMENDEDPLAN + "(category, name, latitude, longitude, description, image)" + " values('Parks','Gardens by the Bay', 1.281708, 103.863570, 'Gardens by the Bay', 'img')");
+        db.execSQL("insert into " + TABLE_STAFFPICKED + "(id, category, name, latitude, longitude, description, image)" + " values(1, 'Tourist Attractions','Jurong Bird Park', 1.318803, 103.706420, 'Jurong Bird Park', 'img')");
+        db.execSQL("insert into " + TABLE_STAFFPICKED + "(category, name, latitude, longitude, description, image)" + " values('Food Centres','Jurong West Block 505 Food Centre', 1.350054, 103.718148, 'Jurong West Block 505 Food Centre', 'img')");
+        db.execSQL("insert into " + TABLE_STAFFPICKED + "(category, name, latitude, longitude, description, image)" + " values('Museums','ArtScience Museum', 1.286413, 103.859180, 'HortPark', 'img')");
+        db.execSQL("insert into " + TABLE_STAFFPICKED + "(category, name, latitude, longitude, description, image)" + " values('Parks','HortPark', 1.279410, 103.797579, 'HortPark', 'img')");
+        db.execSQL("insert into " + TABLE_STAFFPICKED + "(category, name, latitude, longitude, description, image)" + " values('Parks','Gardens by the Bay', 1.281708, 103.863570, 'Gardens By the Bay', 'img')");
     }
 
     @Override
@@ -99,6 +131,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         // Drop older books table if existed
         db.execSQL("DROP TABLE IF EXISTS PopularPlace");
         db.execSQL("DROP TABLE IF EXISTS CurrentPlan");
+        db.execSQL("DROP TABLE IF EXISTS RecommendedPlan");
+        db.execSQL("DROP TABLE IF EXISTS StaffPicked");
         // create fresh books table
         this.onCreate(db);
     }
@@ -241,8 +275,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, location.getName()); // get title
         values.put(KEY_CATEGORY, location.getCategory());
+        values.put(KEY_NAME, location.getName()); // get title
+        values.put(KEY_LATITUDE, location.getLatitude());
+        values.put(KEY_LONGITUDE, location.getLongitude());
         values.put(KEY_DESCRIPTION, location.getDescription());
         values.put(KEY_IMAGE, location.getImage());
 
@@ -270,10 +306,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 location = new Location();
-                location.setName(cursor.getString(1));
-                location.setCategory(cursor.getString(2));
-                location.setDescription(cursor.getString(3));
-                location.setImage(cursor.getString(4));
+                location.setCategory(cursor.getString(1));
+                location.setName(cursor.getString(2));
+                location.setPos(cursor.getDouble(3), cursor.getDouble(4));
+                location.setDescription(cursor.getString(5));
+                location.setImage(cursor.getString(6));
 
                 // Add book to books
                 currentPlan.add(location);
@@ -296,5 +333,35 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         // 3. close
         db.close();
+    }
+
+    public List<Location> getRecommendedPlan() {
+        List<Location> currentPlan = new LinkedList<Location>();
+
+        // 1. build the query
+        String query = "SELECT  * FROM " + TABLE_CURRENTPLAN;
+
+        // 2. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        // 3. go over each row, build book and add it to list
+        Location location = null;
+        if (cursor.moveToFirst()) {
+            do {
+                location = new Location();
+                location.setName(cursor.getString(1));
+                location.setCategory(cursor.getString(2));
+                location.setDescription(cursor.getString(3));
+                location.setImage(cursor.getString(4));
+
+                // Add book to books
+                currentPlan.add(location);
+            } while (cursor.moveToNext());
+        }
+
+        //Log.d("getAllBooks()", books.toString());
+
+        return currentPlan;
     }
 }

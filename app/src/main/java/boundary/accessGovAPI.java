@@ -1,5 +1,10 @@
 package boundary;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,29 +19,61 @@ import control.jsonParser;
  * for accessing API both NEA and Onemap
  */
 public class accessGovAPI {
-    private static List result = new ArrayList();
+    private static List<List> result = new ArrayList<>();
     private static String onemapToken = null;
 
     /*
      * get forecast based on parameter (nowcast , 12hourforecast)
      */
     private static void weatherAPIHandler(String dataset) throws Exception{
-        String keyref = "781CF461BB6606ADBC7C75BF9D4F60DBD179D04B183282AD";
-        String url = "http://www.nea.gov.sg/api/WebAPI?dataset=" + dataset + "&keyref=" + keyref;
+        final String dataanything = dataset;
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    String keyref = "781CF461BB6606ADBC7C75BF9D4F60DBD179D04B183282AD";
+                    String url = "http://www.nea.gov.sg/api/WebAPI?dataset=" + dataanything + "&keyref=" + keyref;
 
-        URL obj = new URL(url);
-        HttpURLConnection con = (HttpURLConnection)obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setConnectTimeout(15000);
-        con.connect();
+                    URL obj = new URL(url);
+                    HttpURLConnection con = (HttpURLConnection)obj.openConnection();
+                    con.setRequestMethod("GET");
+                    //con.setConnectTimeout(15000);
+                    try {
+                        con.connect();
+                    }
+                    catch(Exception e) {
+                        e.printStackTrace();
+                    }
 
-        int responseCode = con.getResponseCode();
-        if(responseCode == 200) {
-            control.xmlParser temp = new control.xmlParser();
-            result = temp.parseWeatherXml(con.getInputStream(), dataset);
-        } else {
-            System.out.println("Error in accessing API");
-        }
+                    int responseCode = con.getResponseCode();
+
+                    if(responseCode == 200) {
+                        control.xmlParser temp = new control.xmlParser();
+
+                        /*BufferedReader br = null;
+                        StringBuilder sb = new StringBuilder();
+                        String line;
+                        try {
+                            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                            while ((line = br.readLine()) != null) {sb.append(line);}
+                        } finally {
+                            if(br==null) {br.close();}
+                        }
+                        String result = sb.toString();*/
+
+
+                        result = temp.parseWeatherXml(con.getInputStream(), dataanything);
+                    } else {
+                        System.out.println("Error in accessing API");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+
     }
 
     /* unused onemap function
@@ -88,7 +125,7 @@ public class accessGovAPI {
     /*
      * return a list of forecast with lat and lon
      */
-    public static List getNowcast() throws Exception {
+    public static List<List> getNowcast() throws Exception {
         weatherAPIHandler("nowcast");
         return result;
     }
@@ -96,17 +133,16 @@ public class accessGovAPI {
     /*
      * return a 12 hour forecast with weather condition(temp, humidity, etc)
      */
-    public static List get12HourForecast() throws Exception{
+    public static List get12HourForecast() throws Exception {
         weatherAPIHandler("12hrs_forecast");
         return result;
     }
 
     /*
      * unused forecast
-     */
     public static List get3DaysForecast() throws Exception{
         weatherAPIHandler("3days_outlook");
         return result;
-    }
+    }*/
 
 }

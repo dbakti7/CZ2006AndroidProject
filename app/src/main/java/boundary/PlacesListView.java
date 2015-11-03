@@ -89,7 +89,9 @@ public class PlacesListView extends AppCompatActivity {
                 Location location = new Location();
                 location.setName(list.get(i).getName());
                 location.setCategory(list.get(i).getCategory());
+                location.setPos(list.get(i).getLatitude(), list.get(i).getLongitude());
                 location.setImage("test");
+                location.setDescription("description");
                 db.addLocationtoCurrentPlan(location);
                 btn.setText(String.valueOf(list.get(i).getLatitude()));
             }

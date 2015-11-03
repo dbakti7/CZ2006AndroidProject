@@ -114,31 +114,39 @@
         android:onClick="planButtonClicked">
     </Button>
     <LinearLayout
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.25"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageButton
-                android:src="@drawable/home_black"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:onClick="homePageClicked" />
-            <ImageButton
-                android:src = "@drawable/magnify"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent" />
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/calendar_black"
-                android:layout_height="match_parent"
-                android:onClick="calendarPageClicked" />
-        </LinearLayout>
+        android:layout_weight="1.25">
+
+
+        <ImageButton
+            android:src="@drawable/hometab"
+            android:scaleType="fitCenter"
+            android:backgroundTint="#fefefe"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+
+            android:layout_height="match_parent"
+            android:onClick="homePageClicked"/>
+        <ImageButton
+            android:src = "@drawable/searchtab"
+            android:backgroundTint="#fefefe"
+            android:scaleType="fitCenter"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            />
+        <ImageButton
+            android:src = "@drawable/calendartab"
+            android:backgroundTint="#fefefe"
+
+            android:scaleType="fitCenter"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:onClick="calendarPageClicked"/>
+
     </LinearLayout>
+
 </LinearLayout>

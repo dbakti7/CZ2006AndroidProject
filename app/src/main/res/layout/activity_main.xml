@@ -19,7 +19,7 @@
 
 
         <ImageView
-            android:src="@drawable/TopBarHome"
+            android:src="@drawable/topbarhome"
             android:layout_width="match_parent"
             android:layout_marginTop="0dp"
             android:layout_height="60dp" />
@@ -36,17 +36,14 @@
             android:layout_weight="1"/>
         <ImageButton
             android:id="@+id/ibMAINrecommendedPlanImage"
-            android:src="@drawable/RecommendedTrip"
-            android:padding="-10dp"
+            android:src="@drawable/recommendedtrip"
+
             android:scaleType="centerCrop"
-            android:layout_width="425dp"
+            android:layout_width="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_height="0dp"
             android:layout_weight="4"
-            android:layout_marginLeft="-50dp"
-            android:layout_marginRight="-50dp"
-
-            android:onClick="travelPlannerPage" />
+            android:onClick="recommendedPlanClicked" />
 
         <TextView
             android:id="@+id/tvMAINstaffPicks"
@@ -60,18 +57,14 @@
             android:layout_weight="1"/>
         <ImageButton
             android:id="@+id/ibMAINstaffPicksImage"
-            android:src="@drawable/Photographytrip"
-            android:padding="-10dp"
+            android:src="@drawable/photographytrip"
+
             android:scaleType="centerCrop"
-            android:layout_width="425dp"
+            android:layout_width="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_height="0dp"
             android:layout_weight="4"
-            android:layout_marginLeft="-50dp"
-            android:layout_marginRight="-50dp"
-            android:layout_marginBottom="-1dp"
-
-            android:onClick="travelPlannerPage" />
+            android:onClick="staffPickedClicked" />
 
 
 
@@ -82,26 +75,26 @@
 
 
             <ImageButton
-                android:src="@drawable/HomeTab"
+                android:src="@drawable/hometab"
                 android:scaleType="fitCenter"
                 android:backgroundTint="#fefefe"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_marginRight="-50dp"
+
                 android:layout_height="match_parent" />
             <ImageButton
-                android:src = "@drawable/SearchTab"
+                android:src = "@drawable/searchtab"
                 android:backgroundTint="#fefefe"
                 android:scaleType="fitCenter"
-                android:layout_margin="-50dp"
+
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:onClick="searchPage"/>
             <ImageButton
-                android:src = "@drawable/CalendarTab"
+                android:src = "@drawable/calendartab"
                 android:backgroundTint="#fefefe"
-                android:layout_marginLeft="-50dp"
+
                 android:scaleType="fitCenter"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -111,17 +104,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ListView
-        android:layout_width="275dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="left"
-        android:id="@+id/listview"
-        android:background="#5e5555"
-        tools:listheader="@layout/abc_action_bar_title_item"
-        android:headerDividersEnabled="false"
-        android:paddingStart="30dp"
-        android:paddingLeft="30dp"
-        ></ListView>
+
 
 
 

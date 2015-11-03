@@ -1,4 +1,7 @@
 package entity;
+import android.content.Context;
+import android.widget.Toast;
+
 import java.util.*;
 /**
  * Created by dbakti7 on 10/19/2015.
@@ -20,8 +23,10 @@ public class Location {
     public Location() {
         name = null;
         category = null;
-        weather = null;
+        weather = new Weather();
         description = null;
+        x = 0.0;
+        y = 0.0;
         image = null;
     }
 
@@ -33,18 +38,21 @@ public class Location {
     public Location(String name, String category, Weather weather, String description, String image) throws Exception{
         this.name = name;
         this.category = category;
-        this.weather.setWeather();
+        //this.weather.setWeather(x, y);
         this.description = description;
         this.image = image;
     }
 
     public Location(String name, Double x, Double y) throws Exception{
         this.name = name;
-        this.setWeatherDetails();
+        //this.setWeatherDetails();
         this.x = x;
         this.y = y;
     }
-
+    public void setPos(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
     /**
      * set the weather
      * @throws Exception
@@ -57,8 +65,13 @@ public class Location {
         this.category = category;
     }
 
-    public void setWeatherDetails() throws Exception{
-        this.weather.setWeather();
+    public void setWeatherDetails() {
+        try {
+            this.weather.setWeather(x, y);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setDescription(String description) {
@@ -99,4 +112,11 @@ public class Location {
         details.add(image);
         return details;
     }
+    public double getLatitude() {
+        return x;
+    }
+    public double getLongitude() {
+        return y;
+    }
+
 }
