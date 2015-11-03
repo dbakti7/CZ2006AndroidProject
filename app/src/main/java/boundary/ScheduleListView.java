@@ -1,11 +1,16 @@
 package boundary;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.android.cz2006androidproject.R;
 
@@ -73,6 +78,34 @@ public class ScheduleListView extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void editPlan() {
+
+    }
+
+    public void buttonClicked(View view)
+    {
+        Button btn = (Button) view.findViewById(R.id.button1);
+        ImageView IV = (ImageView) view.findViewById(R.id.imageView1);
+        SQLiteHelper db = new SQLiteHelper(this);
+        db.getWritableDatabase();
+        List<Location> list = db.getPopularPlaces();
+        db.close();
+        String placeName = (String)btn.getText();
+        int i;
+        for(i = 0;i<list.size();++i) {
+            if(placeName.equals(list.get(i).getName()))
+                break;
+        }
+        if(i < list.size()) {
+            Intent intent = new Intent(ScheduleListView.this, ViewDetails.class);
+            intent.putExtra("name", list.get(i).getName());
+            intent.putExtra("description", list.get(i).getDescription());
+            intent.putExtra("image", list.get(i).getImage());
+            startActivity(intent);
+        }
+        else {
+            Toast toast = Toast.makeText(getApplicationContext(), "No Details Available", Toast.LENGTH_SHORT);
+            toast.show();
+        }
 
     }
 }

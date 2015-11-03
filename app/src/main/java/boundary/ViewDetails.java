@@ -22,14 +22,16 @@ public class ViewDetails extends ActionBarActivity {
         setContentView(R.layout.activity_view_details);
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
-            String[] value = extras.getStringArray("parse this");
+            String name = extras.getString("name");
+            String description = extras.getString("description");
+            String imageLink = extras.getString("image");
             ImageView iv = (ImageView)findViewById(R.id.ivVIEWDETAILSimage);
             iv.setImageResource(getResources().getIdentifier(
-                    value[4], "mipmap", this.getPackageName()));
+                    imageLink, "mipmap", this.getPackageName()));
             TextView placeName=(TextView)findViewById(R.id.tvVIEWDETAILSname);
-            placeName.setText(value[0]);
+            placeName.setText(name);
             TextView detail=(TextView)findViewById(R.id.tvVIEWDETAILSdetail);
-            detail.setText(value[3]);
+            detail.setText(description);
         }
     }
 
