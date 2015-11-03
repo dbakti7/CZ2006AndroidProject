@@ -1,6 +1,7 @@
 package boundary;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,11 +14,11 @@ import android.widget.Toast;
 
 import com.example.android.cz2006androidproject.R;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 import control.TravelPlannerAdapter;
 import entity.Location;
-import entity.PopularPlace;
 import entity.SQLiteHelper;
 
 /**
@@ -34,19 +35,25 @@ public class TravelPlanner extends Activity {
         DatePicker dp = (DatePicker)findViewById(R.id.datePicker);
         dp.setCalendarViewShown(false);
 
-        Bundle extras = getIntent().getExtras();
-        int[] curDate = extras.getIntArray("parse this");
-        dp.updateDate(curDate[0], curDate[1], curDate[2]);
-        int imgplaces[]={R.mipmap.sunny,R.mipmap.rainy,R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
-        String places[] = {"Jurong East Mall","IKEA","Hendersen Waves",
-                "Marina Bay","Changi Airport"};
-
-
         SQLiteHelper db = new SQLiteHelper(this);
-        db.getWritableDatabase();
-        List<PopularPlace> list = db.getPopularPlaces();
+        db.getReadableDatabase();
+        List <Location> list = db.getPopularPlaces();
 
-        ListAdapter tpAdapter = new TravelPlannerAdapter(this, places, imgplaces);
+        Bundle extras = getIntent().getExtras();
+        int[] curDate = extras.getIntArray("date");
+        String[] places = extras.getStringArray("locationList");
+        dp.updateDate(curDate[0], curDate[1], curDate[2]);
+        int weatherPlaces[] = new int[Array.getLength(places)];
+        for(int i = 0;i<Array.getLength(places);++i) {
+            for(int j = 0;j<list.size();++j)
+                if(places[i].equals(list.get(j).getName()))
+                    break;
+            weatherPlaces[i] = R.mipmap.sunny;
+        }
+        //int imgplaces[]={R.mipmap.sunny,R.mipmap.rainy,R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
+
+
+        ListAdapter tpAdapter = new TravelPlannerAdapter(this, places, weatherPlaces);
         ListView lvtp = (ListView)findViewById(R.id.lvtp);
         lvtp.setAdapter(tpAdapter);
         lvtp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,13 +90,29 @@ public class TravelPlanner extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    public void addButtonClicked(View view) {
+        Intent intent = new Intent(TravelPlanner.this, SearchView.class);
+        startActivity(intent);
+    }
     public void nextStep() {
         /*to do when next is clicked*/
     }
 
-    public void locationPlanner() {
+    public void locationPlanner(View view) {
         /*to call location planner class*/
+        Intent intent = new Intent(TravelPlanner.this, ScheduleTabSwitch.class);
+        SQLiteHelper db = new SQLiteHelper(this);
+        db.getReadableDatabase();
+        List<Location> list = db.getCurrentPlan();
+        String[] locationList = new String[list.size()];
+        for(int i = 0;i<list.size();++i)
+            locationList[i] = list.get(i).getName();
+
+        db.close();
+        int[] date = {2015, 10, 3};
+        intent.putExtra("locationList", locationList);
+        intent.putExtra("date", date);
+        startActivity(intent);
     }
 
 }

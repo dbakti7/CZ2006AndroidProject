@@ -26,9 +26,10 @@
         <uses-permission android:name="android.permission.INTERNET"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAW8kHfzZxHOvGWOWODBoa6AbKsNW8lb3k"
-            />
+            android:value="AIzaSyBOZDgvj6sMs2NBTToGamJRiin6qDU9R4o"
 
+            />
+        <!--android:value="AIzaSyAW8kHfzZxHOvGWOWODBoa6AbKsNW8lb3k"-->
         <!--AIzaSyAW8kHfzZxHOvGWOWODBoa6AbKsNW8lb3k-->
         <activity
             android:name="boundary.MainActivity"

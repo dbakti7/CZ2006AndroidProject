@@ -23,7 +23,6 @@ import java.util.List;
 
 import control.CustomListAdapter;
 import entity.Location;
-import entity.PopularPlace;
 import entity.SQLiteHelper;
 
 
@@ -39,19 +38,17 @@ public class PlacesListView extends AppCompatActivity {
         List<String> placesList = new ArrayList<String>();
         SQLiteHelper db = new SQLiteHelper(this);
         db.getReadableDatabase();
-        List<PopularPlace> list = db.getPopularPlaces();
+        List<Location> list = db.getPopularPlaces();
         for(int i = 0;i<list.size();++i)
             if(list.get(i).getCategory().equals(category))
                 placesList.add(list.get(i).getName());
+
         String[] places = new String[placesList.size()];
         places = placesList.toArray(places);
         int logo[]={R.mipmap.sunny,R.mipmap.rainy, R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
         ListAdapter theAdapter = new CustomListAdapter(this, places,logo);
         final ListView theListView = (ListView) findViewById(R.id.placesListView);
         theListView.setAdapter(theAdapter);
-
-
-
     }
 
     @Override
@@ -81,7 +78,7 @@ public class PlacesListView extends AppCompatActivity {
         ImageView IV = (ImageView) view.findViewById(R.id.imageView1);
         SQLiteHelper db = new SQLiteHelper(this);
         db.getWritableDatabase();
-        List<PopularPlace> list = db.getPopularPlaces();
+        List<Location> list = db.getPopularPlaces();
 
         String placeName = (String)btn.getText();
         for(int i = 0;i<list.size();++i) {

@@ -3,6 +3,7 @@ package boundary;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +12,9 @@ import android.widget.ListView;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.cz2006androidproject.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import entity.Location;
 import entity.SQLiteHelper;
@@ -78,14 +82,35 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
 
     public void travelPlannerPage(View view) {
         Intent intent = new Intent(MainActivity.this, TravelPlanner.class);
+
         startActivity(intent);
     }
 
     public void recommendedPlanClicked(View view) {
-
+        Intent intent = new Intent(MainActivity.this, TravelPlanner.class);
+        SQLiteHelper db = new SQLiteHelper(this);
+        db.getReadableDatabase();
+        List <Location> list = db.getRecommendedPlan();
+        String[] locationList = new String[list.size()];
+        for(int i = 0;i<list.size();++i)
+            locationList[i] = list.get(i).getName();
+        int[] date = {2015, 10, 3};
+        intent.putExtra("locationList", locationList);
+        intent.putExtra("date", date);
+        startActivity(intent);
     }
     public void staffPickedClicked(View view) {
-
+        Intent intent = new Intent(MainActivity.this, TravelPlanner.class);
+        SQLiteHelper db = new SQLiteHelper(this);
+        db.getReadableDatabase();
+        List <Location> list = db.getStaffPicked();
+        String[] locationList = new String[list.size()];
+        for(int i = 0;i<list.size();++i)
+            locationList[i] = list.get(i).getName();
+        int[] date = {2015, 10, 3};
+        intent.putExtra("locationList", locationList);
+        intent.putExtra("date", date);
+        startActivity(intent);
     }
 
 }

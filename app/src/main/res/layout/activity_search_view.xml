@@ -2,16 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/str_atv_places">
-
-        <requestFocus />
-    </AutoCompleteTextView>
-
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:hint="@string/str_atv_places">
+            <requestFocus />
+        </AutoCompleteTextView>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text = "Add Place"
+            android:onClick="addPlaceFromSearch"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -104,15 +114,29 @@
             android:textAlignment="center"
             android:onClick="publicLibrariesClicked"></Button>
     </LinearLayout>
-    <Button
-        android:id="@+id/planButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.25"
-        android:text="Plan!"
-        android:gravity="center"
-        android:onClick="planButtonClicked">
-    </Button>
+        android:layout_weight="1.25">
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Add"
+            android:gravity="center"
+            android:onClick="addButtonClicked">
+        </Button>
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Delete Current Plan"
+            android:gravity="center"
+            android:onClick="deleteButtonClicked">
+        </Button>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

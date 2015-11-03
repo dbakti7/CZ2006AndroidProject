@@ -12,7 +12,6 @@ import com.example.android.cz2006androidproject.R;
 import java.util.List;
 
 import entity.Location;
-import entity.PopularPlace;
 import entity.SQLiteHelper;
 
 /**
