@@ -1,4 +1,4 @@
-package Boundary;
+package boundary;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.example.android.cz2006androidproject.R;
 
-import Control.TravelPlannerAdapter;
-import Entity.Place;
+import control.TravelPlannerAdapter;
+import entity.Location;
 
 /**
  * Created by stvalxndr on 20-Oct-15.
@@ -22,15 +22,17 @@ import Entity.Place;
  */
 
 public class TravelPlanner extends Activity {
-    String date;
-    Place[] listPlace = new Place[10];
+    Location[] listLocation = new Location[10];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel_planner);
         DatePicker dp = (DatePicker)findViewById(R.id.datePicker);
         dp.setCalendarViewShown(false);
-        date = dp.toString();
+
+        Bundle extras = getIntent().getExtras();
+        int[] curDate = extras.getIntArray("parse this");
+        dp.updateDate(curDate[0], curDate[1], curDate[2]);
         int imgplaces[]={R.mipmap.sunny,R.mipmap.rainy,R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
         String places[] = {"Jurong East Mall","IKEA","Hendersen Waves",
                 "Marina Bay","Changi Airport"};

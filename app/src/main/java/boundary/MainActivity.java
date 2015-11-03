@@ -1,4 +1,4 @@
-package Boundary;
+package boundary;
 
 
 import android.content.Intent;
@@ -12,8 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.cz2006androidproject.R;
 
-import Entity.Place;
-import Entity.Weather;
+import entity.Location;
+import entity.SQLiteHelper;
+import entity.Weather;
 
 
 public class MainActivity extends AppCompatActivity{//ActionBarActivity {
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
         listview = (ListView)findViewById(R.id.listview);
         listAdapter = new ArrayAdapter<String>(this, R.layout.myplan_layout, R.id.textView2, fragmentArray);
         listview.setAdapter(listAdapter);
+        SQLiteHelper db = new SQLiteHelper(this);
     }
 
     @Override
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
     }
     public void placeDetail(View v) throws Exception {
         Intent i = new Intent(MainActivity.this, ViewDetails.class);
-        Place pSample = new Place("Scenery", "Tourist Attractions", new Weather(), "Beautiful Scenery", "landscape_540115_1920");
+        Location pSample = new Location("Scenery", "Tourist Attractions", new Weather(), "Beautiful Scenery", "landscape_540115_1920");
         String[] pSampleArray = new String[10];
         for(int j=0;j<5;++j) {
             pSampleArray[j] = new String();

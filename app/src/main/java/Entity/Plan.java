@@ -1,14 +1,14 @@
-package Entity;
-import java.util.*;
+package entity;
+
 /**
  * Created by dbakti7 on 10/19/2015.
- * This class implements the Plan entity with the attributes finalized, date, listPlace, ETA,
+ * This class implements the Plan entity with the attributes finalized, date, listLocation, ETA,
  * travelTime, transport, and travelCost.
  */
 public class Plan {
     private boolean finalized;
     private String date;
-    private Place listPlace[] = new Place[10];
+    private Location listLocation[] = new Location[10];
     private int[] ETA = new int[10];
     private int[] travelTime = new int[10];
     private String[] transport = new String[10];
@@ -21,7 +21,7 @@ public class Plan {
         finalized = false;
         date = null;
         for(int i = 0; i < 10; ++i)
-            listPlace[i] = new Place();
+            listLocation[i] = new Location();
     }
 
     /**
@@ -34,8 +34,8 @@ public class Plan {
     public String getDate() {
         return date;
     }
-    public Place[] getPlaces() {
-        return listPlace;
+    public Location[] getPlaces() {
+        return listLocation;
     }
     public int[] getETA() {
         return ETA;
@@ -59,8 +59,8 @@ public class Plan {
     public void setDate(String date) {
         this.date = date;
     }
-    public void setPlaces(Place[] listPlace) {
-        this.listPlace = listPlace;
+    public void setPlaces(Location[] listLocation) {
+        this.listLocation = listLocation;
     }
     public void setETA(){
         // get from API gothere.sg

@@ -1,7 +1,7 @@
-package Boundary;
+package boundary;
 
-import Entity.Place;
-import Entity.Plan;
+import entity.Location;
+import entity.Plan;
 
 /**
  * Created by dbakti7 on 10/20/2015.
@@ -9,7 +9,7 @@ import Entity.Plan;
  */
 public class MyPlan {
     private Plan myPlan = new Plan();
-    public void visited(Place place) {
+    public void visited(Location location) {
 
     }
 }

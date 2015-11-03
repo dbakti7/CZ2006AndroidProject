@@ -1,25 +1,46 @@
-package Boundary;
+package boundary;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.android.cz2006androidproject.R;
 
-import Entity.Place;
+import java.util.List;
+
+import entity.Location;
+import entity.PopularPlace;
+import entity.SQLiteHelper;
 
 /**
  * This class is used to show the search result of an query. User will be able to select places
  * from here.
  */
 public class SearchResult extends ActionBarActivity {
-    Place[] result = new Place[10];
+    Location[] result = new Location[10];
     String searchEntry = new String();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
+        SQLiteHelper db = new SQLiteHelper(this);
+        db.getReadableDatabase();
+        List<Location> list = db.getCurrentPlan();
+        TextView tester=(TextView)findViewById(R.id.testerTextView1);
+        tester.setText(list.get(0).getName());
+        TextView tester1=(TextView)findViewById(R.id.testerTextView2);
+        tester1.setText(list.get(1).getName());
+        TextView tester2=(TextView)findViewById(R.id.testerTextView3);
+        tester2.setText(list.get(2).getName());
+        TextView tester3=(TextView)findViewById(R.id.testerTextView4);
+        tester3.setText(list.get(3).getName());
+        TextView tester4=(TextView)findViewById(R.id.testerTextView5);
+        tester4.setText(list.get(4).getName());
+        for(Location l: list)
+            db.deleteLocation(l);
+        db.close();
     }
 
     @Override

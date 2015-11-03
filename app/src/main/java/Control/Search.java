@@ -1,12 +1,12 @@
-package Control;
+package control;
 
-import Entity.Place;
+import entity.Location;
 
 /**
  * Created by dbakti7 on 10/20/2015.
  */
 public class Search {
-    public Place search(String query) {
+    public Location search(String query) {
         return null;
     }
 }

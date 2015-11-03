@@ -1,7 +1,7 @@
-package Control;
+package control;
 
-import Entity.Place;
-import Entity.Plan;
+import entity.Location;
+import entity.Plan;
 
 /**
  * Created by dbakti7 on 10/20/2015.
@@ -46,9 +46,9 @@ public class PlanGenerator {
 
     /**
      * generates the plan based on given places
-     * @param listPlace
+     * @param listLocation
      */
-    public void generatePlan(Place[] listPlace) {
+    public void generatePlan(Location[] listLocation) {
 
     }
 }

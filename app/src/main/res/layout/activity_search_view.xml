@@ -2,23 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <EditText
-        android:id="@+id/searchQuery"
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.25"
-        android:hint="Enter a Location"
-        android:gravity="center"
-        >
-    </EditText>
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.25"
-        android:text="Search"
-        android:gravity="center">
-    </Button>
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/str_atv_places">
+
+        <requestFocus />
+    </AutoCompleteTextView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -36,6 +29,7 @@
             android:textColor="#FFFF00"
             android:textStyle="bold"
             android:textAlignment="center"
+            android:onClick="touristAttractionsClicked"
             ></Button>
         <Button
             android:layout_width="0dp"
@@ -46,7 +40,8 @@
             android:textSize="@dimen/abc_text_size_large_material"
             android:text="Hotels"
             android:textColor="#FFFF00"
-            android:textStyle="bold"></Button>
+            android:textStyle="bold"
+            android:onClick="hotelsClicked"></Button>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,7 +58,8 @@
             android:text="Food Centres"
             android:textColor="#FFFF00"
             android:textStyle="bold"
-            android:textAlignment="center"></Button>
+            android:textAlignment="center"
+            android:onClick = "foodCentresClicked"></Button>
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -74,7 +70,8 @@
             android:text="Parks"
             android:textColor="#FFFF00"
             android:textStyle="bold"
-            android:textAlignment="center"></Button>
+            android:textAlignment="center"
+            android:onClick="parksClicked"></Button>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,7 +89,8 @@
             android:text="Museums"
             android:textColor="#FFFF00"
             android:textStyle="bold"
-            android:textAlignment="center"></Button>
+            android:textAlignment="center"
+            android:onClick="museumClicked"></Button>
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -103,9 +101,18 @@
             android:text="Public Libraries"
             android:textColor="#FFFF00"
             android:textStyle="bold"
-            android:textAlignment="center"></Button>
+            android:textAlignment="center"
+            android:onClick="publicLibrariesClicked"></Button>
     </LinearLayout>
-
+    <Button
+        android:id="@+id/planButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
+        android:text="Plan!"
+        android:gravity="center"
+        android:onClick="planButtonClicked">
+    </Button>
     <LinearLayout
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"

@@ -24,13 +24,13 @@ Plan.java</FONT>
 </span><span class="s0">import </span><span class="s1">java.util.*</span><span class="s2">;</span><span class="s1"> 
 </span><span class="s3">/** 
  * Created by dbakti7 on 10/19/2015. 
- * This class implements the Plan entity with the attributes finalized, date, listPlace, ETA, 
+ * This class implements the Plan entity with the attributes finalized, date, listLocation, ETA,
  * travelTime, transport, and travelCost. 
  */</span><span class="s1"> 
 </span><span class="s0">public class </span><span class="s1">Plan { 
     </span><span class="s0">private boolean </span><span class="s1">finalized</span><span class="s2">;</span><span class="s1"> 
     </span><span class="s0">private </span><span class="s1">String date</span><span class="s2">;</span><span class="s1"> 
-    </span><span class="s0">private </span><span class="s1">Place listPlace[] = </span><span class="s0">new </span><span class="s1">Place[</span><span class="s4">10</span><span class="s1">]</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Place listLocation[] = </span><span class="s0">new </span><span class="s1">Place[</span><span class="s4">10</span><span class="s1">]</span><span class="s2">;</span><span class="s1">
     </span><span class="s0">private int</span><span class="s1">[] ETA = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">10</span><span class="s1">]</span><span class="s2">;</span><span class="s1"> 
     </span><span class="s0">private int</span><span class="s1">[] travelTime = </span><span class="s0">new int</span><span class="s1">[</span><span class="s4">10</span><span class="s1">]</span><span class="s2">;</span><span class="s1"> 
     </span><span class="s0">private </span><span class="s1">String[] transport = </span><span class="s0">new </span><span class="s1">String[</span><span class="s4">10</span><span class="s1">]</span><span class="s2">;</span><span class="s1"> 
@@ -43,7 +43,7 @@ Plan.java</FONT>
         finalized = </span><span class="s0">false</span><span class="s2">;</span><span class="s1"> 
         date = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
         </span><span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; </span><span class="s4">10</span><span class="s2">; </span><span class="s1">++i) 
-            listPlace[i] = </span><span class="s0">new </span><span class="s1">Place()</span><span class="s2">;</span><span class="s1"> 
+            listLocation[i] = </span><span class="s0">new </span><span class="s1">Place()</span><span class="s2">;</span><span class="s1">
     } 
  
     </span><span class="s3">/** 
@@ -57,7 +57,7 @@ Plan.java</FONT>
         </span><span class="s0">return </span><span class="s1">date</span><span class="s2">;</span><span class="s1"> 
     } 
     </span><span class="s0">public </span><span class="s1">Place[] getPlaces() { 
-        </span><span class="s0">return </span><span class="s1">listPlace</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return </span><span class="s1">listLocation</span><span class="s2">;</span><span class="s1">
     } 
     </span><span class="s0">public int</span><span class="s1">[] getETA() { 
         </span><span class="s0">return </span><span class="s1">ETA</span><span class="s2">;</span><span class="s1"> 
@@ -81,8 +81,8 @@ Plan.java</FONT>
     </span><span class="s0">public void </span><span class="s1">setDate(String date) { 
         </span><span class="s0">this</span><span class="s1">.date = date</span><span class="s2">;</span><span class="s1"> 
     } 
-    </span><span class="s0">public void </span><span class="s1">setPlaces(Place[] listPlace) { 
-        </span><span class="s0">this</span><span class="s1">.listPlace = listPlace</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">setPlaces(Place[] listLocation) {
+        </span><span class="s0">this</span><span class="s1">.listLocation = listLocation</span><span class="s2">;</span><span class="s1">
     } 
     </span><span class="s0">public void </span><span class="s1">setETA(){ 
         </span><span class="s3">// get from API gothere.sg</span><span class="s1"> 

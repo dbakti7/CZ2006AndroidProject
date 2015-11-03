@@ -1,4 +1,4 @@
-package Boundary;
+package boundary;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import com.example.android.cz2006androidproject.R;
 
-import Entity.Plan;
+import entity.Plan;
 
 /**
  * This class is used to display MapView which shows selected places in the form of Singapore map.
