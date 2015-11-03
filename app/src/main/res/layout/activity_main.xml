@@ -6,86 +6,110 @@
     android:layout_centerHorizontal="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-
-    android:layout_height="match_parent"
-    android:orientation="vertical" tools:context=".MainActivity">
-    <!--android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"-->
-
-    <TextView
-        android:id="@+id/tvMAINhome"
-        android:text="Home"
-        android:textSize="40dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/tvMAINrecommendedPlan"
-        android:text="Recommended Plan"
-        android:gravity="center"
-        android:textSize="25dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-    <ImageButton
-        android:id="@+id/ibMAINrecommendedPlanImage"
-        android:src="@mipmap/landscape_540115_1920"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-
-        android:onClick="travelPlannerPage" />
-
-    <TextView
-        android:id="@+id/tvMAINstaffPicks"
-        android:text="Staff Picks"
-        android:gravity="center"
-        android:textSize="25dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-    <ImageButton
-        android:id="@+id/ibMAINstaffPicksImage"
-        android:src="@mipmap/landscape_540115_1920"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:onClick="travelPlannerPage" />
+        android:layout_height="match_parent"
+        android:orientation="vertical" tools:context=".MainActivity">
+        <!--android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"-->
 
 
+        <ImageView
+            android:src="@drawable/TopBarHome"
+            android:layout_width="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_height="60dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.25">
-
-
+        <TextView
+            android:id="@+id/tvMAINrecommendedPlan"
+            android:text="Recommended Plan"
+            android:textStyle="italic"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:padding="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
         <ImageButton
-            android:src="@drawable/home_black"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent" />
-        <ImageButton
-            android:src = "@drawable/magnify"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:onClick="searchPage"/>
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:src="@drawable/calendar_black"
-            android:layout_height="match_parent"
-            android:onClick="calendarPageClicked"/>
+            android:id="@+id/ibMAINrecommendedPlanImage"
+            android:src="@drawable/RecommendedTrip"
+            android:padding="-10dp"
+            android:scaleType="centerCrop"
+            android:layout_width="425dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:layout_marginLeft="-50dp"
+            android:layout_marginRight="-50dp"
 
+            android:onClick="travelPlannerPage" />
+
+        <TextView
+            android:id="@+id/tvMAINstaffPicks"
+            android:text="Staff Picks"
+            android:textStyle="italic"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:padding="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:id="@+id/ibMAINstaffPicksImage"
+            android:src="@drawable/Photographytrip"
+            android:padding="-10dp"
+            android:scaleType="centerCrop"
+            android:layout_width="425dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:layout_marginLeft="-50dp"
+            android:layout_marginRight="-50dp"
+            android:layout_marginBottom="-1dp"
+
+            android:onClick="travelPlannerPage" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.25">
+
+
+            <ImageButton
+                android:src="@drawable/HomeTab"
+                android:scaleType="fitCenter"
+                android:backgroundTint="#fefefe"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_marginRight="-50dp"
+                android:layout_height="match_parent" />
+            <ImageButton
+                android:src = "@drawable/SearchTab"
+                android:backgroundTint="#fefefe"
+                android:scaleType="fitCenter"
+                android:layout_margin="-50dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:onClick="searchPage"/>
+            <ImageButton
+                android:src = "@drawable/CalendarTab"
+                android:backgroundTint="#fefefe"
+                android:layout_marginLeft="-50dp"
+                android:scaleType="fitCenter"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:onClick="calendarPageClicked"/>
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 
     <ListView
         android:layout_width="275dp"
@@ -97,13 +121,10 @@
         android:headerDividersEnabled="false"
         android:paddingStart="30dp"
         android:paddingLeft="30dp"
-    ></ListView>
+        ></ListView>
 
 
 
 </android.support.v4.widget.DrawerLayout>
-
-
-
 
 
