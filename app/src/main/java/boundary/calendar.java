@@ -14,6 +14,8 @@ import com.example.android.cz2006androidproject.R;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
+import entity.SQLiteHelper;
+
 /**
  * This class is used to show calendar view.
  */
@@ -21,6 +23,8 @@ public class Calendar extends AppCompatActivity {
 
     CalendarView cal;
     private String[] dateWithPlan;
+    private int[] date = new int[3];
+    SQLiteHelper db = new SQLiteHelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,14 +35,22 @@ public class Calendar extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 //Toast.makeText(getApplicationContext(), dayOfMonth + "/" + (month+1) + "/" + year, Toast.LENGTH_LONG).show();
-                int[] date = {year, month, dayOfMonth};
-                if(date[2] == 30) {
+                date[0] = year;
+                date[1] = month;
+                date[2] = dayOfMonth;
+                String dateString = String.valueOf(date[0]) + String.valueOf(date[1]) + String.valueOf(date[2]);
+                db.getWritableDatabase();
+                if(db.getPlan(dateString) != null) {
                     Intent intent = new Intent(Calendar.this, ScheduleTabSwitch.class);
+                    intent.putExtra("locationList", db.getPlan(dateString));
+                    intent.putExtra("date", date);
                     startActivity(intent);
                 }
                 else {
                     Intent intent = new Intent(Calendar.this, TravelPlanner.class);
-                    intent.putExtra("parse this", date);
+                    intent.putExtra("date", date);
+                    String[] str = new String[0];
+                    intent.putExtra("locationList", str);
                     startActivity(intent);
                 }
             }
@@ -56,6 +68,7 @@ public class Calendar extends AppCompatActivity {
     //Move to SearchPage
     public void searchPageClicked(View view) {
         Intent intent = new Intent(Calendar.this, SearchView.class);
+        intent.putExtra("date", date);
         startActivity(intent);
     }
 

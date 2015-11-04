@@ -10,12 +10,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.android.cz2006androidproject.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import entity.Location;
 import entity.SQLiteHelper;
 import entity.Weather;
@@ -61,6 +61,11 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
     //Move to SearchPage
     public void searchPage(View view) {
         Intent intent = new Intent(MainActivity.this, SearchView.class);
+        int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+        int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
+        int day = java.util.Calendar.getInstance().get(java.util.Calendar.DATE);
+        int[] date = {year, month, day};
+        intent.putExtra("date", date);
         startActivity(intent);
     }
 
@@ -89,12 +94,20 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
     public void recommendedPlanClicked(View view) {
         Intent intent = new Intent(MainActivity.this, TravelPlanner.class);
         SQLiteHelper db = new SQLiteHelper(this);
-        db.getReadableDatabase();
+        db.getWritableDatabase();
         List <Location> list = db.getRecommendedPlan();
+        List<Location> list2 = db.getCurrentPlan();
+        for(Location l: list2)
+            db.deleteLocation(l);
+        for(Location l: list)
+            db.addLocationtoCurrentPlan(l);
         String[] locationList = new String[list.size()];
         for(int i = 0;i<list.size();++i)
             locationList[i] = list.get(i).getName();
-        int[] date = {2015, 10, 3};
+        int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+        int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
+        int day = java.util.Calendar.getInstance().get(java.util.Calendar.DATE);
+        int[] date = {year, month, day};
         intent.putExtra("locationList", locationList);
         intent.putExtra("date", date);
         startActivity(intent);
@@ -104,10 +117,18 @@ public class MainActivity extends AppCompatActivity{//ActionBarActivity {
         SQLiteHelper db = new SQLiteHelper(this);
         db.getReadableDatabase();
         List <Location> list = db.getStaffPicked();
+        List<Location> list2 = db.getCurrentPlan();
+        for(Location l: list2)
+            db.deleteLocation(l);
+        for(Location l: list)
+            db.addLocationtoCurrentPlan(l);
         String[] locationList = new String[list.size()];
         for(int i = 0;i<list.size();++i)
             locationList[i] = list.get(i).getName();
-        int[] date = {2015, 10, 3};
+        int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+        int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
+        int day = java.util.Calendar.getInstance().get(java.util.Calendar.DATE);
+        int[] date = {year, month, day};
         intent.putExtra("locationList", locationList);
         intent.putExtra("date", date);
         startActivity(intent);

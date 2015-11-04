@@ -45,7 +45,7 @@ public class PlacesListView extends AppCompatActivity {
 
         String[] places = new String[placesList.size()];
         places = placesList.toArray(places);
-        int logo[]={R.mipmap.sunny,R.mipmap.rainy, R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
+        int logo[]={R.mipmap.cloudy, R.mipmap.cloudy,R.mipmap.cloudy,R.mipmap.cloudy, R.mipmap.cloudy};
         ListAdapter theAdapter = new CustomListAdapter(this, places,logo);
         final ListView theListView = (ListView) findViewById(R.id.placesListView);
         theListView.setAdapter(theAdapter);
@@ -90,7 +90,7 @@ public class PlacesListView extends AppCompatActivity {
                 location.setImage("test");
                 location.setDescription("description");
                 db.addLocationtoCurrentPlan(location);
-                btn.setText(String.valueOf(list.get(i).getLatitude()));
+                btn.setText("Place Added");
             }
         }
 
