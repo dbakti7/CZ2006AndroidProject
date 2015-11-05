@@ -9,7 +9,7 @@
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextView"
             android:layout_width="0dp"
-            android:layout_weight="4"
+            android:layout_weight="5"
             android:layout_height="match_parent"
             android:ems="10"
             android:hint="@string/str_atv_places">
@@ -17,7 +17,7 @@
         </AutoCompleteTextView>
         <Button
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_height="match_parent"
             android:text = "Add Place"
             android:onClick="addPlaceFromSearch"/>
@@ -123,7 +123,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="Add"
+            android:text="Add to plan"
             android:gravity="center"
             android:onClick="addButtonClicked">
         </Button>

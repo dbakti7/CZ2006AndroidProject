@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import com.example.android.cz2006androidproject.MapsViewer;
 import com.example.android.cz2006androidproject.R;
@@ -30,7 +31,8 @@ public class ScheduleTabSwitch extends TabActivity {
         TabHost.TabSpec spec;
         spec = tabHost.newTabSpec("page1").setIndicator("list").setContent(ListIntent);
         tabHost.addTab(spec);
-
+        TextView tv = (TextView) findViewById(R.id.dateInPlan);
+        tv.setText(String.valueOf(date[2]) + "/" + String.valueOf(date[1]) + "/" + String.valueOf(date[0]));
         Intent MapIntent = new Intent(this, MapsViewer.class);
         MapIntent.putExtra("locationList", locationList);
         MapIntent.putExtra("date", date);

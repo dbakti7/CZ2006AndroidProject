@@ -13,21 +13,31 @@ public class Plan {
     private int[] travelTime = new int[10];
     private String[] transport = new String[10];
     private double[] travelCost = new double[10];
-
+    private int locationCount;
     /**
      * class constructor
      */
     public Plan() {
         finalized = false;
         date = null;
-        for(int i = 0; i < 10; ++i)
-            listLocation[i] = new Location();
+        locationCount = 0;
     }
 
     /**
      * getter functions
      * @return various attributes
      */
+    public void addLocation(Location location) {
+        listLocation[locationCount] = new Location();
+        listLocation[locationCount].setName(location.getName());
+        ++locationCount;
+    }
+    public int getLocationCount() {
+        return locationCount;
+    }
+    public Location[] getListLocation() {
+        return listLocation;
+    }
     public boolean getState() {
         return finalized;
     }

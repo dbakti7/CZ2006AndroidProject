@@ -46,7 +46,7 @@ public class ScheduleListView extends AppCompatActivity {
             for(int j = 0;j<list.size();++j)
                 if(places[i].equals(list.get(j).getName()))
                     break;
-            weatherPlaces[i] = R.mipmap.sunny;
+            weatherPlaces[i] = R.mipmap.cloudy;
         }
         //int imgplaces[]={R.mipmap.sunny,R.mipmap.rainy,R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
 

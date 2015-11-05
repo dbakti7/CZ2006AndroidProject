@@ -32,13 +32,21 @@
         <!--android:value="AIzaSyAW8kHfzZxHOvGWOWODBoa6AbKsNW8lb3k"-->
         <!--AIzaSyAW8kHfzZxHOvGWOWODBoa6AbKsNW8lb3k-->
         <activity
-            android:name="boundary.MainActivity"
-            android:label="@string/app_name" >
+            android:name="boundary.SplashScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name="boundary.MainActivity"
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="boundary.SearchView"

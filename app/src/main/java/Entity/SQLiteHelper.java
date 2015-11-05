@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,13 +20,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     // Database Name
     private static final String DATABASE_NAME = "PopularPlaceDB";
-
+    public static String strSeparator = "__,__";
     // Books table name
     private static final String TABLE_POPULARPLACE = "PopularPlace";
     private static final String TABLE_CURRENTPLAN = "CurrentPlan";
     private static final String TABLE_RECOMMENDEDPLAN = "RecommendedPlan";
     private static final String TABLE_STAFFPICKED = "StaffPicked";
     private static final String TABLE_OTHERPLACES = "OtherPlaces";
+    private static final String TABLE_SAVEDPLANS = "SavedPlans";
 
     // Books Table Columns names
     private static final String KEY_ID = "id";
@@ -35,8 +37,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_LONGITUDE = "longitude";
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_IMAGE = "image";
+    private static final String KEY_DATE = "date";
+    private static final String KEY_PLAN = "plan";
 
-    private static final String[] COLUMNS = {KEY_ID, KEY_CATEGORY, KEY_NAME, KEY_LATITUDE, KEY_LONGITUDE};
+    private static final String[] COLUMNS = {KEY_ID, KEY_DATE, KEY_PLAN};
 
 
     public SQLiteHelper(Context context) {
@@ -90,12 +94,18 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "longitude REAL, " +
                 "description TEXT, " +
                 "image TEXT )";
+
+        String CREATE_SAVEDPLANS_TABLE = "CREATE TABLE SAVEDPLANS ( " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "date TEXT UNIQUE, " +
+                "plan TEXT )";
         // create books table
         db.execSQL(CREATE_POPULARPLACE_TABLE);
         db.execSQL(CREATE_CURRENTPLAN_TABLE);
         db.execSQL(CREATE_RECOMMENDEDPLAN_TABLE);
         db.execSQL(CREATE_STAFFPICKED_TABLE);
         db.execSQL(CREATE_OTHERPLACES_TABLE);
+        db.execSQL(CREATE_SAVEDPLANS_TABLE);
 
 
         db.execSQL("insert into " + TABLE_POPULARPLACE + "(id, category, name, latitude, longitude, description, image)" + " values(1, 'Tourist Attractions','Singapore Flyer', 1.289572, 103.863121,'Singapore Flyer', 'singapore_flyer')");
@@ -131,7 +141,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("insert into " + TABLE_RECOMMENDEDPLAN + "(id, category, name, latitude, longitude, description, image)" + " values(1, 'Museums','National Gallery Singapore', 1.290518, 103.851630, 'National Gallery Singapore', 'national_gallery_singapore')");
         db.execSQL("insert into " + TABLE_RECOMMENDEDPLAN + "(category, name, latitude, longitude, description, image)" + " values('Museums','National Design Centre', 1.298873, 103.853569, 'National Design Centre', 'national_design_centre')");
         db.execSQL("insert into " + TABLE_RECOMMENDEDPLAN + "(category, name, latitude, longitude, description, image)" + " values('Public Libraries','National Library, Singapore', 1.297910, 103.854287, 'National Library, Singapore', 'national_library_singapore')");
-        db.execSQL("insert into " + TABLE_RECOMMENDEDPLAN + "(category, name, latitude, longitude, description, image)" + " values('Food Centres','Peoples Park Complex Food Centre', 1.289898, 103.844314, 'People’s Park Complex Food Centre', 'peoples_park_complex_food_centre')");
+        db.execSQL("insert into " + TABLE_RECOMMENDEDPLAN + "(category, name, latitude, longitude, description, image)" + " values('Food Centres','People’s Park Complex Food Centre', 1.289898, 103.844314, 'People’s Park Complex Food Centre', 'peoples_park_complex_food_centre')");
         db.execSQL("insert into " + TABLE_RECOMMENDEDPLAN + "(category, name, latitude, longitude, description, image)" + " values('Parks','Gardens by the Bay', 1.281708, 103.863570, 'Gardens by the Bay', 'gardens_by_the_bay')");
         db.execSQL("insert into " + TABLE_STAFFPICKED + "(id, category, name, latitude, longitude, description, image)" + " values(1, 'Tourist Attractions','Jurong Bird Park', 1.318803, 103.706420, 'Jurong Bird Park', 'jurong_bird_park')");
         db.execSQL("insert into " + TABLE_STAFFPICKED + "(category, name, latitude, longitude, description, image)" + " values('Food Centres','Jurong West Block 505 Food Centre', 1.350054, 103.718148, 'Jurong West Block 505 Food Centre', 'jurong_west_block_505_food_centre')");
@@ -429,5 +439,57 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return currentPlan;
+    }
+
+    public void addPlan(Plan currentPlan) {
+        String str = "";
+        for(int i = 0;i< currentPlan.getLocationCount();++i) {
+            str = str+currentPlan.getListLocation()[i].getName();
+            if(i < currentPlan.getLocationCount()-1)
+                str = str + strSeparator;
+        }
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_DATE, currentPlan.getDate());
+        values.put(KEY_PLAN, str);
+
+        db.insert(TABLE_SAVEDPLANS,
+                null,
+                values);
+
+        db.close();
+    }
+
+    public String[] getPlan(String dateQuery) {
+        // 1. get reference to readable DB
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // 2. build query
+        Cursor cursor =
+                db.query(TABLE_SAVEDPLANS, // a. table
+                        COLUMNS, // b. column names
+                        " date = ?", // c. selections
+                        new String[] { String.valueOf(dateQuery) }, // d. selections args
+                        null, // e. group by
+                        null, // f. having
+                        null, // g. order by
+                        null); // h. limit
+
+        // 3. if we got results get the first one
+        if (cursor.moveToFirst());
+
+        else
+            return null;
+        String str = cursor.getString(2);
+        String[] arr = str.split(strSeparator);
+        return arr;
+        /*Location[] locations = new Location[Array.getLength(arr)];
+        for(int i = 0;i<Array.getLength(arr);++i) {
+            locations[i] = new Location();
+            locations[i].setName(arr[i]);
+        }
+        return locations;*/
+
     }
 }

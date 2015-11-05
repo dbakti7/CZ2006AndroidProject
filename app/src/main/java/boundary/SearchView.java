@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import com.example.android.placeapiautocomplete.PlaceArrayAdapter;
 
+import java.util.Date;
 import java.util.List;
 
 import entity.Location;
@@ -43,10 +44,13 @@ GoogleApiClient.ConnectionCallbacks {
     private String searchEntry = new String();
     private String[] category = new String[6];
     private Location picked;
+    private int[] curDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_view);
+        Bundle extras = getIntent().getExtras();
+        curDate = extras.getIntArray("date");
         picked = null;
         mGoogleApiClient = new GoogleApiClient.Builder(SearchView.this)
                 .addApi(Places.GEO_DATA_API)
@@ -195,7 +199,10 @@ GoogleApiClient.ConnectionCallbacks {
             locationList[i] = list.get(i).getName();
 
         db.close();
-        int[] date = {2015, 10, 3};
+        int year = curDate[0];
+        int month = curDate[1];
+        int day = curDate[2];
+        int[] date = {year, month, day};
         intent.putExtra("locationList", locationList);
         intent.putExtra("date", date);
         startActivity(intent);

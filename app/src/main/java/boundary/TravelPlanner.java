@@ -19,6 +19,7 @@ import java.util.List;
 
 import control.TravelPlannerAdapter;
 import entity.Location;
+import entity.Plan;
 import entity.SQLiteHelper;
 
 /**
@@ -28,11 +29,13 @@ import entity.SQLiteHelper;
 
 public class TravelPlanner extends Activity {
     Location[] listLocation = new Location[10];
+    DatePicker dp;
+    private int[] curDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel_planner);
-        DatePicker dp = (DatePicker)findViewById(R.id.datePicker);
+        dp = (DatePicker)findViewById(R.id.datePicker);
         dp.setCalendarViewShown(false);
 
         SQLiteHelper db = new SQLiteHelper(this);
@@ -40,15 +43,16 @@ public class TravelPlanner extends Activity {
         List <Location> list = db.getPopularPlaces();
 
         Bundle extras = getIntent().getExtras();
-        int[] curDate = extras.getIntArray("date");
+        curDate = extras.getIntArray("date");
         String[] places = extras.getStringArray("locationList");
         dp.updateDate(curDate[0], curDate[1], curDate[2]);
+
         int weatherPlaces[] = new int[Array.getLength(places)];
         for(int i = 0;i<Array.getLength(places);++i) {
             for(int j = 0;j<list.size();++j)
                 if(places[i].equals(list.get(j).getName()))
                     break;
-            weatherPlaces[i] = R.mipmap.sunny;
+            weatherPlaces[i] = R.mipmap.cloudy;
         }
         //int imgplaces[]={R.mipmap.sunny,R.mipmap.rainy,R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
 
@@ -92,6 +96,10 @@ public class TravelPlanner extends Activity {
     }
     public void addButtonClicked(View view) {
         Intent intent = new Intent(TravelPlanner.this, SearchView.class);
+        curDate[0] = dp.getYear();
+        curDate[1] = dp.getMonth();
+        curDate[2] = dp.getDayOfMonth();
+        intent.putExtra("date", curDate);
         startActivity(intent);
     }
     public void nextStep() {
@@ -102,17 +110,46 @@ public class TravelPlanner extends Activity {
         /*to call location planner class*/
         Intent intent = new Intent(TravelPlanner.this, ScheduleTabSwitch.class);
         SQLiteHelper db = new SQLiteHelper(this);
-        db.getReadableDatabase();
+        db.getWritableDatabase();
         List<Location> list = db.getCurrentPlan();
         String[] locationList = new String[list.size()];
-        for(int i = 0;i<list.size();++i)
+        Plan plan = new Plan();
+        for(int i = 0;i<list.size();++i) {
             locationList[i] = list.get(i).getName();
+            Location l = new Location();
+            l.setName(locationList[i]);
+            plan.addLocation(l);
+        }
+        curDate[0] = dp.getYear();
+        curDate[1] = dp.getMonth();
+        curDate[2] = dp.getDayOfMonth();
+        int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+        int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
+        int day = java.util.Calendar.getInstance().get(java.util.Calendar.DATE);
+        String dateString = String.valueOf(curDate[0]) + String.valueOf(curDate[1]) + String.valueOf(curDate[2]);
+        if(db.getPlan(dateString) == null) {
+            if(curDate[0] < year || (curDate[0] == year && curDate[1] < month) ||
+                    (curDate[0] == year && curDate[1] == month && curDate[2] < day))
+                Toast.makeText(TravelPlanner.this, "Invalid date!", Toast.LENGTH_SHORT).show();
+            else if(plan.getLocationCount() == 0)
+                Toast.makeText(TravelPlanner.this, "Empty Plan!", Toast.LENGTH_SHORT).show();
+            else {
+                plan.setDate(dateString);
+                db.addPlan(plan);
+                List<Location> list2 = db.getCurrentPlan();
+                for (Location l : list2)
+                    db.deleteLocation(l);
+                db.close();
+                int[] date = curDate;
+                intent.putExtra("locationList", locationList);
+                intent.putExtra("date", date);
+                startActivity(intent);
+            }
+        }
+        else {
+            Toast.makeText(TravelPlanner.this, "Plan already exists!", Toast.LENGTH_SHORT).show();
+        }
 
-        db.close();
-        int[] date = {2015, 10, 3};
-        intent.putExtra("locationList", locationList);
-        intent.putExtra("date", date);
-        startActivity(intent);
     }
 
 }
