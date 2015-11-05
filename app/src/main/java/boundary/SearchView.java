@@ -25,7 +25,10 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import com.example.android.placeapiautocomplete.PlaceArrayAdapter;
 
+import java.util.List;
+
 import entity.Location;
+import entity.SQLiteHelper;
 
 public class SearchView extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
 GoogleApiClient.ConnectionCallbacks {
@@ -39,10 +42,12 @@ GoogleApiClient.ConnectionCallbacks {
 
     private String searchEntry = new String();
     private String[] category = new String[6];
+    private Location picked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_view);
+        picked = null;
         mGoogleApiClient = new GoogleApiClient.Builder(SearchView.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
@@ -55,8 +60,6 @@ GoogleApiClient.ConnectionCallbacks {
         mPlaceArrayAdapter = new PlaceArrayAdapter(this, android.R.layout.simple_list_item_1,
                 BOUNDS_SINGAPORE, null);
         mAutocompleteTextView.setAdapter(mPlaceArrayAdapter);
-
-
     }
 
     private AdapterView.OnItemClickListener mAutocompleteClickListener
@@ -68,6 +71,7 @@ GoogleApiClient.ConnectionCallbacks {
             PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
                     .getPlaceById(mGoogleApiClient, placeId);
             placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
+
         }
     };
 
@@ -82,11 +86,10 @@ GoogleApiClient.ConnectionCallbacks {
             // Selecting the first object buffer.
             final Place place = places.get(0);
             try {
-                Location picked = new Location((String)place.getName(),place.getLatLng().latitude,place.getLatLng().longitude);
+                picked = new Location((String)place.getName(),place.getLatLng().latitude,place.getLatLng().longitude);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     };
 
@@ -128,7 +131,6 @@ GoogleApiClient.ConnectionCallbacks {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -183,9 +185,45 @@ GoogleApiClient.ConnectionCallbacks {
 
     }
 
-    public void planButtonClicked(View view) {
-        Intent intent = new Intent(SearchView.this, SearchResult.class);
+    public void addButtonClicked(View view) {
+        Intent intent = new Intent(SearchView.this, TravelPlanner.class);
+        SQLiteHelper db = new SQLiteHelper(this);
+        db.getWritableDatabase();
+        List<Location> list = db.getCurrentPlan();
+        String[] locationList = new String[list.size()];
+        for(int i = 0;i<list.size();++i)
+            locationList[i] = list.get(i).getName();
+
+        db.close();
+        int[] date = {2015, 10, 3};
+        intent.putExtra("locationList", locationList);
+        intent.putExtra("date", date);
         startActivity(intent);
     }
-
+    public void deleteButtonClicked(View view) {
+        SQLiteHelper db = new SQLiteHelper(this);
+        db.getWritableDatabase();
+        List<Location> list = db.getCurrentPlan();
+        for(Location l: list)
+            db.deleteLocation(l);
+        db.close();
+    }
+    public void addPlaceFromSearch(View view) {
+        AutoCompleteTextView ACTV = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+        if(picked != null && (BOUNDS_SINGAPORE.contains(new LatLng(picked.getLatitude(), picked.getLongitude())))) {
+            SQLiteHelper db = new SQLiteHelper(this);
+            db.getWritableDatabase();
+            db.addLocationtoOtherPlaces(picked);
+            db.addLocationtoCurrentPlan(picked);
+            db.close();
+            ACTV.setText("");
+            Toast toast = Toast.makeText(getApplicationContext(), "Place Added", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else {
+            Toast toast = Toast.makeText(getApplicationContext(), "Invalid Place", Toast.LENGTH_SHORT);
+            toast.show();
+            ACTV.setText("");
+        }
+    }
 }

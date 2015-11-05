@@ -48,10 +48,13 @@ public class Weather {
         }
 
         List<List> container = accessGovAPI.get12HourForecast();
-        condition = temp.get(ans).get(0).toString();
-        temperature = "skldjfljsdlfj";
+        condition = "sunny";
+        temperature = "28";
+        humidity = "10";
+        /*condition = temp.get(ans).get(0).toString();
+
         temperature = container.get(1).toString();
-        humidity = container.get(2).toString();
+        humidity = container.get(2).toString();*/
 
     }
 

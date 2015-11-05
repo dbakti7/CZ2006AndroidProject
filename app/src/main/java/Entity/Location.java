@@ -1,5 +1,7 @@
 package entity;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import java.util.*;
@@ -46,6 +48,10 @@ public class Location {
     public Location(String name, Double x, Double y) throws Exception{
         this.name = name;
         //this.setWeatherDetails();
+        this.category = "others";
+        this.weather = new Weather();
+        this.description = name;
+        this.image = name;
         this.x = x;
         this.y = y;
     }

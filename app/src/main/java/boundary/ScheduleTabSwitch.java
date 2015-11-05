@@ -20,13 +20,20 @@ public class ScheduleTabSwitch extends TabActivity {
         setContentView(R.layout.activity_schedule_tab_switch);
 
         TabHost tabHost = getTabHost();
-
+        Bundle extras = getIntent().getExtras();
+        int[] date = extras.getIntArray("date");
+        String[] locationList = extras.getStringArray("locationList");
         Intent ListIntent = new Intent(this, ScheduleListView.class);
+
+        ListIntent.putExtra("locationList", locationList);
+        ListIntent.putExtra("date", date);
         TabHost.TabSpec spec;
         spec = tabHost.newTabSpec("page1").setIndicator("list").setContent(ListIntent);
         tabHost.addTab(spec);
 
         Intent MapIntent = new Intent(this, MapsViewer.class);
+        MapIntent.putExtra("locationList", locationList);
+        MapIntent.putExtra("date", date);
         spec = tabHost.newTabSpec("page2").setIndicator("map").setContent(MapIntent);
         tabHost.addTab(spec);
 

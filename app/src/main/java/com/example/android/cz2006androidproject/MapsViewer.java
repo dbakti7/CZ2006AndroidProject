@@ -12,6 +12,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.lang.reflect.Array;
+import java.util.List;
+
+import entity.Location;
+import entity.SQLiteHelper;
+
 public class MapsViewer extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
@@ -22,11 +28,43 @@ public class MapsViewer extends FragmentActivity implements OnMapReadyCallback {
     private final LatLng Marina_bay_sands = new LatLng(1.2838785,103.8589899);
     private GoogleMap map ;
     private final LatLng Center_SGP = new LatLng(1.2800945,103.8509491);
+    private LatLng[] coordinatesList;
+    private String[] places;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps_viewer);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
+        SQLiteHelper db = new SQLiteHelper(this);
+        db.getReadableDatabase();
+        List<Location> list = db.getPopularPlaces();
+        List<Location> listOther = db.getOtherPlaces();
+        Bundle extras = getIntent().getExtras();
+        int[] curDate = extras.getIntArray("date");
+        places = extras.getStringArray("locationList");
+        coordinatesList = new LatLng[Array.getLength(places)];
+        //dp.updateDate(curDate[0], curDate[1], curDate[2]);
+        int weatherPlaces[] = new int[Array.getLength(places)];
+        for(int i = 0;i<Array.getLength(places);++i) {
+            boolean flag = false;
+            for(int j = 0;j<list.size();++j)
+                if(places[i].equals(list.get(j).getName())) {
+                    coordinatesList[i] = new LatLng(list.get(j).getLatitude(), list.get(j).getLongitude());
+                    flag = true;
+                    break;
+                }
+            if(!flag) {
+                for(int j = 0;j<listOther.size();++j)
+                    if(places[i].equals(listOther.get(j).getName())) {
+                        coordinatesList[i] = new LatLng(listOther.get(j).getLatitude(), listOther.get(j).getLongitude());
+                        break;
+                    }
+            }
+            weatherPlaces[i] = R.mipmap.sunny;
+        }
+
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -75,15 +113,13 @@ public class MapsViewer extends FragmentActivity implements OnMapReadyCallback {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        map.addMarker(new MarkerOptions().position(Jurong_EAST).title("Jurong East Mall"));
-        map.addMarker(new MarkerOptions().position(IKEA_Tampines).title("IKEA"));
-        map.addMarker(new MarkerOptions().position(HENDERSEN_WAVES).title("Hendersen Waves"));
-        map.addMarker(new MarkerOptions().position(Changi_airport).title("Changi Airport"));
-        map.addMarker(new MarkerOptions().position(Marina_bay_sands).title("Marina Bay Sands"));
+        for(int i = 0;i<Array.getLength(coordinatesList);++i)
+            map.addMarker(new MarkerOptions().position(coordinatesList[i]).title(places[i]));
+
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         CameraUpdate update= CameraUpdateFactory.newLatLngZoom(Center_SGP, 10);
         map.animateCamera(update);
