@@ -19,14 +19,13 @@ import java.util.List;
 
 import control.CustomListAdapter;
 import entity.Location;
-import entity.Plan;
 import entity.SQLiteHelper;
 
 /**
  * This class is used to show the plan in the form of list
  */
 public class ScheduleListView extends AppCompatActivity {
-    Plan finalPlan = new Plan();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,9 +83,6 @@ public class ScheduleListView extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    public void editPlan() {
-
     }
 
     public void buttonClicked(View view)

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import control.CustomListAdapter;
+import control.LocationPlanner;
 import entity.Location;
 import entity.SQLiteHelper;
 
@@ -86,20 +87,14 @@ public class PlacesListView extends AppCompatActivity {
     public void buttonClicked(View view)
     {
         Button btn = (Button) view.findViewById(R.id.button1);
-        ImageView IV = (ImageView) view.findViewById(R.id.imageView1);
         SQLiteHelper db = new SQLiteHelper(this);
         db.getWritableDatabase();
         List<Location> list = db.getPopularPlaces();
         String placeName = (String)btn.getText();
-        for(int i = 0;i<list.size();++i) {
+        LocationPlanner locationPlanner = new LocationPlanner();
+        for(int i = 0; i < list.size(); ++i) {
             if(placeName.equals(list.get(i).getName())) {
-                Location location = new Location();
-                location.setName(list.get(i).getName());
-                location.setCategory(list.get(i).getCategory());
-                location.setPos(list.get(i).getLatitude(), list.get(i).getLongitude());
-                location.setImage("test");
-                location.setDescription("description");
-                db.addLocationToCurrentPlan(location);
+                locationPlanner.addPlaceFromPopularPlaces(list.get(i), this.getApplicationContext());
                 btn.setText("Place Added");
             }
         }

@@ -12,7 +12,9 @@ import com.example.android.cz2006androidproject.MapsViewer;
 import com.example.android.cz2006androidproject.R;
 
 
-
+/**
+ * this class is used to control which display will be shown, either list view or map view
+ */
 public class ScheduleTabSwitch extends TabActivity {
 
     @Override

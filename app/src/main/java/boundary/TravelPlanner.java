@@ -29,7 +29,6 @@ import entity.SQLiteHelper;
  */
 
 public class TravelPlanner extends Activity {
-    Location[] listLocation = new Location[10];
     DatePicker dp;
     private int[] curDate;
     @Override
@@ -69,7 +68,6 @@ public class TravelPlanner extends Activity {
                 placesWeather[i] = R.mipmap.rainy;
         }
 
-
         ListAdapter tpAdapter = new TravelPlannerAdapter(this, places, placesWeather);
         ListView lvtp = (ListView)findViewById(R.id.lvtp);
         lvtp.setAdapter(tpAdapter);
@@ -107,6 +105,7 @@ public class TravelPlanner extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
     public void addButtonClicked(View view) {
         Intent intent = new Intent(TravelPlanner.this, SearchView.class);
         curDate[0] = dp.getYear();
@@ -114,9 +113,6 @@ public class TravelPlanner extends Activity {
         curDate[2] = dp.getDayOfMonth();
         intent.putExtra("date", curDate);
         startActivity(intent);
-    }
-    public void nextStep() {
-        /*to do when next is clicked*/
     }
 
     public void locationPlanner(View view) {

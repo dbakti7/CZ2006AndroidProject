@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>Weather.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(128,128,128); font-weight: bold; font-style: italic; }
+.s5 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Weather.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">entity</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.List</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s3">/** 
+ * Created by dbakti7 on 10/19/2015. 
+ * This class implements Weather entity. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">Weather { 
+    </span><span class="s0">private </span><span class="s1">String condition</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String temperature</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String humidity</span><span class="s2">;</span><span class="s1"> 
+ 
+    </span><span class="s3">/** 
+     * set the current weather condition based on latitude and longitude of the location 
+     * all information are retrieved from government API, which is NEA API 
+     * the weather condition is based on nowcast, which is weather forecast for the next 3 hours 
+     * the temperature and humidity is based on 12 Hours Forecast 
+     * </span><span class="s4">@param </span><span class="s3">latitude latitude of the location 
+     * </span><span class="s4">@param </span><span class="s3">longitude longitude of the location 
+     * </span><span class="s4">@param </span><span class="s3">nowcast 3-hour forecast API retrieved from NEA 
+     * </span><span class="s4">@param </span><span class="s3">forecast12 12-hour forecast retrieved from NEA 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">setWeather(</span><span class="s0">double </span><span class="s1">latitude</span><span class="s2">, </span><span class="s0">double </span><span class="s1">longitude</span><span class="s2">, </span><span class="s1">List&lt;List&gt; nowcast</span><span class="s2">, </span><span class="s1">List forecast12) { 
+        </span><span class="s0">double </span><span class="s1">curMin = </span><span class="s5">2000000000</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">ans = </span><span class="s5">0</span><span class="s2">, </span><span class="s1">counter = </span><span class="s5">0</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">for</span><span class="s1">(List l: nowcast) { 
+            </span><span class="s0">double </span><span class="s1">x = latitude - Double.parseDouble(l.get(</span><span class="s5">1</span><span class="s1">).toString())</span><span class="s2">;</span><span class="s1"> 
+            </span><span class="s0">double </span><span class="s1">y = longitude - Double.parseDouble(l.get(</span><span class="s5">2</span><span class="s1">).toString())</span><span class="s2">;</span><span class="s1"> 
+            </span><span class="s0">double </span><span class="s1">min = Math.sqrt(x * x + y * y)</span><span class="s2">;</span><span class="s1"> 
+            </span><span class="s0">if</span><span class="s1">(min &lt; curMin) { 
+                curMin = min</span><span class="s2">;</span><span class="s1"> 
+                ans = counter</span><span class="s2">;</span><span class="s1"> 
+            } 
+            ++counter</span><span class="s2">;</span><span class="s1"> 
+        } 
+        condition = nowcast.get(ans).get(</span><span class="s5">0</span><span class="s1">).toString()</span><span class="s2">;</span><span class="s1"> 
+        temperature = forecast12.get(</span><span class="s5">1</span><span class="s1">).toString()</span><span class="s2">;</span><span class="s1"> 
+        humidity = forecast12.get(</span><span class="s5">2</span><span class="s1">).toString()</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@return </span><span class="s3">the weather condition 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String getCondition() { 
+        </span><span class="s0">return </span><span class="s1">condition</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@return </span><span class="s3">the temperature 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String getTemperature() { 
+        </span><span class="s0">return </span><span class="s1">temperature</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@return </span><span class="s3">the humidity 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String getHumidity() {</span><span class="s0">return </span><span class="s1">humidity</span><span class="s2">;</span><span class="s1">} 
+} 
+</span></pre>
+</body>
+</html>

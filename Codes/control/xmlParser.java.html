@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>xmlParser.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(128,128,128); font-weight: bold; font-style: italic; }
+.s5 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+xmlParser.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">control</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.util.Xml</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">org.xmlpull.v1.XmlPullParser</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">java.io.InputStream</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.List</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s3">/** 
+ * Created by stefan on 10/18/2015. 
+ * XmlParser class to handle parsing XML data from API 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">xmlParser { 
+    </span><span class="s3">/** 
+     * parsing the data from NEA API 
+     * </span><span class="s4">@param </span><span class="s3">in: data retrieved from NEA API in the form of input stream 
+     * </span><span class="s4">@param </span><span class="s3">data: type of API retrieved(Nowcast/12Hrs_Forecast) 
+     * </span><span class="s4">@return: </span><span class="s3">A list containing data from API 
+     * </span><span class="s4">@throws </span><span class="s3">Exception 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">List&lt;List&gt; parseWeatherXml(InputStream in</span><span class="s2">, </span><span class="s1">String data) </span><span class="s0">throws </span><span class="s1">Exception { 
+        List res = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">try </span><span class="s1">{ 
+            XmlPullParser parser = Xml.newPullParser()</span><span class="s2">;</span><span class="s1"> 
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES</span><span class="s2">, </span><span class="s0">false</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+            parser.setInput(in</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+            parser.next()</span><span class="s2">;</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(data.equalsIgnoreCase(</span><span class="s5">&quot;nowcast&quot;</span><span class="s1">)) { 
+                res = readNowcast(parser)</span><span class="s2">;</span><span class="s1"> 
+            } </span><span class="s0">else if </span><span class="s1">(data.equalsIgnoreCase(</span><span class="s5">&quot;12hrs_forecast&quot;</span><span class="s1">)) { 
+                res = read12HourForecast(parser)</span><span class="s2">;</span><span class="s1"> 
+            } 
+        } </span><span class="s0">finally </span><span class="s1">{ 
+            in.close()</span><span class="s2">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">return </span><span class="s1">res</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * provides 3-hour forecast in necessary data structure 
+     * </span><span class="s4">@param </span><span class="s3">parser: XmlPullParser object that parses the Xml 
+     * </span><span class="s4">@return: </span><span class="s3">A list containing 3 elements (Condition, Latitude, Longitude) 
+     * </span><span class="s4">@throws </span><span class="s3">Exception 
+     */</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">List&lt;List&gt; readNowcast(XmlPullParser parser) </span><span class="s0">throws </span><span class="s1">Exception { 
+        List&lt;List&gt; forecast = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">try </span><span class="s1">{ 
+            </span><span class="s0">int </span><span class="s1">eventType = parser.getEventType()</span><span class="s2">;</span><span class="s1"> 
+            </span><span class="s0">while </span><span class="s1">(eventType != XmlPullParser.END_DOCUMENT) { 
+                String name = parser.getName()</span><span class="s2">;</span><span class="s1"> 
+                </span><span class="s0">switch </span><span class="s1">(eventType) { 
+                    </span><span class="s0">case </span><span class="s1">XmlPullParser.START_TAG: 
+                        </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+                    </span><span class="s0">case </span><span class="s1">XmlPullParser.TEXT: 
+                        </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+                    </span><span class="s0">case </span><span class="s1">XmlPullParser.END_TAG: 
+                        </span><span class="s0">if </span><span class="s1">(name.equalsIgnoreCase(</span><span class="s5">&quot;area&quot;</span><span class="s1">)) { 
+                            List temp = </span><span class="s0">new </span><span class="s1">ArrayList()</span><span class="s2">;</span><span class="s1"> 
+                            temp.add(parser.getAttributeValue(</span><span class="s0">null</span><span class="s2">, </span><span class="s5">&quot;forecast&quot;</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                            temp.add(parser.getAttributeValue(</span><span class="s0">null</span><span class="s2">, </span><span class="s5">&quot;lat&quot;</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                            temp.add(parser.getAttributeValue(</span><span class="s0">null</span><span class="s2">, </span><span class="s5">&quot;lon&quot;</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                            forecast.add(temp)</span><span class="s2">;</span><span class="s1"> 
+                        } 
+                        </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+                    </span><span class="s0">default</span><span class="s1">: 
+                        </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+                } 
+                eventType = parser.next()</span><span class="s2">;</span><span class="s1"> 
+            } 
+        } </span><span class="s0">catch </span><span class="s1">(Exception e) { 
+            e.printStackTrace()</span><span class="s2">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">return </span><span class="s1">forecast</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * provides 12-hour forecast in necessary data structure 
+     * </span><span class="s4">@param </span><span class="s3">parser: XmlPullParser object that parses the XML 
+     * </span><span class="s4">@return: </span><span class="s3">A list containing Forecast(12 hours), Temperature, Humidity 
+     * </span><span class="s4">@throws </span><span class="s3">Exception 
+     */</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">List read12HourForecast(XmlPullParser parser) </span><span class="s0">throws </span><span class="s1">Exception { 
+        List forecast = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s2">;</span><span class="s1"> 
+        String text = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">try </span><span class="s1">{ 
+            </span><span class="s0">int </span><span class="s1">eventType = parser.getEventType()</span><span class="s2">;</span><span class="s1"> 
+            </span><span class="s0">while </span><span class="s1">(eventType != XmlPullParser.END_DOCUMENT) { 
+                String name = parser.getName()</span><span class="s2">;</span><span class="s1"> 
+                </span><span class="s0">switch </span><span class="s1">(eventType) { 
+                    </span><span class="s0">case </span><span class="s1">XmlPullParser.START_TAG: 
+                        </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+                    </span><span class="s0">case </span><span class="s1">XmlPullParser.TEXT: 
+                        text = parser.getText()</span><span class="s2">;</span><span class="s1"> 
+                        </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+                    </span><span class="s0">case </span><span class="s1">XmlPullParser.END_TAG: 
+                        </span><span class="s0">if </span><span class="s1">(name.equalsIgnoreCase(</span><span class="s5">&quot;forecast&quot;</span><span class="s1">)) { 
+                            forecast.add(text)</span><span class="s2">;</span><span class="s1"> 
+                        } </span><span class="s0">else if </span><span class="s1">(name.equalsIgnoreCase(</span><span class="s5">&quot;temperature&quot;</span><span class="s1">) || name.equalsIgnoreCase(</span><span class="s5">&quot;relativeHumidity&quot;</span><span class="s1">)) { 
+                            forecast.add(parser.getAttributeValue(</span><span class="s0">null</span><span class="s2">, </span><span class="s5">&quot;high&quot;</span><span class="s1">) + </span><span class="s5">&quot;-&quot;</span><span class="s1"> 
+                                    + parser.getAttributeValue(</span><span class="s0">null</span><span class="s2">, </span><span class="s5">&quot;low&quot;</span><span class="s1">) + </span><span class="s5">&quot; &quot; </span><span class="s1">+ parser.getAttributeValue(</span><span class="s0">null</span><span class="s2">, </span><span class="s5">&quot;unit&quot;</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                        } 
+                        </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+                    </span><span class="s0">default</span><span class="s1">: 
+                        </span><span class="s0">break</span><span class="s2">;</span><span class="s1"> 
+                } 
+                eventType = parser.next()</span><span class="s2">;</span><span class="s1"> 
+            } 
+        } </span><span class="s0">catch </span><span class="s1">(Exception e) { 
+            e.printStackTrace()</span><span class="s2">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">return </span><span class="s1">forecast</span><span class="s2">;</span><span class="s1"> 
+    } 
+}</span></pre>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<html>
+<head>
+<title>SQLiteHelper.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,0,255); }
+.s5 { color: rgb(0,128,0); font-weight: bold; }
+.s6 { color: rgb(128,128,128); font-weight: bold; font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+SQLiteHelper.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">entity</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s3">/** 
+ * Created by dbakti7 on 11/2/2015. 
+ * This class is used to manage SQLite database 
+ */</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.content.ContentValues</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.content.Context</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.database.Cursor</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteOpenHelper</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.LinkedList</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.List</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">public class </span><span class="s1">SQLiteHelper </span><span class="s0">extends </span><span class="s1">SQLiteOpenHelper { 
+    </span><span class="s0">private static final int </span><span class="s1">DATABASE_VERSION = </span><span class="s4">1</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String DATABASE_NAME = </span><span class="s5">&quot;PopularPlaceDB&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String TABLE_POPULARPLACE = </span><span class="s5">&quot;PopularPlace&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String TABLE_CURRENTPLAN = </span><span class="s5">&quot;CurrentPlan&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String TABLE_RECOMMENDEDPLAN = </span><span class="s5">&quot;RecommendedPlan&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String TABLE_STAFFPICKED = </span><span class="s5">&quot;StaffPicked&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String TABLE_OTHERPLACES = </span><span class="s5">&quot;OtherPlaces&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String TABLE_SAVEDPLANS = </span><span class="s5">&quot;SavedPlans&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">public static </span><span class="s1">String strSeparator = </span><span class="s5">&quot;__,__&quot;</span><span class="s2">;</span><span class="s1"> 
+ 
+    </span><span class="s0">private static final </span><span class="s1">String KEY_ID = </span><span class="s5">&quot;id&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String KEY_CATEGORY = </span><span class="s5">&quot;category&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String KEY_NAME = </span><span class="s5">&quot;name&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String KEY_LATITUDE = </span><span class="s5">&quot;latitude&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String KEY_LONGITUDE = </span><span class="s5">&quot;longitude&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String KEY_DESCRIPTION = </span><span class="s5">&quot;description&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String KEY_IMAGE = </span><span class="s5">&quot;image&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String KEY_DATE = </span><span class="s5">&quot;date&quot;</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private static final </span><span class="s1">String KEY_PLAN = </span><span class="s5">&quot;plan&quot;</span><span class="s2">;</span><span class="s1"> 
+ 
+    </span><span class="s0">private static final </span><span class="s1">String[] COLUMNS = {KEY_ID</span><span class="s2">, </span><span class="s1">KEY_DATE</span><span class="s2">, </span><span class="s1">KEY_PLAN}</span><span class="s2">;</span><span class="s1"> 
+ 
+    </span><span class="s3">/** 
+     * class constructor 
+     * </span><span class="s6">@param </span><span class="s3">context context 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">SQLiteHelper(Context context) { 
+        </span><span class="s0">super</span><span class="s1">(context</span><span class="s2">, </span><span class="s1">DATABASE_NAME</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s1">DATABASE_VERSION)</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+ 
+    </span><span class="s3">/** 
+     * initializing database 
+     * </span><span class="s6">@param </span><span class="s3">db database 
+     */</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onCreate(SQLiteDatabase db) { 
+        </span><span class="s3">// SQL statements to create tables</span><span class="s1"> 
+        String CREATE_POPULARPLACE_TABLE = </span><span class="s5">&quot;CREATE TABLE PopularPlace ( &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;id INTEGER PRIMARY KEY AUTOINCREMENT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;category TEXT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;name TEXT UNIQUE, &quot;</span><span class="s1">+ 
+                </span><span class="s5">&quot;latitude REAL, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;longitude REAL, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;description TEXT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;image TEXT )&quot;</span><span class="s2">;</span><span class="s1"> 
+ 
+        String CREATE_CURRENTPLAN_TABLE = </span><span class="s5">&quot;CREATE TABLE CURRENTPLAN ( &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;id INTEGER PRIMARY KEY AUTOINCREMENT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;category TEXT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;name TEXT UNIQUE, &quot;</span><span class="s1">+ 
+                </span><span class="s5">&quot;latitude REAL, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;longitude REAL, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;description TEXT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;image TEXT )&quot;</span><span class="s2">;</span><span class="s1"> 
+ 
+        String CREATE_RECOMMENDEDPLAN_TABLE = </span><span class="s5">&quot;CREATE TABLE RECOMMENDEDPLAN ( &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;id INTEGER PRIMARY KEY AUTOINCREMENT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;category TEXT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;name TEXT UNIQUE, &quot;</span><span class="s1">+ 
+                </span><span class="s5">&quot;latitude REAL, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;longitude REAL, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;description TEXT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;image TEXT )&quot;</span><span class="s2">;</span><span class="s1"> 
+ 
+        String CREATE_STAFFPICKED_TABLE = </span><span class="s5">&quot;CREATE TABLE STAFFPICKED ( &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;id INTEGER PRIMARY KEY AUTOINCREMENT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;category TEXT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;name TEXT UNIQUE, &quot;</span><span class="s1">+ 
+                </span><span class="s5">&quot;latitude REAL, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;longitude REAL, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;description TEXT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;image TEXT )&quot;</span><span class="s2">;</span><span class="s1"> 
+ 
+        String CREATE_OTHERPLACES_TABLE = </span><span class="s5">&quot;CREATE TABLE OTHERPLACES ( &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;id INTEGER PRIMARY KEY AUTOINCREMENT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;category TEXT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;name TEXT UNIQUE, &quot;</span><span class="s1">+ 
+                </span><span class="s5">&quot;latitude REAL, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;longitude REAL, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;description TEXT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;image TEXT )&quot;</span><span class="s2">;</span><span class="s1"> 
+ 
+        String CREATE_SAVEDPLANS_TABLE = </span><span class="s5">&quot;CREATE TABLE SAVEDPLANS ( &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;id INTEGER PRIMARY KEY AUTOINCREMENT, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;date TEXT UNIQUE, &quot; </span><span class="s1">+ 
+                </span><span class="s5">&quot;plan TEXT )&quot;</span><span class="s2">;</span><span class="s1"> 
+ 
+        </span><span class="s3">// create tables</span><span class="s1"> 
+        db.execSQL(CREATE_POPULARPLACE_TABLE)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(CREATE_CURRENTPLAN_TABLE)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(CREATE_RECOMMENDEDPLAN_TABLE)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(CREATE_STAFFPICKED_TABLE)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(CREATE_OTHERPLACES_TABLE)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(CREATE_SAVEDPLANS_TABLE)</span><span class="s2">;</span><span class="s1"> 
+ 
+        </span><span class="s3">// inserting necessary information</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(id, category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values(1, 'Tourist Attractions','Singapore Flyer', 1.289572, 103.863121,'Singapore Flyer', 'singapore_flyer')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Tourist Attractions','Jurong Bird Park', 1.318803, 103.706420,'Jurong Bird Park','jurong_bird_park')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Tourist Attractions','Singapore Zoo', 1.404627, 103.793023,'Singapore Zoo','singapore_zoo')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Tourist Attractions','Universal Studios Singapore', 1.254278, 103.823765,'Universal Studios Singapore','universal_studios_singapore')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Tourist Attractions','Night Safari', 1.402198, 103.788125,'Night Safari','night_safari')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Museums','ArtScience Museum', 1.286413, 103.859180,'ArtScience Museum','artScience_museum')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Museums','National Museum of Singapore', 1.296857, 103.848527,'National Museum of Singapore','national_museum_of_singapore')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Museums','National Design Centre', 1.298873, 103.853569,'National Design Centre','national_design_centre')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Museums','National Gallery Singapore', 1.290518, 103.851630,'National Gallery Singapore','national_gallery_singapore')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Museums','Asian Civilisations Museum', 1.287760, 103.851433,'Asian Civilisations Museum','asian_civilisations_museum')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Food Centres','Jurong West Block 505 Food Centre', 1.350054, 103.718148,'Jurong West Block 505 Food Centre','jurong_west_block_505_food_centre')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Food Centres','People’s Park Complex Food Centre', 1.289898, 103.844314,'People’s Park Complex Food Centre','peoples_park_complex_food_centre')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Food Centres','Ayer Rajah Food Centre', 1.312293, 103.760243,'Ayer Rajah Food Centre','ayer_rajah_food_centre')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Food Centres','Zion Riverside Food Centre', 1.292843, 103.831231,'Zion Riverside Food Centre','zion_riverside_food_centre')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Food Centres','Toa Payoh Lorong 8 Hawker Centre',1.342622, 103.854462,'Toa Payoh Lorong 8 Hawker Centre','toa_payoh_lorong_8_hawker_centre')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Hotels','Shangri-La Hotel', 1.311685, 103.826138,'Shangri-La Hotel','shangri-la_hotel')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Hotels','Singapore Marriott Hotel', 1.305624, 103.832580,'Singapore Marriott Hotel','singapore_marriott_hotel')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Hotels','Furama Riverfront Singapore',1.288143, 103.836001,'Furama Riverfront Singapore','furama_riverfront_singapore')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Hotels','Concorde Hotel Singapore',1.300804, 103.842154,'Concorde Hotel Singapore','concorde_hotel_singapore')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Hotels','The Fullerton Singapore', 1.286557, 103.853046,'The Fullerton Singapore','the_fullerton_singapore')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Parks','Chinese Garden', 1.338718, 103.730064,'Chinese Garden','chinese_garden')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Parks','East Coast Park', 1.300891, 103.912079,'East Coast Park','east_coast_park')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Parks','HortPark', 1.279410, 103.797579,'HortPark','hortpark')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Parks','FortCanning Park', 1.295693, 103.847447,'FortCanning Park','fortcanning_park')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Parks','Gardens by the Bay', 1.281708, 103.863570,'Gardens by the Bay','gardens_by_the_bay')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Public Libraries','Bishan Public Library', 1.355557, 103.849018,'Bishan Public Library','bishan_public_library')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Public Libraries','Toa Payoh public library',1.333859, 103.850504,'Toa Payoh public library','toa_payoh_public_library')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Public Libraries','National Library, Singapore', 1.297910, 103.854287,'National Library, Singapore','national_library_singapore' )&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Public Libraries','Library @Esplanade',1.289775, 103.856103,'Library @Esplanade','library_esplanade')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_POPULARPLACE + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Public Libraries','Queenstown Library', 1.298951, 103.805379,'Queenstown Library','queenstown_library')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_RECOMMENDEDPLAN + </span><span class="s5">&quot;(id, category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values(1, 'Museums','National Gallery Singapore', 1.290518, 103.851630, 'National Gallery Singapore', 'national_gallery_singapore')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_RECOMMENDEDPLAN + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Museums','National Design Centre', 1.298873, 103.853569, 'National Design Centre', 'national_design_centre')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_RECOMMENDEDPLAN + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Public Libraries','National Library, Singapore', 1.297910, 103.854287, 'National Library, Singapore', 'national_library_singapore')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_RECOMMENDEDPLAN + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Food Centres','People’s Park Complex Food Centre', 1.289898, 103.844314, 'People’s Park Complex Food Centre', 'peoples_park_complex_food_centre')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_RECOMMENDEDPLAN + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Parks','Gardens by the Bay', 1.281708, 103.863570, 'Gardens by the Bay', 'gardens_by_the_bay')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_STAFFPICKED + </span><span class="s5">&quot;(id, category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values(1, 'Tourist Attractions','Jurong Bird Park', 1.318803, 103.706420, 'Jurong Bird Park', 'jurong_bird_park')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_STAFFPICKED + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Food Centres','Jurong West Block 505 Food Centre', 1.350054, 103.718148, 'Jurong West Block 505 Food Centre', 'jurong_west_block_505_food_centre')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_STAFFPICKED + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Museums','ArtScience Museum', 1.286413, 103.859180, 'HortPark', 'hortpark')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_STAFFPICKED + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Parks','HortPark', 1.279410, 103.797579, 'HortPark', 'hortpark')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;insert into &quot; </span><span class="s1">+ TABLE_STAFFPICKED + </span><span class="s5">&quot;(category, name, latitude, longitude, description, image)&quot; </span><span class="s1">+ </span><span class="s5">&quot; values('Parks','Gardens by the Bay', 1.281708, 103.863570, 'Gardens By the Bay', 'gardens_by_the_bay')&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+ 
+    </span><span class="s3">/** 
+     * modifying database 
+     * </span><span class="s6">@param </span><span class="s3">db database 
+     * </span><span class="s6">@param </span><span class="s3">oldVersion old database's version 
+     * </span><span class="s6">@param </span><span class="s3">newVersion new database's version 
+     */</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onUpgrade(SQLiteDatabase db</span><span class="s2">, </span><span class="s0">int </span><span class="s1">oldVersion</span><span class="s2">, </span><span class="s0">int </span><span class="s1">newVersion) { 
+        </span><span class="s3">// Drop older tables if existed</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;DROP TABLE IF EXISTS PopularPlace&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;DROP TABLE IF EXISTS CurrentPlan&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;DROP TABLE IF EXISTS RecommendedPlan&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        db.execSQL(</span><span class="s5">&quot;DROP TABLE IF EXISTS StaffPicked&quot;</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s3">// create fresh tables</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.onCreate(db)</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s6">@return </span><span class="s3">popular places stored in databased 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">List&lt;Location&gt; getPopularPlaces() { 
+        List&lt;Location&gt; pplaces = </span><span class="s0">new </span><span class="s1">LinkedList&lt;Location&gt;()</span><span class="s2">;</span><span class="s1"> 
+ 
+        String query = </span><span class="s5">&quot;SELECT  * FROM &quot; </span><span class="s1">+ TABLE_POPULARPLACE</span><span class="s2">;</span><span class="s1"> 
+ 
+        SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span><span class="s1"> 
+        Cursor cursor = db.rawQuery(query</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+ 
+        Location pplace = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(cursor.moveToFirst()) { 
+            </span><span class="s0">do </span><span class="s1">{ 
+                pplace = </span><span class="s0">new </span><span class="s1">Location()</span><span class="s2">;</span><span class="s1"> 
+                pplace.setCategory(cursor.getString(</span><span class="s4">1</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                pplace.setName(cursor.getString(</span><span class="s4">2</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                pplace.setPos(cursor.getDouble(</span><span class="s4">3</span><span class="s1">)</span><span class="s2">, </span><span class="s1">cursor.getDouble(</span><span class="s4">4</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                pplace.setDescription(cursor.getString(</span><span class="s4">5</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                pplace.setImage(cursor.getString(</span><span class="s4">6</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                pplaces.add(pplace)</span><span class="s2">;</span><span class="s1"> 
+            } </span><span class="s0">while </span><span class="s1">(cursor.moveToNext())</span><span class="s2">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">return </span><span class="s1">pplaces</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * add a new location into current plan 
+     * </span><span class="s6">@param </span><span class="s3">location location to be added into current plan 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">addLocationToCurrentPlan(Location location) { 
+        SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span><span class="s1"> 
+        ContentValues values = </span><span class="s0">new </span><span class="s1">ContentValues()</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_CATEGORY</span><span class="s2">, </span><span class="s1">location.getCategory())</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_NAME</span><span class="s2">, </span><span class="s1">location.getName())</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_LATITUDE</span><span class="s2">, </span><span class="s1">location.getLatitude())</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_LONGITUDE</span><span class="s2">, </span><span class="s1">location.getLongitude())</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_DESCRIPTION</span><span class="s2">, </span><span class="s1">location.getDescription())</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_IMAGE</span><span class="s2">, </span><span class="s1">location.getImage())</span><span class="s2">;</span><span class="s1"> 
+        db.insert(TABLE_CURRENTPLAN</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s1">values)</span><span class="s2">;</span><span class="s1"> 
+        db.close()</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * 
+     * </span><span class="s6">@return </span><span class="s3">the current plan 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">List&lt;Location&gt; getCurrentPlan() { 
+        List&lt;Location&gt; currentPlan = </span><span class="s0">new </span><span class="s1">LinkedList&lt;Location&gt;()</span><span class="s2">;</span><span class="s1"> 
+        String query = </span><span class="s5">&quot;SELECT  * FROM &quot; </span><span class="s1">+ TABLE_CURRENTPLAN</span><span class="s2">;</span><span class="s1"> 
+        SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span><span class="s1"> 
+        Cursor cursor = db.rawQuery(query</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        Location location = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(cursor.moveToFirst()) { 
+            </span><span class="s0">do </span><span class="s1">{ 
+                location = </span><span class="s0">new </span><span class="s1">Location()</span><span class="s2">;</span><span class="s1"> 
+                location.setCategory(cursor.getString(</span><span class="s4">1</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setName(cursor.getString(</span><span class="s4">2</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setPos(cursor.getDouble(</span><span class="s4">3</span><span class="s1">)</span><span class="s2">, </span><span class="s1">cursor.getDouble(</span><span class="s4">4</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setDescription(cursor.getString(</span><span class="s4">5</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setImage(cursor.getString(</span><span class="s4">6</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                currentPlan.add(location)</span><span class="s2">;</span><span class="s1"> 
+            } </span><span class="s0">while </span><span class="s1">(cursor.moveToNext())</span><span class="s2">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">return </span><span class="s1">currentPlan</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * delete a location from current plan 
+     * </span><span class="s6">@param </span><span class="s3">location location to be deleted from current plan 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">deleteLocationFromCurrentPlan(Location location) { 
+        SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span><span class="s1"> 
+        db.delete(TABLE_CURRENTPLAN</span><span class="s2">,</span><span class="s1"> 
+                KEY_NAME + </span><span class="s5">&quot; = ?&quot;</span><span class="s2">,</span><span class="s1"> 
+                </span><span class="s0">new </span><span class="s1">String[]{String.valueOf(location.getName())})</span><span class="s2">;</span><span class="s1"> 
+        db.close()</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s6">@return </span><span class="s3">the recommended plan 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">List&lt;Location&gt; getRecommendedPlan() { 
+        List&lt;Location&gt; currentPlan = </span><span class="s0">new </span><span class="s1">LinkedList&lt;Location&gt;()</span><span class="s2">;</span><span class="s1"> 
+        String query = </span><span class="s5">&quot;SELECT  * FROM &quot; </span><span class="s1">+ TABLE_RECOMMENDEDPLAN</span><span class="s2">;</span><span class="s1"> 
+        SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span><span class="s1"> 
+        Cursor cursor = db.rawQuery(query</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        Location location = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(cursor.moveToFirst()) { 
+            </span><span class="s0">do </span><span class="s1">{ 
+                location = </span><span class="s0">new </span><span class="s1">Location()</span><span class="s2">;</span><span class="s1"> 
+                location.setCategory(cursor.getString(</span><span class="s4">1</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setName(cursor.getString(</span><span class="s4">2</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setPos(cursor.getDouble(</span><span class="s4">3</span><span class="s1">)</span><span class="s2">, </span><span class="s1">cursor.getDouble(</span><span class="s4">4</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setDescription(cursor.getString(</span><span class="s4">5</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setImage(cursor.getString(</span><span class="s4">6</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                currentPlan.add(location)</span><span class="s2">;</span><span class="s1"> 
+            } </span><span class="s0">while </span><span class="s1">(cursor.moveToNext())</span><span class="s2">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">return </span><span class="s1">currentPlan</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * 
+     * </span><span class="s6">@return </span><span class="s3">the plan personally picked by the staff 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">List&lt;Location&gt; getStaffPicked() { 
+        List&lt;Location&gt; currentPlan = </span><span class="s0">new </span><span class="s1">LinkedList&lt;Location&gt;()</span><span class="s2">;</span><span class="s1"> 
+        String query = </span><span class="s5">&quot;SELECT  * FROM &quot; </span><span class="s1">+ TABLE_STAFFPICKED</span><span class="s2">;</span><span class="s1"> 
+        SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span><span class="s1"> 
+        Cursor cursor = db.rawQuery(query</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        Location location = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(cursor.moveToFirst()) { 
+            </span><span class="s0">do </span><span class="s1">{ 
+                location = </span><span class="s0">new </span><span class="s1">Location()</span><span class="s2">;</span><span class="s1"> 
+                location.setCategory(cursor.getString(</span><span class="s4">1</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setName(cursor.getString(</span><span class="s4">2</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setPos(cursor.getDouble(</span><span class="s4">3</span><span class="s1">)</span><span class="s2">, </span><span class="s1">cursor.getDouble(</span><span class="s4">4</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setDescription(cursor.getString(</span><span class="s4">5</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setImage(cursor.getString(</span><span class="s4">6</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                currentPlan.add(location)</span><span class="s2">;</span><span class="s1"> 
+            } </span><span class="s0">while </span><span class="s1">(cursor.moveToNext())</span><span class="s2">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">return </span><span class="s1">currentPlan</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * add location to database if the location comes from search 
+     * </span><span class="s6">@param </span><span class="s3">location location to be added 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">addLocationToOtherPlaces(Location location) { 
+        SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span><span class="s1"> 
+        ContentValues values = </span><span class="s0">new </span><span class="s1">ContentValues()</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_CATEGORY</span><span class="s2">, </span><span class="s1">location.getCategory())</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_NAME</span><span class="s2">, </span><span class="s1">location.getName())</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_LATITUDE</span><span class="s2">, </span><span class="s1">location.getLatitude())</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_LONGITUDE</span><span class="s2">, </span><span class="s1">location.getLongitude())</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_DESCRIPTION</span><span class="s2">, </span><span class="s1">location.getDescription())</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_IMAGE</span><span class="s2">, </span><span class="s1">location.getImage())</span><span class="s2">;</span><span class="s1"> 
+        db.insert(TABLE_OTHERPLACES</span><span class="s2">,</span><span class="s1"> 
+                </span><span class="s0">null</span><span class="s2">,</span><span class="s1"> 
+                values)</span><span class="s2">;</span><span class="s1"> 
+        db.close()</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s6">@return </span><span class="s3">the places added from search results 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">List&lt;Location&gt; getOtherPlaces() { 
+        List&lt;Location&gt; currentPlan = </span><span class="s0">new </span><span class="s1">LinkedList&lt;Location&gt;()</span><span class="s2">;</span><span class="s1"> 
+        String query = </span><span class="s5">&quot;SELECT  * FROM &quot; </span><span class="s1">+ TABLE_OTHERPLACES</span><span class="s2">;</span><span class="s1"> 
+        SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span><span class="s1"> 
+        Cursor cursor = db.rawQuery(query</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        Location location = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(cursor.moveToFirst()) { 
+            </span><span class="s0">do </span><span class="s1">{ 
+                location = </span><span class="s0">new </span><span class="s1">Location()</span><span class="s2">;</span><span class="s1"> 
+                location.setCategory(cursor.getString(</span><span class="s4">1</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setName(cursor.getString(</span><span class="s4">2</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setPos(cursor.getDouble(</span><span class="s4">3</span><span class="s1">)</span><span class="s2">, </span><span class="s1">cursor.getDouble(</span><span class="s4">4</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setDescription(cursor.getString(</span><span class="s4">5</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                location.setImage(cursor.getString(</span><span class="s4">6</span><span class="s1">))</span><span class="s2">;</span><span class="s1"> 
+                currentPlan.add(location)</span><span class="s2">;</span><span class="s1"> 
+            } </span><span class="s0">while </span><span class="s1">(cursor.moveToNext())</span><span class="s2">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">return </span><span class="s1">currentPlan</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * add a travel plan into calendar 
+     * </span><span class="s6">@param </span><span class="s3">currentPlan travel plan to be added 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">addPlan(Plan currentPlan) { 
+        String[] placeslist = currentPlan.getlocationList()</span><span class="s2">;</span><span class="s1"> 
+        String str = </span><span class="s5">&quot;&quot;</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">i</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">for</span><span class="s1">(i = </span><span class="s4">0</span><span class="s2">;</span><span class="s1">i&lt; currentPlan.getLocationCount() - </span><span class="s4">1</span><span class="s2">;</span><span class="s1">++i) 
+            str = str + placeslist[i] + strSeparator</span><span class="s2">;</span><span class="s1"> 
+        str += placeslist[i]</span><span class="s2">;</span><span class="s1"> 
+ 
+        SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span><span class="s1"> 
+ 
+        ContentValues values = </span><span class="s0">new </span><span class="s1">ContentValues()</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_DATE</span><span class="s2">, </span><span class="s1">currentPlan.getDate())</span><span class="s2">;</span><span class="s1"> 
+        values.put(KEY_PLAN</span><span class="s2">, </span><span class="s1">str)</span><span class="s2">;</span><span class="s1"> 
+ 
+        db.insert(TABLE_SAVEDPLANS</span><span class="s2">,</span><span class="s1"> 
+                </span><span class="s0">null</span><span class="s2">,</span><span class="s1"> 
+                values)</span><span class="s2">;</span><span class="s1"> 
+ 
+        db.close()</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * get a plan from calendar from a specific date 
+     * </span><span class="s6">@param </span><span class="s3">dateQuery date to be queried 
+     * </span><span class="s6">@return </span><span class="s3">travel plan for that date 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String[] getPlan(String dateQuery) { 
+        SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getReadableDatabase()</span><span class="s2">;</span><span class="s1"> 
+        Cursor cursor = 
+                db.query(TABLE_SAVEDPLANS</span><span class="s2">, </span><span class="s3">// a. table</span><span class="s1"> 
+                        COLUMNS</span><span class="s2">, </span><span class="s3">// b. column names</span><span class="s1"> 
+                        </span><span class="s5">&quot; date = ?&quot;</span><span class="s2">, </span><span class="s3">// c. selections</span><span class="s1"> 
+                        </span><span class="s0">new </span><span class="s1">String[] { String.valueOf(dateQuery) }</span><span class="s2">, </span><span class="s3">// d. selections args</span><span class="s1"> 
+                        </span><span class="s0">null</span><span class="s2">, </span><span class="s3">// e. group by</span><span class="s1"> 
+                        </span><span class="s0">null</span><span class="s2">, </span><span class="s3">// f. having</span><span class="s1"> 
+                        </span><span class="s0">null</span><span class="s2">, </span><span class="s3">// g. order by</span><span class="s1"> 
+                        </span><span class="s0">null</span><span class="s1">)</span><span class="s2">; </span><span class="s3">// h. limit</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(cursor.moveToFirst())</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">else</span><span class="s1"> 
+            </span><span class="s0">return null</span><span class="s2">;</span><span class="s1"> 
+        String str = cursor.getString(</span><span class="s4">2</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        String[] arr = str.split(strSeparator)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return </span><span class="s1">arr</span><span class="s2">;</span><span class="s1"> 
+    } 
+} 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<html>
+<head>
+<title>Location.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(128,128,128); font-weight: bold; font-style: italic; }
+.s5 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Location.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">entity</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">java.util.*</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s3">/** 
+ * Created by dbakti7 on 10/19/2015. 
+ * This class implements the Location entity with the attributes name, category, weather, description, 
+ * and image. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">Location { 
+    </span><span class="s0">private </span><span class="s1">String name</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String category</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Weather weather</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String description</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">String image</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Double latitude</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Double longitude</span><span class="s2">;</span><span class="s1"> 
+ 
+    </span><span class="s3">/** 
+     * default class constructor 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Location() { 
+    } 
+ 
+    </span><span class="s3">/** 
+     * class constructor 
+     * </span><span class="s4">@param </span><span class="s3">name name of the location 
+     * </span><span class="s4">@param </span><span class="s3">latitude location's latitude 
+     * </span><span class="s4">@param </span><span class="s3">longitude location's longitude 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Location(String name</span><span class="s2">, </span><span class="s1">Double latitude</span><span class="s2">, </span><span class="s1">Double longitude) { 
+        </span><span class="s0">this</span><span class="s1">.name = name</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.category = </span><span class="s5">&quot;others&quot;</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.weather = </span><span class="s0">new </span><span class="s1">Weather()</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.description = name</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.image = name</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.latitude = latitude</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.longitude = longitude</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * set the position of the location 
+     * </span><span class="s4">@param </span><span class="s3">latitude location's latitude 
+     * </span><span class="s4">@param </span><span class="s3">longitude location's longitude 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">setPos(</span><span class="s0">double </span><span class="s1">latitude</span><span class="s2">, </span><span class="s0">double </span><span class="s1">longitude) { 
+        </span><span class="s0">this</span><span class="s1">.latitude = latitude</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.longitude = longitude</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@param </span><span class="s3">name set the name of the location 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">setName(String name) { 
+        </span><span class="s0">this</span><span class="s1">.name = name</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * 
+     * </span><span class="s4">@param </span><span class="s3">category set the category of the location 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">setCategory(String category) { 
+        </span><span class="s0">this</span><span class="s1">.category = category</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * set the current weather condition 
+     * </span><span class="s4">@param </span><span class="s3">nowcast 3-hour weather forecast from NEA API 
+     * </span><span class="s4">@param </span><span class="s3">forecast12 12-hour weather forecast from NEA API 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">setWeatherDetails(List&lt;List&gt; nowcast</span><span class="s2">, </span><span class="s1">List forecast12) { 
+        </span><span class="s0">try </span><span class="s1">{ 
+            </span><span class="s0">this</span><span class="s1">.weather.setWeather(latitude</span><span class="s2">, </span><span class="s1">longitude</span><span class="s2">, </span><span class="s1">nowcast</span><span class="s2">, </span><span class="s1">forecast12)</span><span class="s2">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">catch</span><span class="s1">(Exception e) { 
+            e.printStackTrace()</span><span class="s2">;</span><span class="s1"> 
+        } 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@param </span><span class="s3">description set the description of the location 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">setDescription(String description) { 
+        </span><span class="s0">this</span><span class="s1">.description = description</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@param </span><span class="s3">image location's image url 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">setImage(String image) { 
+        </span><span class="s0">this</span><span class="s1">.image = image</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@return </span><span class="s3">name of the location 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String getName() { 
+        </span><span class="s0">return </span><span class="s1">name</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@return </span><span class="s3">category of the location 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String getCategory() { 
+        </span><span class="s0">return </span><span class="s1">category</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@return </span><span class="s3">description of the location 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String getDescription() { 
+        </span><span class="s0">return </span><span class="s1">description</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@return </span><span class="s3">weather condition of the location 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Weather getWeather() { 
+        </span><span class="s0">return </span><span class="s1">weather</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@return </span><span class="s3">image url of the location 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String getImage() { 
+        </span><span class="s0">return </span><span class="s1">image</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@return </span><span class="s3">latitude of the location 
+     */</span><span class="s1"> 
+    </span><span class="s0">public double </span><span class="s1">getLatitude() { 
+        </span><span class="s0">return </span><span class="s1">latitude</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s4">@return </span><span class="s3">longitude of the location 
+     */</span><span class="s1"> 
+    </span><span class="s0">public double </span><span class="s1">getLongitude() { 
+        </span><span class="s0">return </span><span class="s1">longitude</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+} 
+</span></pre>
+</body>
+</html>

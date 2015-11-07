@@ -10,9 +10,16 @@ import java.util.List;
 
 /**
  * Created by stefan on 10/18/2015.
+ * XmlParser class to handle parsing XML data from API
  */
 public class xmlParser {
-
+    /**
+     * parsing the data from NEA API
+     * @param in: data retrieved from NEA API in the form of input stream
+     * @param data: type of API retrieved(Nowcast/12Hrs_Forecast)
+     * @return: A list containing data from API
+     * @throws Exception
+     */
     public List<List> parseWeatherXml(InputStream in, String data) throws Exception {
         List res = null;
         try {
@@ -31,6 +38,12 @@ public class xmlParser {
         return res;
     }
 
+    /**
+     * provides 3-hour forecast in necessary data structure
+     * @param parser: XmlPullParser object that parses the Xml
+     * @return: A list containing 3 elements (Condition, Latitude, Longitude)
+     * @throws Exception
+     */
     private List<List> readNowcast(XmlPullParser parser) throws Exception {
         List<List> forecast = new ArrayList<>();
         try {
@@ -62,6 +75,12 @@ public class xmlParser {
         return forecast;
     }
 
+    /**
+     * provides 12-hour forecast in necessary data structure
+     * @param parser: XmlPullParser object that parses the XML
+     * @return: A list containing Forecast(12 hours), Temperature, Humidity
+     * @throws Exception
+     */
     private List read12HourForecast(XmlPullParser parser) throws Exception {
         List forecast = new ArrayList<>();
         String text = null;

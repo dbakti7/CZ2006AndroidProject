@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Plan.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,0,255); }
+.s5 { color: rgb(128,128,128); font-weight: bold; font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Plan.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">entity</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s3">/** 
+ * Created by dbakti7 on 10/19/2015. 
+ * This class implements the Plan entity 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">Plan { 
+    </span><span class="s0">private </span><span class="s1">String date</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Location locationList[]</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s0">private int </span><span class="s1">locationCount</span><span class="s2">;</span><span class="s1"> 
+    </span><span class="s3">/** 
+     * class constructor 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">Plan() { 
+        date = </span><span class="s0">null</span><span class="s2">;</span><span class="s1"> 
+        locationList = </span><span class="s0">new </span><span class="s1">Location[</span><span class="s4">20</span><span class="s1">]</span><span class="s2">;</span><span class="s1"> 
+        locationCount = </span><span class="s4">0</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * Add a new location into the current travel plan 
+     * </span><span class="s5">@param </span><span class="s3">location location to be added 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">addLocation(Location location) { 
+        locationList[locationCount] = </span><span class="s0">new </span><span class="s1">Location()</span><span class="s2">;</span><span class="s1"> 
+        locationList[locationCount].setName(location.getName())</span><span class="s2">;</span><span class="s1"> 
+        ++locationCount</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s5">@return </span><span class="s3">number of location in the travel plan 
+     */</span><span class="s1"> 
+    </span><span class="s0">public int </span><span class="s1">getLocationCount() { 
+        </span><span class="s0">return </span><span class="s1">locationCount</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s5">@return </span><span class="s3">the date of the travel plan 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String getDate() { 
+        </span><span class="s0">return </span><span class="s1">date</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * </span><span class="s5">@return </span><span class="s3">the names of the locations in the plan 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">String[] getlocationList() { 
+        String[] locationNames = </span><span class="s0">new </span><span class="s1">String[locationCount]</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">;</span><span class="s1">i&lt;locationCount</span><span class="s2">;</span><span class="s1">++i) 
+            locationNames[i] = locationList[i].getName()</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return </span><span class="s1">locationNames</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * set the date of the travel plan 
+     * </span><span class="s5">@param </span><span class="s3">date date of the travel plan 
+     */</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">setDate(String date) { 
+        </span><span class="s0">this</span><span class="s1">.date = date</span><span class="s2">;</span><span class="s1"> 
+    } 
+}</span></pre>
+</body>
+</html>

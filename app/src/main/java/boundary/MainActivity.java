@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.android.cz2006androidproject.R;
 import java.util.List;
 
+import control.LocationPlanner;
 import entity.Location;
 import entity.SQLiteHelper;
 
@@ -81,15 +82,16 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void recommendedPlanClicked(View view) {
+        LocationPlanner locationPlanner = new LocationPlanner();
         Intent intent = new Intent(MainActivity.this, TravelPlanner.class);
         SQLiteHelper db = new SQLiteHelper(this);
         db.getWritableDatabase();
         List <Location> list = db.getRecommendedPlan();
-        List<Location> list2 = db.getCurrentPlan();
+        List <Location> list2 = db.getCurrentPlan();
         for(Location l: list2)
-            db.deleteLocationFromCurrentPlan(l);
+            locationPlanner.removePlaceFromCurrentPlan(l, this.getApplicationContext());
         for(Location l: list)
-            db.addLocationToCurrentPlan(l);
+            locationPlanner.addPlaceFromPopularPlaces(l, this.getApplicationContext());
         String[] locationList = new String[list.size()];
         for(int i = 0;i<list.size();++i)
             locationList[i] = list.get(i).getName();
@@ -103,15 +105,16 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void staffPickedClicked(View view) {
+        LocationPlanner locationPlanner = new LocationPlanner();
         Intent intent = new Intent(MainActivity.this, TravelPlanner.class);
         SQLiteHelper db = new SQLiteHelper(this);
         db.getReadableDatabase();
         List <Location> list = db.getStaffPicked();
-        List<Location> list2 = db.getCurrentPlan();
+        List <Location> list2 = db.getCurrentPlan();
         for(Location l: list2)
-            db.deleteLocationFromCurrentPlan(l);
+            locationPlanner.removePlaceFromCurrentPlan(l, this.getApplicationContext());
         for(Location l: list)
-            db.addLocationToCurrentPlan(l);
+            locationPlanner.addPlaceFromPopularPlaces(l, this.getApplicationContext());
         String[] locationList = new String[list.size()];
         for(int i = 0;i<list.size();++i)
             locationList[i] = list.get(i).getName();

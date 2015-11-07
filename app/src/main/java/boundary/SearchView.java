@@ -26,6 +26,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.example.android.placeapiautocomplete.PlaceArrayAdapter;
 
 import java.util.List;
+
+import control.LocationPlanner;
 import entity.Location;
 import entity.SQLiteHelper;
 
@@ -212,20 +214,17 @@ GoogleApiClient.ConnectionCallbacks {
     }
     public void addPlaceFromSearch(View view) {
         AutoCompleteTextView ACTV = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+        LocationPlanner locationPlanner = new LocationPlanner();
         if(picked != null && (BOUNDS_SINGAPORE.contains(new LatLng(picked.getLatitude(), picked.getLongitude())))) {
-            SQLiteHelper db = new SQLiteHelper(this);
-            db.getWritableDatabase();
-            db.addLocationToOtherPlaces(picked);
-            db.addLocationToCurrentPlan(picked);
-            db.close();
+            locationPlanner.addPlaceFromSearchResult(picked, this.getApplicationContext());
             ACTV.setText("");
             Toast toast = Toast.makeText(getApplicationContext(), "Place Added", Toast.LENGTH_SHORT);
             toast.show();
         }
         else {
+            ACTV.setText("");
             Toast toast = Toast.makeText(getApplicationContext(), "Invalid Place", Toast.LENGTH_SHORT);
             toast.show();
-            ACTV.setText("");
         }
     }
 }

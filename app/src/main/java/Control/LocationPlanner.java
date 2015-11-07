@@ -1,6 +1,9 @@
 package control;
 
+import android.content.Context;
+
 import entity.Location;
+import entity.SQLiteHelper;
 
 /**
  * Created by dbakti7 on 10/20/2015.
@@ -8,37 +11,40 @@ import entity.Location;
  */
 public class LocationPlanner {
     /**
-     * add a new location into existing plan
+     * add location from popular places provided into current travel plan
+     * @param location location to be added
+     * @param context context needed to access database
      */
-    public void addPlace(Location location, Location[] listLocation) {
-
+    public void addPlaceFromPopularPlaces(Location location, Context context) {
+        SQLiteHelper db = new SQLiteHelper(context);
+        db.getWritableDatabase();
+        db.addLocationToCurrentPlan(location);
+        db.close();
     }
 
     /**
-     * delete a location from existing plan
-     * @param location
-     * @param listLocation
+     * add location from search result into current travel plan
+     * @param location location to be added
+     * @param context context needed to access database
      */
-    public void removePlace(Location location, Location[] listLocation) {
-
+    public void addPlaceFromSearchResult(Location location, Context context) {
+        SQLiteHelper db = new SQLiteHelper(context);
+        db.getWritableDatabase();
+        db.addLocationToOtherPlaces(location);
+        db.addLocationToCurrentPlan(location);
+        db.close();
     }
 
     /**
-     * set location as starting point of the plan
-     * @param location
-     * @param listLocation
+     * remove a location from current plan
+     * @param location location to be removed
+     * @param context context needed to access the database
      */
-    public void setStart(Location location, Location[] listLocation) {
-
-    }
-
-    /**
-     * set the location as last point of the plan
-     * @param location
-     * @param listLocation
-     */
-    public void setFinish(Location location, Location[] listLocation) {
-
+    public void removePlaceFromCurrentPlan(Location location, Context context) {
+        SQLiteHelper db = new SQLiteHelper(context);
+        db.getWritableDatabase();
+        db.deleteLocationFromCurrentPlan(location);
+        db.close();
     }
 
 }

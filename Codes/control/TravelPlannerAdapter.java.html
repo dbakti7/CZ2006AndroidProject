@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>TravelPlannerAdapter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(204,120,50); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(128,128,128); font-weight: bold; font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+TravelPlannerAdapter.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">control</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.content.Context</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.LayoutInflater</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.View</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.ViewGroup</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.ArrayAdapter</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s2">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">com.example.android.cz2006androidproject.R</span><span class="s2">;</span><span class="s1"> 
+ 
+</span><span class="s3">/** 
+ * Created by asus on 20-Oct-15. 
+ * this class is used to arrange the display in TravelPlanner 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">TravelPlannerAdapter </span><span class="s0">extends </span><span class="s1">ArrayAdapter&lt;String&gt; { 
+    </span><span class="s0">int</span><span class="s1">[] imgplaces={}</span><span class="s2">;</span><span class="s1"> 
+ 
+    </span><span class="s3">/** 
+     * class constructor 
+     * </span><span class="s4">@param </span><span class="s3">context context from caller function 
+     * </span><span class="s4">@param </span><span class="s3">values places' name 
+     * </span><span class="s4">@param </span><span class="s3">imgplaces places' photo 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">TravelPlannerAdapter(Context context</span><span class="s2">, </span><span class="s1">String[] values</span><span class="s2">,</span><span class="s0">int</span><span class="s1">[] imgplaces) { 
+        </span><span class="s0">super</span><span class="s1">(context</span><span class="s2">, </span><span class="s1">R.layout.activity_view_schedule</span><span class="s2">,</span><span class="s1">values)</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.imgplaces=imgplaces</span><span class="s2">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">/** 
+     * for each entry, display in the form of list 
+     * </span><span class="s4">@param </span><span class="s3">position index 
+     * </span><span class="s4">@param </span><span class="s3">convertView view 
+     * </span><span class="s4">@param </span><span class="s3">parent parent view 
+     * </span><span class="s4">@return </span><span class="s3">view to be displayed 
+     */</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">View getView(</span><span class="s0">int </span><span class="s1">position</span><span class="s2">, </span><span class="s1">View convertView</span><span class="s2">,</span><span class="s1">ViewGroup parent){ 
+        LayoutInflater tpInflater = LayoutInflater.from(getContext())</span><span class="s2">;</span><span class="s1"> 
+        View tpView = tpInflater.inflate(R.layout.travelplanner_adapter</span><span class="s2">, </span><span class="s1">parent</span><span class="s2">, </span><span class="s0">false</span><span class="s1">)</span><span class="s2">;</span><span class="s1"> 
+        String places = getItem(position)</span><span class="s2">;</span><span class="s1"> 
+        TextView theTextView = (TextView) tpView.findViewById(R.id.tptv1)</span><span class="s2">;</span><span class="s1"> 
+        theTextView.setText(places)</span><span class="s2">;</span><span class="s1"> 
+        ImageView theImageView =(ImageView) tpView.findViewById(R.id.tpimg)</span><span class="s2">;</span><span class="s1"> 
+        theImageView.setImageResource(imgplaces[position])</span><span class="s2">;</span><span class="s1"> 
+        </span><span class="s0">return </span><span class="s1">tpView</span><span class="s2">;</span><span class="s1"> 
+    } 
+} 
+</span></pre>
+</body>
+</html>
