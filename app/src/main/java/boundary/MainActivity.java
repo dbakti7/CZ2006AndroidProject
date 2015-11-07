@@ -2,20 +2,24 @@ package boundary;
 
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.example.android.cz2006androidproject.R;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import entity.Location;
 import entity.SQLiteHelper;
 import entity.Weather;
@@ -23,18 +27,78 @@ import entity.Weather;
 
 public class MainActivity extends AppCompatActivity{//ActionBarActivity {
 
-    ListView listview;
-    ArrayAdapter<String> listAdapter;
-    String[] fragmentArray = {"A","B","C","D","E"};
+    List nowcast = new ArrayList();
+    private class nowcastAPIHandler extends AsyncTask<String,Void,List> {
+        @Override
+        protected List doInBackground(String... params) {
+            List<List> myReturn = null;
+            try {
+                String keyref = "781CF461BB6606ADBC7C75BF9D4F60DBD179D04B183282AD";
+                String url = "http://www.nea.gov.sg/api/WebAPI?dataset=" + params[0] + "&keyref=" + keyref;
+
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection)obj.openConnection();
+                con.setRequestMethod("GET");
+                con.connect();
+
+                int responseCode = con.getResponseCode();
+                if(responseCode == 200) {
+                    control.xmlParser temp = new control.xmlParser();
+                    myReturn = temp.parseWeatherXml(con.getInputStream(), params[0]);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return myReturn;
+        }
+
+        @Override
+        protected void onPostExecute(List result) {
+            nowcast = result;
+        }
+    }
+
+    List forecast12 = new ArrayList();
+    private class forecast12APIHandler extends AsyncTask<String,Void,List> {
+        @Override
+        protected List doInBackground(String... params) {
+            List myReturn = null;
+            try {
+                String keyref = "781CF461BB6606ADBC7C75BF9D4F60DBD179D04B183282AD";
+                String url = "http://www.nea.gov.sg/api/WebAPI?dataset=" + params[0] + "&keyref=" + keyref;
+
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection)obj.openConnection();
+                con.setRequestMethod("GET");
+                con.connect();
+
+                int responseCode = con.getResponseCode();
+                if(responseCode == 200) {
+                    control.xmlParser temp = new control.xmlParser();
+                    forecast12 = temp.parseWeatherXml(con.getInputStream(), params[0]);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.d("FORECAST12",forecast12.get(0).toString());
+            Log.d("FORECAST12",forecast12.get(1).toString());
+            Log.d("FORECAST12",forecast12.get(2).toString());
+            return myReturn;
+        }
+
+        @Override
+        protected void onPostExecute(List result) {
+            forecast12 = result;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //listview = (ListView)findViewById(R.id.listview);
-        //listAdapter = new ArrayAdapter<String>(this, R.layout.myplan_layout, R.id.textView2, fragmentArray);
-        //listview.setAdapter(listAdapter);
         SQLiteHelper db = new SQLiteHelper(this);
+        new nowcastAPIHandler().execute("nowcast");
+        new forecast12APIHandler().execute("12hrs_forecast");
     }
 
     @Override
