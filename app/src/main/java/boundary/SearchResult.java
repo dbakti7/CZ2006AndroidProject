@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.cz2006androidproject.R;
 
@@ -19,8 +18,6 @@ import entity.SQLiteHelper;
  * from here.
  */
 public class SearchResult extends ActionBarActivity {
-    Location[] result = new Location[10];
-    String searchEntry = new String();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,26 +25,9 @@ public class SearchResult extends ActionBarActivity {
         SQLiteHelper db = new SQLiteHelper(this);
         db.getReadableDatabase();
         List<Location> list = db.getCurrentPlan();
-
-
-        TextView tester=(TextView)findViewById(R.id.testerTextView1);
-
-        /*try {
-            loc.setWeatherDetails();
-            tester.setText(loc.getWeather().toString());
-        }
-        catch(Exception e) {
-
-        }*/
         Location location = list.get(0);
-        try {
-            location.setWeatherDetails();
-            tester.setText(location.getWeather().toString());
-        }
-        catch(Exception e) {
-            //Toast toast = Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT);
-            //toast.show();
-        }
+
+
 
         TextView tester1=(TextView)findViewById(R.id.testerTextView2);
         tester1.setText(location.getWeather().getTemperature());
@@ -58,7 +38,7 @@ public class SearchResult extends ActionBarActivity {
         TextView tester4=(TextView)findViewById(R.id.testerTextView5);
         tester4.setText(list.get(4).getName());
         for(Location l: list)
-            db.deleteLocation(l);
+            db.deleteLocationFromCurrentPlan(l);
         db.close();
     }
 
@@ -82,11 +62,5 @@ public class SearchResult extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    public String getUserInput() {
-        return null;
-    }
-    public void searchEntry(String entry) {
-
     }
 }

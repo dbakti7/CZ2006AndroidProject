@@ -1,20 +1,14 @@
 package boundary;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.android.cz2006androidproject.R;
 
@@ -39,14 +33,31 @@ public class PlacesListView extends AppCompatActivity {
         SQLiteHelper db = new SQLiteHelper(this);
         db.getReadableDatabase();
         List<Location> list = db.getPopularPlaces();
-        for(int i = 0;i<list.size();++i)
-            if(list.get(i).getCategory().equals(category))
+        int placesWeather[] = new int[5];;
+        int counter = 0;
+        String currentCondition;
+        for(int i = 0;i<list.size();++i) {
+            if (list.get(i).getCategory().equals(category)) {
                 placesList.add(list.get(i).getName());
+                list.get(i).setWeatherDetails(accessGovAPI.getNowcast(), accessGovAPI.get12HourForecast());
+                currentCondition = list.get(i).getWeather().getCondition();
+                if (currentCondition.contains("Cloudy") || currentCondition.contains("Partly Cloudy"))
+                    placesWeather[counter++] = R.mipmap.cloudy;
+                else if (currentCondition.contains("Hazy"))
+                    placesWeather[counter++] = R.mipmap.hazy;
+                else if (currentCondition.contains("Fair (Day)") || currentCondition.contains("Fair (Night)"))
+                    placesWeather[counter++] = R.mipmap.sunny;
+                else if (currentCondition.contains("Thundery showers"))
+                    placesWeather[counter++] = R.mipmap.stormy;
+                else
+                    placesWeather[counter++] = R.mipmap.rainy;
+            }
+        }
 
         String[] places = new String[placesList.size()];
         places = placesList.toArray(places);
-        int logo[]={R.mipmap.cloudy, R.mipmap.cloudy,R.mipmap.cloudy,R.mipmap.cloudy, R.mipmap.cloudy};
-        ListAdapter theAdapter = new CustomListAdapter(this, places,logo);
+
+        ListAdapter theAdapter = new CustomListAdapter(this, places, placesWeather);
         final ListView theListView = (ListView) findViewById(R.id.placesListView);
         theListView.setAdapter(theAdapter);
     }
@@ -79,7 +90,6 @@ public class PlacesListView extends AppCompatActivity {
         SQLiteHelper db = new SQLiteHelper(this);
         db.getWritableDatabase();
         List<Location> list = db.getPopularPlaces();
-
         String placeName = (String)btn.getText();
         for(int i = 0;i<list.size();++i) {
             if(placeName.equals(list.get(i).getName())) {
@@ -89,7 +99,7 @@ public class PlacesListView extends AppCompatActivity {
                 location.setPos(list.get(i).getLatitude(), list.get(i).getLongitude());
                 location.setImage("test");
                 location.setDescription("description");
-                db.addLocationtoCurrentPlan(location);
+                db.addLocationToCurrentPlan(location);
                 btn.setText("Place Added");
             }
         }

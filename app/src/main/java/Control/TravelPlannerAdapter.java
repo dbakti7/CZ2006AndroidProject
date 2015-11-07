@@ -25,11 +25,8 @@ public class TravelPlannerAdapter extends ArrayAdapter<String> {
         LayoutInflater tpInflater = LayoutInflater.from(getContext());
         View tpView = tpInflater.inflate(R.layout.travelplanner_adapter, parent, false);
         String places = getItem(position);
-
         TextView theTextView = (TextView) tpView.findViewById(R.id.tptv1);
-
         theTextView.setText(places);
-
         ImageView theImageView =(ImageView) tpView.findViewById(R.id.tpimg);
         theImageView.setImageResource(imgplaces[position]);
         return tpView;

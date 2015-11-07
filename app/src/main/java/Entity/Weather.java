@@ -1,14 +1,6 @@
 package entity;
-
-
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import boundary.accessGovAPI;
-
-
 /**
  * Created by dbakti7 on 10/19/2015.
  * This class implements Weather entity.
@@ -18,25 +10,20 @@ public class Weather {
     private String temperature;
     private String humidity;
 
-    public Weather() {
-        condition = "default";
-        temperature = null;
-        humidity = null;
-    }
-
-    public Weather(String condition, String temperature, String humidity) {
-        this.condition = condition;
-        this.temperature = temperature;
-        this.humidity = humidity;
-    }
-
-    public void setWeather(double latitude, double longitude) throws Exception{
-        // from API
-
-        List<List> temp = accessGovAPI.getNowcast();
+    /**
+     * set the current weather condition based on latitude and longitude of the location
+     * all information are retrieved from government API, which is NEA API
+     * the weather condition is based on nowcast, which is weather forecast for the next 3 hours
+     * the temperature and humidity is based on 12 Hours Forecast
+     * @param latitude latitude of the location
+     * @param longitude longitude of the location
+     * @param nowcast 3-hour forecast API retrieved from NEA
+     * @param forecast12 12-hour forecast retrieved from NEA
+     */
+    public void setWeather(double latitude, double longitude, List<List> nowcast, List forecast12) {
         double curMin = 2000000000;
         int ans = 0, counter = 0;
-        for(List l: temp) {
+        for(List l: nowcast) {
             double x = latitude - Double.parseDouble(l.get(1).toString());
             double y = longitude - Double.parseDouble(l.get(2).toString());
             double min = Math.sqrt(x * x + y * y);
@@ -46,30 +33,27 @@ public class Weather {
             }
             ++counter;
         }
-
-        List<List> container = accessGovAPI.get12HourForecast();
-        condition = "sunny";
-        temperature = "28";
-        humidity = "10";
-        /*condition = temp.get(ans).get(0).toString();
-
-        temperature = container.get(1).toString();
-        humidity = container.get(2).toString();*/
-
+        condition = nowcast.get(ans).get(0).toString();
+        temperature = forecast12.get(1).toString();
+        humidity = forecast12.get(2).toString();
     }
 
-    public List getWeatherDetails(){
-        List weatherDetails = new ArrayList();
-        weatherDetails.add(condition);
-        weatherDetails.add(temperature);
-        weatherDetails.add(humidity);
-        return weatherDetails;
-    }
-
-    public String toString() {
+    /**
+     * @return the weather condition
+     */
+    public String getCondition() {
         return condition;
     }
+
+    /**
+     * @return the temperature
+     */
     public String getTemperature() {
         return temperature;
     }
+
+    /**
+     * @return the humidity
+     */
+    public String getHumidity() {return humidity;}
 }

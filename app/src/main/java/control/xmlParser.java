@@ -1,15 +1,10 @@
 package control;
 
-import android.util.Log;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +12,6 @@ import java.util.List;
  * Created by stefan on 10/18/2015.
  */
 public class xmlParser {
-    private static final String ns = null;
 
     public List<List> parseWeatherXml(InputStream in, String data) throws Exception {
         List res = null;
@@ -31,16 +25,13 @@ public class xmlParser {
             } else if (data.equalsIgnoreCase("12hrs_forecast")) {
                 res = read12HourForecast(parser);
             }
-            //else if(data.equalsIgnoreCase("3days_outlook")) {
-            //    res=read3DaysForecast(parser);
-            //}
         } finally {
             in.close();
         }
         return res;
     }
 
-    private List readNowcast(XmlPullParser parser) throws Exception {
+    private List<List> readNowcast(XmlPullParser parser) throws Exception {
         List<List> forecast = new ArrayList<>();
         try {
             int eventType = parser.getEventType();
@@ -68,7 +59,6 @@ public class xmlParser {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d("FUCK", "FUCK THIS SHIT");
         return forecast;
     }
 

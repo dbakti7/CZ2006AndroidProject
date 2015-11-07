@@ -2,34 +2,27 @@ package entity;
 
 /**
  * Created by dbakti7 on 11/2/2015.
+ * This class is used to manage SQLite database
  */
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.List;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
-
-    // Database Version
     private static final int DATABASE_VERSION = 1;
-    // Database Name
     private static final String DATABASE_NAME = "PopularPlaceDB";
-    public static String strSeparator = "__,__";
-    // Books table name
     private static final String TABLE_POPULARPLACE = "PopularPlace";
     private static final String TABLE_CURRENTPLAN = "CurrentPlan";
     private static final String TABLE_RECOMMENDEDPLAN = "RecommendedPlan";
     private static final String TABLE_STAFFPICKED = "StaffPicked";
     private static final String TABLE_OTHERPLACES = "OtherPlaces";
     private static final String TABLE_SAVEDPLANS = "SavedPlans";
+    public static String strSeparator = "__,__";
 
-    // Books Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_CATEGORY = "category";
     private static final String KEY_NAME = "name";
@@ -42,14 +35,22 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     private static final String[] COLUMNS = {KEY_ID, KEY_DATE, KEY_PLAN};
 
-
+    /**
+     * class constructor
+     * @param context context
+     */
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+
+    /**
+     * initializing database
+     * @param db database
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // SQL statement to create book table
+        // SQL statements to create tables
         String CREATE_POPULARPLACE_TABLE = "CREATE TABLE PopularPlace ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "category TEXT, " +
@@ -99,7 +100,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "date TEXT UNIQUE, " +
                 "plan TEXT )";
-        // create books table
+
+        // create tables
         db.execSQL(CREATE_POPULARPLACE_TABLE);
         db.execSQL(CREATE_CURRENTPLAN_TABLE);
         db.execSQL(CREATE_RECOMMENDEDPLAN_TABLE);
@@ -107,7 +109,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_OTHERPLACES_TABLE);
         db.execSQL(CREATE_SAVEDPLANS_TABLE);
 
-
+        // inserting necessary information
         db.execSQL("insert into " + TABLE_POPULARPLACE + "(id, category, name, latitude, longitude, description, image)" + " values(1, 'Tourist Attractions','Singapore Flyer', 1.289572, 103.863121,'Singapore Flyer', 'singapore_flyer')");
         db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude, description, image)" + " values('Tourist Attractions','Jurong Bird Park', 1.318803, 103.706420,'Jurong Bird Park','jurong_bird_park')");
         db.execSQL("insert into " + TABLE_POPULARPLACE + "(category, name, latitude, longitude, description, image)" + " values('Tourist Attractions','Singapore Zoo', 1.404627, 103.793023,'Singapore Zoo','singapore_zoo')");
@@ -150,72 +152,27 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("insert into " + TABLE_STAFFPICKED + "(category, name, latitude, longitude, description, image)" + " values('Parks','Gardens by the Bay', 1.281708, 103.863570, 'Gardens By the Bay', 'gardens_by_the_bay')");
     }
 
+
+    /**
+     * modifying database
+     * @param db database
+     * @param oldVersion old database's version
+     * @param newVersion new database's version
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older books table if existed
+        // Drop older tables if existed
         db.execSQL("DROP TABLE IF EXISTS PopularPlace");
         db.execSQL("DROP TABLE IF EXISTS CurrentPlan");
         db.execSQL("DROP TABLE IF EXISTS RecommendedPlan");
         db.execSQL("DROP TABLE IF EXISTS StaffPicked");
-        // create fresh books table
+        // create fresh tables
         this.onCreate(db);
     }
 
-    public void addPopularPlace(Location location){
-        //for logging
-        //Log.d("addBook", book.toString());
-
-        // 1. get reference to writable DB
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        // 2. create ContentValues to add key "column"/value
-        ContentValues values = new ContentValues();
-        values.put(KEY_CATEGORY, location.getCategory()); // get title
-        values.put(KEY_NAME, location.getName());
-        values.put(KEY_LATITUDE, location.getLatitude());
-        values.put(KEY_LONGITUDE, location.getLongitude());
-        values.put(KEY_DESCRIPTION, location.getDescription());
-        values.put(KEY_IMAGE, location.getImage());
-
-        // 3. insert
-        db.insert(TABLE_POPULARPLACE, // table
-                null, //nullColumnHack
-                values); // key/value -> keys = column names/ values = column values
-
-        // 4. close
-        db.close();
-    }
-
-    public Location getPopularPlace(int id){
-
-        // 1. get reference to readable DB
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        // 2. build query
-        Cursor cursor =
-                db.query(TABLE_POPULARPLACE, // a. table
-                        COLUMNS, // b. column names
-                        " id = ?", // c. selections
-                        new String[] { String.valueOf(id) }, // d. selections args
-                        null, // e. group by
-                        null, // f. having
-                        null, // g. order by
-                        null); // h. limit
-
-        // 3. if we got results get the first one
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        Location pplace = new Location();
-        //pplace.setId(Integer.parseInt(cursor.getString(0)));
-        pplace.setCategory(cursor.getString(1));
-        pplace.setName(cursor.getString(2));
-        pplace.setPos(cursor.getDouble(3), cursor.getDouble(4));
-        pplace.setDescription(cursor.getString(5));
-        pplace.setImage(cursor.getString(6));
-        return pplace;
-    }
-
+    /**
+     * @return popular places stored in databased
+     */
     public List<Location> getPopularPlaces() {
         List<Location> pplaces = new LinkedList<Location>();
 
@@ -228,180 +185,23 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 pplace = new Location();
-                //pplace.setId(Integer.parseInt(cursor.getString(0)));
                 pplace.setCategory(cursor.getString(1));
                 pplace.setName(cursor.getString(2));
                 pplace.setPos(cursor.getDouble(3), cursor.getDouble(4));
                 pplace.setDescription(cursor.getString(5));
                 pplace.setImage(cursor.getString(6));
-
                 pplaces.add(pplace);
             } while (cursor.moveToNext());
         }
         return pplaces;
     }
 
-    public int updatePopularPlace(Location pplace) {
-
-        // 1. get reference to writable DB
+    /**
+     * add a new location into current plan
+     * @param location location to be added into current plan
+     */
+    public void addLocationToCurrentPlan(Location location) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        // 2. create ContentValues to add key "column"/value
-        ContentValues values = new ContentValues();
-        values.put("category", pplace.getCategory());
-        values.put("name", pplace.getName());
-        values.put("latitude", pplace.getLatitude());
-        values.put("longitude", pplace.getLongitude());
-
-        // 3. updating row
-        int i = db.update(TABLE_POPULARPLACE, //table
-                values, // column/value
-                KEY_NAME+" = ?", // selections
-                new String[] { String.valueOf(pplace.getName()) }); //selection args
-
-        // 4. close
-        db.close();
-
-        return i;
-
-    }
-
-    public void deletePopularPlace(Location pplace) {
-
-        // 1. get reference to writable DB
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        // 2. delete
-        db.delete(TABLE_POPULARPLACE, //table name
-                KEY_NAME + " = ?",  // selections
-                new String[]{String.valueOf(pplace.getName())}); //selections args
-
-        // 3. close
-        db.close();
-
-        //log
-        //Log.d("deleteBook", pplace.toString());
-
-    }
-
-    public void addLocationtoCurrentPlan(Location location) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        // 2. create ContentValues to add key "column"/value
-        ContentValues values = new ContentValues();
-        values.put(KEY_CATEGORY, location.getCategory());
-        values.put(KEY_NAME, location.getName()); // get title
-        values.put(KEY_LATITUDE, location.getLatitude());
-        values.put(KEY_LONGITUDE, location.getLongitude());
-        values.put(KEY_DESCRIPTION, location.getDescription());
-        values.put(KEY_IMAGE, location.getImage());
-
-        // 3. insert
-        db.insert(TABLE_CURRENTPLAN, // table
-                null, //nullColumnHack
-                values); // key/value -> keys = column names/ values = column values
-
-        // 4. close
-        db.close();
-    }
-
-    public List<Location> getCurrentPlan() {
-        List<Location> currentPlan = new LinkedList<Location>();
-
-        // 1. build the query
-        String query = "SELECT  * FROM " + TABLE_CURRENTPLAN;
-
-        // 2. get reference to writable DB
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        // 3. go over each row, build book and add it to list
-        Location location = null;
-        if (cursor.moveToFirst()) {
-            do {
-                location = new Location();
-                location.setCategory(cursor.getString(1));
-                location.setName(cursor.getString(2));
-                location.setPos(cursor.getDouble(3), cursor.getDouble(4));
-                location.setDescription(cursor.getString(5));
-                location.setImage(cursor.getString(6));
-
-                // Add book to books
-                currentPlan.add(location);
-            } while (cursor.moveToNext());
-        }
-
-        //Log.d("getAllBooks()", books.toString());
-
-        return currentPlan;
-    }
-
-    public void deleteLocation(Location location) {
-        // 1. get reference to writable DB
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        // 2. delete
-        db.delete(TABLE_CURRENTPLAN, //table name
-                KEY_NAME + " = ?",  // selections
-                new String[]{String.valueOf(location.getName())}); //selections args
-
-        // 3. close
-        db.close();
-    }
-
-    public List<Location> getRecommendedPlan() {
-        List<Location> currentPlan = new LinkedList<Location>();
-
-
-        String query = "SELECT  * FROM " + TABLE_RECOMMENDEDPLAN;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        Location location = null;
-        if (cursor.moveToFirst()) {
-            do {
-                location = new Location();
-                location.setCategory(cursor.getString(1));
-                location.setName(cursor.getString(2));
-                location.setPos(cursor.getDouble(3), cursor.getDouble(4));
-                location.setDescription(cursor.getString(5));
-                location.setImage(cursor.getString(6));
-
-                // Add book to books
-                currentPlan.add(location);
-            } while (cursor.moveToNext());
-        }
-        return currentPlan;
-    }
-
-    public List<Location> getStaffPicked() {
-        List<Location> currentPlan = new LinkedList<Location>();
-        String query = "SELECT  * FROM " + TABLE_STAFFPICKED;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        Location location = null;
-        if (cursor.moveToFirst()) {
-            do {
-                location = new Location();
-                location.setCategory(cursor.getString(1));
-                location.setName(cursor.getString(2));
-                location.setPos(cursor.getDouble(3), cursor.getDouble(4));
-                location.setDescription(cursor.getString(5));
-                location.setImage(cursor.getString(6));
-
-                // Add book to books
-                currentPlan.add(location);
-            } while (cursor.moveToNext());
-        }
-        return currentPlan;
-    }
-
-    public void addLocationtoOtherPlaces(Location location) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(KEY_CATEGORY, location.getCategory());
         values.put(KEY_NAME, location.getName());
@@ -409,21 +209,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_LONGITUDE, location.getLongitude());
         values.put(KEY_DESCRIPTION, location.getDescription());
         values.put(KEY_IMAGE, location.getImage());
-
-        db.insert(TABLE_OTHERPLACES,
-                null,
-                values);
-
+        db.insert(TABLE_CURRENTPLAN, null, values);
         db.close();
     }
 
-    public List<Location> getOtherPlaces() {
+    /**
+     *
+     * @return the current plan
+     */
+    public List<Location> getCurrentPlan() {
         List<Location> currentPlan = new LinkedList<Location>();
-        String query = "SELECT  * FROM " + TABLE_OTHERPLACES;
-
+        String query = "SELECT  * FROM " + TABLE_CURRENTPLAN;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-
         Location location = null;
         if (cursor.moveToFirst()) {
             do {
@@ -433,21 +231,125 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 location.setPos(cursor.getDouble(3), cursor.getDouble(4));
                 location.setDescription(cursor.getString(5));
                 location.setImage(cursor.getString(6));
-
-                // Add book to books
                 currentPlan.add(location);
             } while (cursor.moveToNext());
         }
         return currentPlan;
     }
 
-    public void addPlan(Plan currentPlan) {
-        String str = "";
-        for(int i = 0;i< currentPlan.getLocationCount();++i) {
-            str = str+currentPlan.getListLocation()[i].getName();
-            if(i < currentPlan.getLocationCount()-1)
-                str = str + strSeparator;
+    /**
+     * delete a location from current plan
+     * @param location location to be deleted from current plan
+     */
+    public void deleteLocationFromCurrentPlan(Location location) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_CURRENTPLAN,
+                KEY_NAME + " = ?",
+                new String[]{String.valueOf(location.getName())});
+        db.close();
+    }
+
+    /**
+     * @return the recommended plan
+     */
+    public List<Location> getRecommendedPlan() {
+        List<Location> currentPlan = new LinkedList<Location>();
+        String query = "SELECT  * FROM " + TABLE_RECOMMENDEDPLAN;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Location location = null;
+        if (cursor.moveToFirst()) {
+            do {
+                location = new Location();
+                location.setCategory(cursor.getString(1));
+                location.setName(cursor.getString(2));
+                location.setPos(cursor.getDouble(3), cursor.getDouble(4));
+                location.setDescription(cursor.getString(5));
+                location.setImage(cursor.getString(6));
+                currentPlan.add(location);
+            } while (cursor.moveToNext());
         }
+        return currentPlan;
+    }
+
+    /**
+     *
+     * @return the plan personally picked by the staff
+     */
+    public List<Location> getStaffPicked() {
+        List<Location> currentPlan = new LinkedList<Location>();
+        String query = "SELECT  * FROM " + TABLE_STAFFPICKED;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Location location = null;
+        if (cursor.moveToFirst()) {
+            do {
+                location = new Location();
+                location.setCategory(cursor.getString(1));
+                location.setName(cursor.getString(2));
+                location.setPos(cursor.getDouble(3), cursor.getDouble(4));
+                location.setDescription(cursor.getString(5));
+                location.setImage(cursor.getString(6));
+                currentPlan.add(location);
+            } while (cursor.moveToNext());
+        }
+        return currentPlan;
+    }
+
+    /**
+     * add location to database if the location comes from search
+     * @param location location to be added
+     */
+    public void addLocationToOtherPlaces(Location location) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_CATEGORY, location.getCategory());
+        values.put(KEY_NAME, location.getName());
+        values.put(KEY_LATITUDE, location.getLatitude());
+        values.put(KEY_LONGITUDE, location.getLongitude());
+        values.put(KEY_DESCRIPTION, location.getDescription());
+        values.put(KEY_IMAGE, location.getImage());
+        db.insert(TABLE_OTHERPLACES,
+                null,
+                values);
+        db.close();
+    }
+
+    /**
+     * @return the places added from search results
+     */
+    public List<Location> getOtherPlaces() {
+        List<Location> currentPlan = new LinkedList<Location>();
+        String query = "SELECT  * FROM " + TABLE_OTHERPLACES;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Location location = null;
+        if (cursor.moveToFirst()) {
+            do {
+                location = new Location();
+                location.setCategory(cursor.getString(1));
+                location.setName(cursor.getString(2));
+                location.setPos(cursor.getDouble(3), cursor.getDouble(4));
+                location.setDescription(cursor.getString(5));
+                location.setImage(cursor.getString(6));
+                currentPlan.add(location);
+            } while (cursor.moveToNext());
+        }
+        return currentPlan;
+    }
+
+    /**
+     * add a travel plan into calendar
+     * @param currentPlan travel plan to be added
+     */
+    public void addPlan(Plan currentPlan) {
+        String[] placeslist = currentPlan.getlocationList();
+        String str = "";
+        int i;
+        for(i = 0;i< currentPlan.getLocationCount() - 1;++i)
+            str = str + placeslist[i] + strSeparator;
+        str += placeslist[i];
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -461,11 +363,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * get a plan from calendar from a specific date
+     * @param dateQuery date to be queried
+     * @return travel plan for that date
+     */
     public String[] getPlan(String dateQuery) {
-        // 1. get reference to readable DB
         SQLiteDatabase db = this.getReadableDatabase();
-
-        // 2. build query
         Cursor cursor =
                 db.query(TABLE_SAVEDPLANS, // a. table
                         COLUMNS, // b. column names
@@ -475,21 +379,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                         null, // f. having
                         null, // g. order by
                         null); // h. limit
-
-        // 3. if we got results get the first one
         if (cursor.moveToFirst());
-
         else
             return null;
         String str = cursor.getString(2);
         String[] arr = str.split(strSeparator);
         return arr;
-        /*Location[] locations = new Location[Array.getLength(arr)];
-        for(int i = 0;i<Array.getLength(arr);++i) {
-            locations[i] = new Location();
-            locations[i].setName(arr[i]);
-        }
-        return locations;*/
-
     }
 }

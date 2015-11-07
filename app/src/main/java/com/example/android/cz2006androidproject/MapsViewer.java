@@ -1,7 +1,6 @@
 package com.example.android.cz2006androidproject;
 
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -21,11 +20,6 @@ import entity.SQLiteHelper;
 public class MapsViewer extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    private final LatLng Jurong_EAST = new LatLng(1.33313,103.743402);
-    private final LatLng IKEA_Tampines = new LatLng(1.374095,103.932354);
-    private final LatLng HENDERSEN_WAVES = new LatLng(1.276095,103.815444);
-    private final LatLng Changi_airport = new LatLng(1.36442,103.991531);
-    private final LatLng Marina_bay_sands = new LatLng(1.2838785,103.8589899);
     private GoogleMap map ;
     private final LatLng Center_SGP = new LatLng(1.2800945,103.8509491);
     private LatLng[] coordinatesList;
@@ -44,7 +38,6 @@ public class MapsViewer extends FragmentActivity implements OnMapReadyCallback {
         int[] curDate = extras.getIntArray("date");
         places = extras.getStringArray("locationList");
         coordinatesList = new LatLng[Array.getLength(places)];
-        //dp.updateDate(curDate[0], curDate[1], curDate[2]);
         int weatherPlaces[] = new int[Array.getLength(places)];
         for(int i = 0;i<Array.getLength(places);++i) {
             boolean flag = false;
@@ -63,13 +56,9 @@ public class MapsViewer extends FragmentActivity implements OnMapReadyCallback {
             }
             weatherPlaces[i] = R.mipmap.sunny;
         }
-
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
     }
 
     @Override
@@ -113,16 +102,13 @@ public class MapsViewer extends FragmentActivity implements OnMapReadyCallback {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         for(int i = 0;i<Array.getLength(coordinatesList);++i)
             map.addMarker(new MarkerOptions().position(coordinatesList[i]).title(places[i]));
-
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         CameraUpdate update= CameraUpdateFactory.newLatLngZoom(Center_SGP, 10);
         map.animateCamera(update);
-        // Add a marker in Sydney and move the camera
     }
 }

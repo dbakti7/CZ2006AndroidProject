@@ -1,8 +1,4 @@
 package entity;
-import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.widget.Toast;
 
 import java.util.*;
 /**
@@ -16,113 +12,131 @@ public class Location {
     private Weather weather;
     private String description;
     private String image;
-    private Double x;
-    private Double y;
+    private Double latitude;
+    private Double longitude;
 
     /**
      * default class constructor
      */
     public Location() {
-        name = null;
-        category = null;
-        weather = new Weather();
-        description = null;
-        x = 0.0;
-        y = 0.0;
-        image = null;
     }
-
 
     /**
-     * class contructor
+     * class constructor
+     * @param name name of the location
+     * @param latitude location's latitude
+     * @param longitude location's longitude
      */
-
-    public Location(String name, String category, Weather weather, String description, String image) throws Exception{
+    public Location(String name, Double latitude, Double longitude) {
         this.name = name;
-        this.category = category;
-        //this.weather.setWeather(x, y);
-        this.description = description;
-        this.image = image;
-    }
-
-    public Location(String name, Double x, Double y) throws Exception{
-        this.name = name;
-        //this.setWeatherDetails();
         this.category = "others";
         this.weather = new Weather();
         this.description = name;
         this.image = name;
-        this.x = x;
-        this.y = y;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
-    public void setPos(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
+
     /**
-     * set the weather
-     * @throws Exception
+     * set the position of the location
+     * @param latitude location's latitude
+     * @param longitude location's longitude
+     */
+    public void setPos(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    /**
+     * @param name set the name of the location
      */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @param category set the category of the location
+     */
     public void setCategory(String category) {
         this.category = category;
     }
 
-    public void setWeatherDetails() {
+    /**
+     * set the current weather condition
+     * @param nowcast 3-hour weather forecast from NEA API
+     * @param forecast12 12-hour weather forecast from NEA API
+     */
+    public void setWeatherDetails(List<List> nowcast, List forecast12) {
         try {
-            this.weather.setWeather(x, y);
+            this.weather.setWeather(latitude, longitude, nowcast, forecast12);
         }
         catch(Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * @param description set the description of the location
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * @param image location's image url
+     */
     public void setImage(String image) {
         this.image = image;
     }
 
+    /**
+     * @return name of the location
+     */
     public String getName() {
         return name;
     }
+
+    /**
+     * @return category of the location
+     */
     public String getCategory() {
         return category;
     }
+
+    /**
+     * @return description of the location
+     */
     public String getDescription() {
         return description;
     }
+
+    /**
+     * @return weather condition of the location
+     */
     public Weather getWeather() {
         return weather;
     }
+
+    /**
+     * @return image url of the location
+     */
     public String getImage() {
         return image;
     }
 
     /**
-     * get the details of the place
-     * @return details of the place in a List
+     * @return latitude of the location
      */
-    public List getDetails() {
-        // return details of a place
-        List details = new ArrayList();
-        details.add(name);
-        details.add(category);
-        details.add(weather);
-        details.add(description);
-        details.add(image);
-        return details;
-    }
     public double getLatitude() {
-        return x;
+        return latitude;
     }
+
+    /**
+     * @return longitude of the location
+     */
     public double getLongitude() {
-        return y;
+        return longitude;
     }
 
 }

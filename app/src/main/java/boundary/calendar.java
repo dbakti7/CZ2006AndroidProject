@@ -6,13 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.android.cz2006androidproject.R;
-
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 
 import entity.SQLiteHelper;
 
@@ -22,7 +16,6 @@ import entity.SQLiteHelper;
 public class Calendar extends AppCompatActivity {
 
     CalendarView cal;
-    private String[] dateWithPlan;
     private int[] date = new int[3];
     SQLiteHelper db = new SQLiteHelper(this);
     @Override
@@ -34,7 +27,6 @@ public class Calendar extends AppCompatActivity {
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                //Toast.makeText(getApplicationContext(), dayOfMonth + "/" + (month+1) + "/" + year, Toast.LENGTH_LONG).show();
                 date[0] = year;
                 date[1] = month;
                 date[2] = dayOfMonth;
@@ -70,16 +62,5 @@ public class Calendar extends AppCompatActivity {
         Intent intent = new Intent(Calendar.this, SearchView.class);
         intent.putExtra("date", date);
         startActivity(intent);
-    }
-
-
-
-    /**
-     * update the status of the date to indicate whether there is an existing plan or not on that
-     * date.
-     * @param date
-     */
-    public void updateCalendar(String date) {
-
     }
 }

@@ -104,7 +104,17 @@
         </LinearLayout>
     </LinearLayout>
 
-
+    <ListView
+        android:layout_width="275dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:id="@+id/listview"
+        android:background="#5e5555"
+        tools:listheader="@layout/abc_action_bar_title_item"
+        android:headerDividersEnabled="false"
+        android:paddingStart="30dp"
+        android:paddingLeft="30dp"
+        ></ListView>
 
 
 

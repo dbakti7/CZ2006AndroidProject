@@ -38,9 +38,6 @@ public class ScheduleTabSwitch extends TabActivity {
         MapIntent.putExtra("date", date);
         spec = tabHost.newTabSpec("page2").setIndicator("map").setContent(MapIntent);
         tabHost.addTab(spec);
-
-
-
     }
 
     @Override

@@ -7,7 +7,8 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="boundary.ViewDetails">
 
-    <TextView android:text="@string/hello_world" android:layout_width="match_parent"
+    <TextView
+        android:layout_width="match_parent"
         android:id="@+id/tvVIEWDETAILSname"
         android:layout_height="0dp"
         android:textSize="@dimen/abc_text_size_large_material"
@@ -19,10 +20,24 @@
         android:layout_height="0dp"
         android:layout_weight="5"/>
     <TextView
-        android:id="@+id/tvVIEWDETAILSdetail"
+        android:id="@+id/tvVIEWDETAILScondition"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"/>
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/tvVIEWDETAILStemperature"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/tvVIEWDETAILShumidity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"/>
 
 
 </LinearLayout>

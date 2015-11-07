@@ -23,15 +23,21 @@ public class ViewDetails extends ActionBarActivity {
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             String name = extras.getString("name");
-            String description = extras.getString("description");
             String imageLink = extras.getString("image");
+            String condition = extras.getString("condition");
+            String temperature = extras.getString("temperature");
+            String humidity = extras.getString("humidity");
             ImageView iv = (ImageView)findViewById(R.id.ivVIEWDETAILSimage);
             iv.setImageResource(getResources().getIdentifier(
                     imageLink, "mipmap", this.getPackageName()));
             TextView placeName=(TextView)findViewById(R.id.tvVIEWDETAILSname);
             placeName.setText(name);
-            TextView detail=(TextView)findViewById(R.id.tvVIEWDETAILSdetail);
-            detail.setText(description);
+            TextView conditionText=(TextView)findViewById(R.id.tvVIEWDETAILScondition);
+            conditionText.setText("Weather Condition: " + condition);
+            TextView temperatureText =(TextView)findViewById(R.id.tvVIEWDETAILStemperature);
+            temperatureText.setText("Temperature: " + temperature);
+            TextView humidityText =(TextView)findViewById(R.id.tvVIEWDETAILShumidity);
+            humidityText.setText("Humidity: " + humidity);
         }
     }
 

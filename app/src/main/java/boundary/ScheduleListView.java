@@ -18,7 +18,6 @@ import java.lang.reflect.Array;
 import java.util.List;
 
 import control.CustomListAdapter;
-import control.TravelPlannerAdapter;
 import entity.Location;
 import entity.Plan;
 import entity.SQLiteHelper;
@@ -38,20 +37,29 @@ public class ScheduleListView extends AppCompatActivity {
         List<Location> list = db.getPopularPlaces();
 
         Bundle extras = getIntent().getExtras();
+        String currentCondition;
         int[] curDate = extras.getIntArray("date");
         String[] places = extras.getStringArray("locationList");
-        //dp.updateDate(curDate[0], curDate[1], curDate[2]);
-        int weatherPlaces[] = new int[Array.getLength(places)];
+        int placesWeather[] = new int[Array.getLength(places)];
+        int j;
         for(int i = 0;i<Array.getLength(places);++i) {
-            for(int j = 0;j<list.size();++j)
+            for(j = 0;j<list.size();++j)
                 if(places[i].equals(list.get(j).getName()))
                     break;
-            weatherPlaces[i] = R.mipmap.cloudy;
+            list.get(j).setWeatherDetails(accessGovAPI.getNowcast(), accessGovAPI.get12HourForecast());
+            currentCondition = list.get(j).getWeather().getCondition();
+            if (currentCondition.contains("Cloudy") || currentCondition.contains("Partly Cloudy"))
+                placesWeather[i] = R.mipmap.cloudy;
+            else if (currentCondition.contains("Hazy"))
+                placesWeather[i] = R.mipmap.hazy;
+            else if (currentCondition.contains("Fair (Day)") || currentCondition.contains("Fair (Night)"))
+                placesWeather[i] = R.mipmap.sunny;
+            else if (currentCondition.contains("Thundery showers"))
+                placesWeather[i] = R.mipmap.stormy;
+            else
+                placesWeather[i] = R.mipmap.rainy;
         }
-        //int imgplaces[]={R.mipmap.sunny,R.mipmap.rainy,R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
-
-        //int logo[]={R.mipmap.sunny,R.mipmap.rainy,R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
-        ListAdapter theAdapter = new CustomListAdapter(this, places,weatherPlaces);
+        ListAdapter theAdapter = new CustomListAdapter(this, places, placesWeather);
         ListView theListView = (ListView) findViewById(R.id.theListView);
         theListView.setAdapter(theAdapter);
     }
@@ -96,10 +104,15 @@ public class ScheduleListView extends AppCompatActivity {
                 break;
         }
         if(i < list.size()) {
+            list.get(i).setWeatherDetails(accessGovAPI.getNowcast(), accessGovAPI.get12HourForecast());
             Intent intent = new Intent(ScheduleListView.this, ViewDetails.class);
             intent.putExtra("name", list.get(i).getName());
-            intent.putExtra("description", list.get(i).getDescription());
             intent.putExtra("image", list.get(i).getImage());
+            intent.putExtra("condition", list.get(i).getWeather().getCondition());
+            intent.putExtra("temperature", list.get(i).getWeather().getTemperature());
+            Toast toast = Toast.makeText(getApplicationContext(), list.get(i).getWeather().getTemperature(), Toast.LENGTH_SHORT);
+            toast.show();
+            intent.putExtra("humidity", list.get(i).getWeather().getHumidity());
             startActivity(intent);
         }
         else {

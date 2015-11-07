@@ -25,15 +25,12 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import com.example.android.placeapiautocomplete.PlaceArrayAdapter;
 
-import java.util.Date;
 import java.util.List;
-
 import entity.Location;
 import entity.SQLiteHelper;
 
 public class SearchView extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
 GoogleApiClient.ConnectionCallbacks {
-    private static final String LOG_TAG = "MainActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView mAutocompleteTextView;
     private GoogleApiClient mGoogleApiClient;
@@ -41,8 +38,6 @@ GoogleApiClient.ConnectionCallbacks {
     private static final LatLngBounds BOUNDS_SINGAPORE = new LatLngBounds(
             new LatLng(1.196938, 103.625473), new LatLng(1.469376, 104.018237));
 
-    private String searchEntry = new String();
-    private String[] category = new String[6];
     private Location picked;
     private int[] curDate;
     @Override
@@ -212,7 +207,7 @@ GoogleApiClient.ConnectionCallbacks {
         db.getWritableDatabase();
         List<Location> list = db.getCurrentPlan();
         for(Location l: list)
-            db.deleteLocation(l);
+            db.deleteLocationFromCurrentPlan(l);
         db.close();
     }
     public void addPlaceFromSearch(View view) {
@@ -220,8 +215,8 @@ GoogleApiClient.ConnectionCallbacks {
         if(picked != null && (BOUNDS_SINGAPORE.contains(new LatLng(picked.getLatitude(), picked.getLongitude())))) {
             SQLiteHelper db = new SQLiteHelper(this);
             db.getWritableDatabase();
-            db.addLocationtoOtherPlaces(picked);
-            db.addLocationtoCurrentPlan(picked);
+            db.addLocationToOtherPlaces(picked);
+            db.addLocationToCurrentPlan(picked);
             db.close();
             ACTV.setText("");
             Toast toast = Toast.makeText(getApplicationContext(), "Place Added", Toast.LENGTH_SHORT);

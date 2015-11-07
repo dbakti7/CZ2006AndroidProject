@@ -17,6 +17,7 @@ import com.example.android.cz2006androidproject.R;
 import java.lang.reflect.Array;
 import java.util.List;
 
+import control.PlanGenerator;
 import control.TravelPlannerAdapter;
 import entity.Location;
 import entity.Plan;
@@ -47,17 +48,29 @@ public class TravelPlanner extends Activity {
         String[] places = extras.getStringArray("locationList");
         dp.updateDate(curDate[0], curDate[1], curDate[2]);
 
-        int weatherPlaces[] = new int[Array.getLength(places)];
+        int placesWeather[] = new int[Array.getLength(places)];
+        String currentCondition;
+        int j;
         for(int i = 0;i<Array.getLength(places);++i) {
-            for(int j = 0;j<list.size();++j)
+            for(j = 0;j<list.size();++j)
                 if(places[i].equals(list.get(j).getName()))
                     break;
-            weatherPlaces[i] = R.mipmap.cloudy;
+            list.get(j).setWeatherDetails(accessGovAPI.getNowcast(), accessGovAPI.get12HourForecast());
+            currentCondition = list.get(j).getWeather().getCondition();
+            if (currentCondition.contains("Cloudy") || currentCondition.contains("Partly Cloudy"))
+                placesWeather[i] = R.mipmap.cloudy;
+            else if (currentCondition.contains("Hazy"))
+                placesWeather[i] = R.mipmap.hazy;
+            else if (currentCondition.contains("Fair (Day)") || currentCondition.contains("Fair (Night)"))
+                placesWeather[i] = R.mipmap.sunny;
+            else if (currentCondition.contains("Thundery showers"))
+                placesWeather[i] = R.mipmap.stormy;
+            else
+                placesWeather[i] = R.mipmap.rainy;
         }
-        //int imgplaces[]={R.mipmap.sunny,R.mipmap.rainy,R.mipmap.cloudy,R.mipmap.sunny,R.mipmap.rainy};
 
 
-        ListAdapter tpAdapter = new TravelPlannerAdapter(this, places, weatherPlaces);
+        ListAdapter tpAdapter = new TravelPlannerAdapter(this, places, placesWeather);
         ListView lvtp = (ListView)findViewById(R.id.lvtp);
         lvtp.setAdapter(tpAdapter);
         lvtp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -109,39 +122,31 @@ public class TravelPlanner extends Activity {
     public void locationPlanner(View view) {
         /*to call location planner class*/
         Intent intent = new Intent(TravelPlanner.this, ScheduleTabSwitch.class);
+
+        PlanGenerator planGenerator = new PlanGenerator();
+
         SQLiteHelper db = new SQLiteHelper(this);
         db.getWritableDatabase();
-        List<Location> list = db.getCurrentPlan();
-        String[] locationList = new String[list.size()];
-        Plan plan = new Plan();
-        for(int i = 0;i<list.size();++i) {
-            locationList[i] = list.get(i).getName();
-            Location l = new Location();
-            l.setName(locationList[i]);
-            plan.addLocation(l);
-        }
-        curDate[0] = dp.getYear();
-        curDate[1] = dp.getMonth();
-        curDate[2] = dp.getDayOfMonth();
+        planGenerator.generatePlan(db.getCurrentPlan(), dp.getYear(), dp.getMonth(), dp.getDayOfMonth());
+        Plan currentPlan = planGenerator.getGeneratedPlan();
+
         int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
         int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
         int day = java.util.Calendar.getInstance().get(java.util.Calendar.DATE);
-        String dateString = String.valueOf(curDate[0]) + String.valueOf(curDate[1]) + String.valueOf(curDate[2]);
-        if(db.getPlan(dateString) == null) {
+        if(db.getPlan(currentPlan.getDate()) == null) {
             if(curDate[0] < year || (curDate[0] == year && curDate[1] < month) ||
                     (curDate[0] == year && curDate[1] == month && curDate[2] < day))
                 Toast.makeText(TravelPlanner.this, "Invalid date!", Toast.LENGTH_SHORT).show();
-            else if(plan.getLocationCount() == 0)
+            else if(currentPlan.getLocationCount() == 0)
                 Toast.makeText(TravelPlanner.this, "Empty Plan!", Toast.LENGTH_SHORT).show();
             else {
-                plan.setDate(dateString);
-                db.addPlan(plan);
+                db.addPlan(currentPlan);
                 List<Location> list2 = db.getCurrentPlan();
                 for (Location l : list2)
-                    db.deleteLocation(l);
+                    db.deleteLocationFromCurrentPlan(l);
                 db.close();
                 int[] date = curDate;
-                intent.putExtra("locationList", locationList);
+                intent.putExtra("locationList", currentPlan.getlocationList());
                 intent.putExtra("date", date);
                 startActivity(intent);
             }
